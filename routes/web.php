@@ -7,6 +7,7 @@ use App\Http\Controllers\customer\HomeController;
 use App\Http\Controllers\customer\ShopController;
 use App\Http\Controllers\customer\ContactController;
 use App\Http\Controllers\customer\ContentController;
+use App\Http\Controllers\customer\CartController;
 
 //Route cho admin
 use App\Http\Controllers\admin\DashboardController;
@@ -43,3 +44,8 @@ Route::post('/product/{id}', [ProductController::class,'handleUpdate'])
 
 Route::delete('product/{id}',[ProductController::class,'delete'])
 ->name('productDelete');
+
+
+//Cart API
+Route::get('/api',[CartController::class,'index']);
+Route::post('api/add',[CartController::class,'add']);

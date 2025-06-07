@@ -22,15 +22,17 @@
                     <a href="{{ route('contact') }}" class="nav-item nav-link">Liên hệ</a>
                     <a href="" class="nav-item nav-link">Chính sách</a>
                 </div>
-                <div class="d-flex m-3 me-0 ">
+                <div class="d-flex m-3 me-0 " onmouseover="loadCart()">
                     <a href="" class="position-relative me-4 my-auto cart-icon">
                         <i class="fa fa-shopping-bag fa-2x green-color"></i>
-                        <span
+                        <span id="slsp"
                             class="quantity-cart position-absolute bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark px-1">3</span>
                     </a>
                     <div class="position-absolute cart-content shadow p-3 bg-white">
-                        <div class="cart-item d-flex align-item-center mb-3">
+                        <div id="cart-item">
+                            <div class="cart-item d-flex align-item-center mb-3">
 
+                            </div>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between" id="total">

@@ -48,28 +48,35 @@
                     </div>
                     <div class="col-lg-9">
                         <div class="row g-4 justify-content-center">
-                            @foreach($dssp as $sp)
-                            <div class="col-md-6 col-lg-6 col-xl-4">
-                                <div class="rounded position-relative fruite-item">
-                                    <div class="fruite-img">
-                                        <img src="{{asset('customer/assets/img/'.$sp->hinh)}}" class="img-fluid w-100 rounded-top" alt="">
-                                    </div>
-                                    <div class="p-4 border border-top-0 rounded-bottom">
-                                        <h4>{{$sp->tensanpham}}</h4>
-                                        <p>{{Str::limit($sp->motasanpham,70)}}</p>
-                                        <div class="d-flex justify-content-between flex-lg-wrap">
-                                            <p class="text-secondary fs-6 fw-bold mb-0">{{ number_format($sp->dongia, 0, ',', '.') }} VNĐ</p>
-                                            <a href="#"
-                                                class="btn border border-warning rounded-pill px-3 green-color"><i
-                                                    class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</a>
+                            @foreach ($dssp as $sp)
+                                
+                                    <div class="col-md-6 col-lg-6 col-xl-4" id="productForm">
+                                        <div class="rounded position-relative fruite-item">
+                                            <form>
+                                            @csrf
+                                            <input  type="text" value={{$sp->idsanpham}} id="productId" hidden>
+                                            <div class="fruite-img">
+                                                <img src="{{ asset('customer/assets/img/' . $sp->hinh) }}"
+                                                    class="img-fluid w-100 rounded-top" alt="" id="productImage">
+                                            </div>
+                                            <div class="p-4 border border-top-0 rounded-bottom">
+                                                <h4 id="productName">{{ $sp->tensanpham }}</h4>
+                                                <p>{{ Str::limit($sp->motasanpham, 70) }}</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-secondary fs-6 fw-bold mb-0" id="productPrice">
+                                                        {{ number_format($sp->dongia, 0, ',', '.') }} VNĐ</p>
+                                                    <button type="submit"
+                                                        class="btn border border-warning rounded-pill px-3 green-color"><i
+                                                            class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                </form>
                             @endforeach
                             <div class="col-12" id="pagination">
                                 <div class=" d-flex justify-content-center mt-5">
-                                    {{ $dssp->links()}}
+                                    {{ $dssp->links() }}
                                 </div>
                             </div>
                         </div>
