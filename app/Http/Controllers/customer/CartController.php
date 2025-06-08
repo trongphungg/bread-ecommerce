@@ -31,7 +31,6 @@ class CartController extends Controller
         return response()->json([
             'message' => 'Thêm sản phẩm vào giỏ hàng thành công',
             'cart'=>$cart,
-            'tensanpham'=>$request->tensanpham,
         ]);
     }
 }

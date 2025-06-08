@@ -11,4 +11,5 @@ class ContentController extends Controller
         $dstt = tintuc::all();
         return view('customer.content',compact('dstt'));
     }
+    
 }

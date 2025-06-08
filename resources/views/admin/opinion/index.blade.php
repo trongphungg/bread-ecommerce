@@ -3,36 +3,32 @@
 <div class="container">
     <div class="page-inner">
       <div class="page-header">
-        <h3 class="fw-bold mb-3">Quản lý sản phẩm</h3>
+        <h3 class="fw-bold mb-3">Quản lý ý kiến</h3>
       </div>
       <div class="row">
         <div class="card">
             <div class="my-2">
-                <a class="btn btn-primary" href="{{route('productCreate')}}">Thêm sản phẩm</a>
+                <a class="btn btn-primary" href="{{route('opinionCreate')}}">Thêm ý kiến</a>
             </div>
-          <table class="mt-3 table table-hover">
+        <table class="mt-3 table table-hover">
             <tr>
-                <td>Mã sản phẩm</td>
-                <td>Tên sản phẩm</td>
+                <td>Tên khách hàng</td>
                 <td>Mô tả</td>
-                <td>Đơn vị tính</td>
-                <td>Trạng thái</td>
-                <td>Đơn giá</td>
-                <td>Số lượng</td>
+                <td>Nghề nghiệp</td>
+                <td>Số điểm</td>
                 <td></td>
                 <td></td>
             </tr>
-            @foreach($dssp as $sp)
+            @foreach($dsyk as $yk)
             <tr>
-                <td>{{$sp->idsanpham}}</td>
-                <td>{{$sp->tensanpham}}</td>
-                <td>{{Str::limit($sp->motasanpham,50)}}</td>
-                <td>{{$sp->donvitinh}}</td>
-                <td>{{$sp->trangthai}}</td>
-                <td>{{number_format($sp->dongia,0,',',',').'VNĐ'}}</td>
-                <td>{{$sp->soluong}}</td>
                 <td>
-                    <form action="{{route('productUpdate',$sp->idsanpham)}}" method="POST"
+                    {{$yk->tenkhachhang}}
+                </td>
+                <td>{{$yk->mota}}</td>
+                <td>{{$yk->nghenghiep}}</td>
+                <td>{{$yk->sodiem}}</td>
+                <td>
+                    <form action="{{route('opinionUpdate',$yk->idykien)}}" method="POST"
                         style="display: inline;">
                             @csrf
                             <button type="submit" style="background:none; border:none; cursor:pointer;">
@@ -41,8 +37,8 @@
                     </form>
                 </td>
                 <td>
-                    <form action="{{route('productDelete',$sp->idsanpham)}}" method="POST"
-                    style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm {{$sp->tensanpham}} không?');">
+                    <form action="{{route('opinionDelete',$yk->idykien)}}" method="POST"
+                    style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm  không?');">
                         @csrf
                         @method('delete')
                         <button type="submit" style="background:none; border:none; cursor:pointer;">
@@ -53,14 +49,12 @@
             </tr>
             @endforeach
           </table>
-         <div>
           <div>
-            {{$dssp->links()}}
+            {{$dsyk->links()}}
           </div>
-         </div>
         </div>
-      </div>
       </div>
     </div>
   </div>
-  @endsection
+</div>
+@endsection

@@ -14,8 +14,8 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Giới thiệu</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="{{ route('content') }}" class="dropdown-item">Về cửa hàng</a>
-                            <a href="chackout.html" class="dropdown-item">Thông tin khác</a>
+                            <a href="{{ route('content')}}" class="dropdown-item">Về cửa hàng</a>
+                            <a href="" class="dropdown-item">Thông tin khác</a>
                         </div>
                     </div>
                     <a href="{{ route('shop') }}" class="nav-item nav-link">Sản phẩm</a>

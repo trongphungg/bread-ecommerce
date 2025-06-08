@@ -5,6 +5,7 @@
     </div>
     <div class="container py-5">
     @foreach($dstt as $content)
+    @if($content->idloaitintuc == 1)
     <div class="row align-items-center mb-5">
         @if($loop->iteration % 2 == 1)
         <div class="col-lg-6 mb-4 mb-lg-0 animate__animated">
@@ -45,6 +46,7 @@
             </div>
         </div>
     </div>
+    @endif
     @endforeach
 </div>
 @endsection

@@ -35,7 +35,7 @@ class ProductController extends Controller
         $sanpham->dongia = $request->input('dongia');
         $sanpham->idloaisanpham = $request->input('loaisanpham');
         $sanpham->save();
-        return redirect('/product');
+        return redirect('/products');
     }
 
     public function update($id){
@@ -64,12 +64,12 @@ class ProductController extends Controller
                                 'dongia' => $request->input('dongia'),
                                 'idloaisanpham' => $request->input('loaisanpham')
                             ]);
-        return redirect('/product');
+        return redirect('/products');
     }
 
     public function delete($id){
-        $sp = sanpham::where('idsanpham',$id);
+        $sp = sanpham::where('idsanpham',$id)->first();
         $sp->delete();
-        return redirect('/product');
+        return redirect('/products');
     }
 }

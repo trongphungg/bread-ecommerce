@@ -57,18 +57,18 @@
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#base">
             <i class="fas fa-layer-group"></i>
-            <p>Quản lí nội dung</p>
+            <p>Quản lý tin tức</p>
             <span class="caret"></span>
           </a>
           <div class="collapse" id="base">
             <ul class="nav nav-collapse">
               <li>
-                <a href="">
-                  <span class="sub-item">Danh sách nội dung</span>
+                <a href="{{route('newsIndex')}}">
+                  <span class="sub-item">Danh sách tin tức</span>
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="{{route('opinionIndex')}}">
                   <span class="sub-item">Danh sách ý kiến</span>
                 </a>
               </li>
@@ -85,7 +85,7 @@
           <div class="collapse" id="sidebarLayouts">
             <ul class="nav nav-collapse">
               <li>
-                <a href="">
+                <a href="{{route('userIndex')}}">
                   <span class="sub-item">Danh sách người dùng</span>
                 </a>
               </li>
@@ -101,19 +101,19 @@
           <div class="collapse" id="forms">
             <ul class="nav nav-collapse">
               <li>
-                <a href="">
+                <a href="{{route('productIndex')}}">
                   <span class="sub-item">Danh sách sản phẩm</span>
                 </a>
               </li>
               <li>
-                <a href="">
+                <a href="{{route('categoryIndex')}}">
                   <span class="sub-item">Danh mục sản phẩm</span>
                 </a>
               </li>
             </ul>
           </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a data-bs-toggle="collapse" href="#tables">
             <i class="fas fa-table"></i>
             <p>Quản lí người dùng</p>
@@ -122,14 +122,14 @@
           <div class="collapse" id="tables">
             <ul class="nav nav-collapse">
               <li class="active">
-                <a href="">
+                <a href="{{route('userIndex')}}">
                   <span class="sub-item">Danh sách người dùng</span>
                 </a>
               </li>
 
             </ul>
           </div>
-        </li>
+        </li> --}}
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#maps">
             <i class="fas fa-map-marker-alt"></i>
@@ -149,7 +149,7 @@
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#charts">
             <i class="far fa-chart-bar"></i>
-            <p>Quản lí đánh giá</p>
+            <p>Quản lý đánh giá</p>
             <span class="caret"></span>
           </a>
           <div class="collapse" id="charts">

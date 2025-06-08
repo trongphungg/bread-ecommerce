@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let idsanpham = form.querySelector('#productId').value;
             let tensanpham = form.querySelector('#productName').innerText;
             let dongiaProduct = form.querySelector('#productPrice').innerText;
-            let dongia = parseInt(dongiaProduct.replace("VNĐ","").replace(/,/g,"").trim());
+            let dongia = parseInt(dongiaProduct.replace("VNĐ","").replace(/\./g,"").trim());
             let srcHinh = form.querySelector('#productImage').src;
             let hinh = srcHinh.split('/').pop();
             let soluongsp;
