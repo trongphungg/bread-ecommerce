@@ -8,6 +8,7 @@ use App\Http\Controllers\customer\ShopController;
 use App\Http\Controllers\customer\ContactController;
 use App\Http\Controllers\customer\ContentController;
 use App\Http\Controllers\customer\CartController;
+use App\Http\Controllers\customer\TintucController;
 
 //Route cho admin
 use App\Http\Controllers\admin\DashboardController;
@@ -29,6 +30,8 @@ Route::get('/content', [ContentController::class,'index'])
 ->name('content');
 Route::post('/contact/sendMail',[ContactController::class,'sendMail'])
 ->name('sendMail');
+Route::get('/customer/news',[TintucController::class,'index'])
+->name('news');
 
 
 //Dashboard Admin

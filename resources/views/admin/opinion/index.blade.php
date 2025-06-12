@@ -38,7 +38,7 @@
                 </td>
                 <td>
                     <form action="{{route('opinionDelete',$yk->idykien)}}" method="POST"
-                    style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm  không?');">
+                    style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa ý kiến {{$yk->tenkhachhang}} không?');">
                         @csrf
                         @method('delete')
                         <button type="submit" style="background:none; border:none; cursor:pointer;">

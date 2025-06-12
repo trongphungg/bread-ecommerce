@@ -14,7 +14,7 @@
                         <i class="icon-arrow-right"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Người dùng</a>
+                        <a href="{{ route('userIndex') }}"> Danh sách người dùng</a>
                     </li>
                     <li class="separator">
                         <i class="icon-arrow-right"></i>

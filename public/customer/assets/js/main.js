@@ -81,7 +81,7 @@ async function loadCart() {
         total += item.dongia*item.soluongsp;
         dem++;
     }
-    document.getElementById('total').innerHTML=`<h6>Total:</h6>
+    document.getElementById('total').innerHTML=`<h6>Tổng tiền:</h6>
                                     <h6>${total} VNĐ</h6>`;
     document.getElementById('slsp').innerText=dem;
 }
