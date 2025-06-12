@@ -62,7 +62,7 @@ async function loadCart() {
         const item = cart[id];
 
         let itemHTML = `<div class="cart-item d-flex align-items-center mb-3">
-                                    <img src="http://127.0.0.1:8000/assets/img/${item.hinh}" class="img-fluid rounded-circle" style="width: 50px;" alt="">
+                                    <img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" class="img-fluid rounded-circle" style="width: 50px;" alt="">
                                     <div class="ms-3">
                                         <h6 class="mb-0">${item.tensanpham}</h6>
                                         <div class="d-flex justify-content-between">
@@ -72,7 +72,7 @@ async function loadCart() {
                                     </div>
                                 <button class="btn btn-sm text-danger ms-auto remove-item ">
                                     <input type="hidden" value="${item.idsanpham}" id="item-id"/>
-                                    <a href="#" onclick="handleDelete(event)"><i class="fas fa-times"></i></a>
+                                    <a href="#" onclick=""><i class="fas fa-times"></i></a>
                                 </button>
 
                                 </div>
@@ -82,7 +82,7 @@ async function loadCart() {
         dem++;
     }
     document.getElementById('total').innerHTML=`<h6>Total:</h6>
-                                    <h6>${total}</h6>`;
+                                    <h6>${total} VNĐ</h6>`;
     document.getElementById('slsp').innerText=dem;
 }
 

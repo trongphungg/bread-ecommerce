@@ -25,12 +25,21 @@
                                 <div class="mb-3">
                                     <h4 class="text-secondary">Danh mục sản phẩm</h4>
                                     <ul class="list-unstyled fruite-categorie">
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                <span>(3)</span>
-                                            </div>
-                                        </li>
+                                        @php
+                                        foreach($dslsp as $lsp){
+                                            $dem=0;
+                                            foreach($dsspp as $sp)
+                                            if($sp->idloaisanpham==$lsp->idloaisanpham){
+                                                $dem++;
+                                            }
+                                            echo '<li>
+                                                <div class="d-flex justify-content-between fruite-name">
+                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>'.$lsp->tenloai.'</a>
+                                                    <span>('.$dem.')</span>
+                                                </div>
+                                            </li>';
+                                        }
+                                        @endphp
                                     </ul>
                                 </div>
                             </div>
@@ -53,7 +62,6 @@
                                     <div class="col-md-6 col-lg-6 col-xl-4" id="productForm">
                                         <div class="rounded position-relative fruite-item">
                                             <form>
-                                            @csrf
                                             <input  type="text" value={{$sp->idsanpham}} id="productId" hidden>
                                             <div class="fruite-img">
                                                 <img src="{{ asset('customer/assets/img/' . $sp->hinh) }}"

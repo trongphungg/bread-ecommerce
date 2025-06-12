@@ -26,7 +26,7 @@
                     <a href="" class="position-relative me-4 my-auto cart-icon">
                         <i class="fa fa-shopping-bag fa-2x green-color"></i>
                         <span id="slsp"
-                            class="quantity-cart position-absolute bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark px-1">3</span>
+                            class="quantity-cart position-absolute bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark px-1">0</span>
                     </a>
                     <div class="position-absolute cart-content shadow p-3 bg-white">
                         <div id="cart-item">

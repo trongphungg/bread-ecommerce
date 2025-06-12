@@ -27,6 +27,9 @@ Route::get('/contact', [ContactController::class,'index'])
 ->name('contact');
 Route::get('/content', [ContentController::class,'index'])
 ->name('content');
+Route::post('/contact/sendMail',[ContactController::class,'sendMail'])
+->name('sendMail');
+
 
 //Dashboard Admin
 Route::get('/dashboard', [DashboardController::class,'index'])

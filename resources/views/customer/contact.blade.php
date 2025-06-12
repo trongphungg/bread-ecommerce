@@ -19,41 +19,44 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        <form action="" class="">
+                        <form action="{{route('sendMail')}}" class="" method="POST">
+                            @csrf
                             <input type="text" name="name" class="w-100 form-control border-0 py-3 mb-4"
                                 placeholder="Nhập họ và tên ..." required>
                             <input type="email" name="email" class="w-100 form-control border-0 py-3 mb-4"
                                 placeholder="Nhập email ..." required>
                             <textarea name="content" class="w-100 form-control border-0 mb-4" rows="5" cols="10"
                                 placeholder="Để lại lời nhắn với chúng tôi nhé !"></textarea required>
-                                    <button class="w-100 btn form-control green-color bg-warning py-3 bg-white  " type="submit">Submit</button>
-                                </form>
-                        </div>
-                        <div class="col-lg-5">
-    <div class="d-flex p-4 rounded mb-4 bg-white">
-                                    <i class="fas fa-map-marker-alt fa-2x green-color me-4"></i>
-                                    <div>
-                                        <h4>Địa chỉ cửa hàng</h4>
-                                        <p class="mb-2">45 thôn Mỹ Yên, Đức Minh, Đăk Mil, Đăk Nông</p>
+                                        <button class="w-100 btn form-control green-color bg-warning py-3 bg-white  " type="submit">Submit</button>
+                                    </form>
+                            </div>
+                            <div class="col-lg-5">
+        <div class="d-flex p-4 rounded mb-4 bg-white">
+                                        <i class="fas fa-map-marker-alt fa-2x green-color me-4"></i>
+                                        <div>
+                                            <h4>Địa chỉ cửa hàng</h4>
+                                            <p class="mb-2">45 thôn Mỹ Yên, Đức Minh, Đăk Mil, Đăk Nông</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex p-4 rounded mb-4 bg-white">
-                                    <i class="fas fa-envelope fa-2x green-color me-4"></i>
-                                    <div>
-                                        <h4>Email hỗ trợ</h4>
-                                        <p class="mb-2">trongphung020103@gmail.com</p>
+                                    <div class="d-flex p-4 rounded mb-4 bg-white">
+                                        <i class="fas fa-envelope fa-2x green-color me-4"></i>
+                                        <div>
+                                            <h4>Email hỗ trợ</h4>
+                                            <p class="mb-2">trongphung020103@gmail.com</p>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex p-4 rounded bg-white">
-                                    <i class="fa fa-phone-alt fa-2x green-color me-4"></i>
-                                    <div>
-                                        <h4>Hotline</h4>
-                                        <p class="mb-2">0338 737 003</p>
+                                    <div class="d-flex p-4 rounded bg-white">
+                                        <i class="fa fa-phone-alt fa-2x green-color me-4"></i>
+                                        <div>
+                                            <h4>Hotline</h4>
+                                            <p class="mb-2">0338 737 003</p>
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
