@@ -171,21 +171,24 @@ async function loadListCart() {
     for (let id in cart) {
         const item = cart[id];
         
-        let itemHTML= `<tr>
-                                <td scope="row">
+        let itemHTML= `<tr class="cart-item" data-id="${item.idsanpham}">
+                                <td>
                                     <div class="d-flex align-items-center">
                                         <input type="hidden" value="${item.idsanpham}" id="item-id"/>
                                         <img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                     </div>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">${item.tensanpham}</p>
+                                    <p class="mb-0 mt-4" id="item-name">${item.tensanpham}</p>
+                                </td>
+                                <td>
+                                    <textarea class="mt-2 " style="width:100%;" placeholder="Nếu bạn muốn thêm chi tiết(Bỏ ngò, nhiều ớt,...)"></textarea>
                                 </td>
                                 <td>
                                     <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.dongia)}</p>
                                 </td>
                                 <td>
-                                    <div class="input-group quantity mb-5" style="width: 100px;">
+                                    <div class="input-group quantity mt-4" style="width: 100px;">
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="handleQuantityChange(event,${item.idsanpham})">
                                             <i class="fa fa-minus"></i>
@@ -203,9 +206,11 @@ async function loadListCart() {
                                     <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.dongia*item.soluongsp)}</p>
                                 </td>
                                 <td>
+                                    <a onclick="handleDelete(event)">
                                     <button class="btn btn-md rounded-circle bg-light border mt-4">
-                                        <a onclick="handleDelete(event)"><i class="fa fa-times text-danger"></i></a>
+                                     <i class="fa fa-times text-danger"></i>
                                     </button>
+                                    </a>
                                 </td>  
                             </tr>
                                 `;
@@ -227,6 +232,34 @@ if(document.getElementById('listCart'))
     loadListCart();
 
 
+//Update api
+async function handleQuantityChange(event,idsanpham) {
+    const button = event.target.closest('button');
+    if (!button) return;
+
+    const quantityInput = button.closest('.quantity').querySelector('#product-quantity');
+    let quantity = parseInt(quantityInput.value, 10);
+
+    if (button.classList.contains('btn-plus')) {
+        quantity += 1; 
+    } else if (button.classList.contains('btn-minus')) {
+        quantity -= 1;
+    }
+    quantityInput.value = quantity;
+
+    const response = await fetch(`${apiBaseUrl}/update`, {
+        method: 'PUT',
+        headers: { 
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify({ idsanpham, quantity }),
+        mode: 'cors',
+    });
+    const result = await response.json();
+    loadListCart();
+}
+
 
 //Delete api
 
@@ -234,9 +267,12 @@ function handleDelete(event) {
     event.preventDefault(); 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
-    const id = document.getElementById('item-id').value;
+    const cartItem = event.target.closest('.cart-item');
 
-    if (confirm('Bạn có chắc chắn muốn xóa?')) {
+    const id = cartItem.getAttribute('data-id');
+    const name = cartItem.querySelector('#item-name').innerText;
+
+    if (confirm('Bạn có chắc chắn muốn xóa sản phẩm '+name+' khỏi giỏ hàng không?')) {
         fetch(`/api/delete/${id}`, {
             method: 'POST',
             headers: {

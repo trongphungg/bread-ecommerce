@@ -46,8 +46,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="position-relative">
-                    <a href="#" class="my-auto user-icon">
+                    <a href="#" class="position-relative my-auto user-icon">
                         <i class="fas fa-user fa-2x green-color"></i>
                     </a>
                     <div class="position-absolute user-content shadow bg-white">
@@ -60,9 +59,8 @@
                         </div>
                         @else
                         <div class="user-item">
-                            <a href="{{route('login')}}" class="btn text-decoration-none green-color ">Đăng&nbsp;nhập</a>
-                            <br>
-                            <a href="" class="btn d-flex alig-items-center green-color text-decoration-none">Đăng&nbsp;ký</a>
+                            <a href="{{route('login')}}" class="btn d-block text-decoration-none green-color ">Đăng&nbsp;nhập</a>
+                            <a href="" class="btn d-block green-color text-decoration-none">Đăng&nbsp;ký</a>
                         </div>
                         @endif
                     </div>

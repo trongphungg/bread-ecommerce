@@ -30,7 +30,6 @@ class CartController extends Controller
                 'hinh' => $request->hinh
             ];
         }
-
         session()->put('cart',$cart);
 
         return response()->json([
@@ -38,6 +37,29 @@ class CartController extends Controller
             'cart'=>$cart,
         ]);
     }
+
+    public function update(Request $request)
+{
+    $cart = session()->get('cart', new \stdClass());
+
+
+    if (property_exists($cart, $request->idsanpham)) {
+
+        $cart->{$request->idsanpham}->soluongsp = $request->quantity;
+    } else {
+        return response()->json([
+            'message' => 'Product not found in cart!'
+        ], 404);
+    }
+
+
+    session()->put('cart', $cart);
+
+    return response()->json([
+        'message' => 'Product quantity updated!',
+        'cart' => $cart
+    ]);
+}
 
     public function delete($id){
         $cart = session()->get('cart',new \StdClass());

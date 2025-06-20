@@ -30,18 +30,18 @@
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Họ và tên</label>
                                 <input type="text" class="login-input form-control"
-                                    name="tennguoidung" placeholder="Nhập họ tên đầy đủ ..." />
+                                    name="tennguoidung" placeholder="Nhập họ tên đầy đủ ..." required />
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Ngày sinh</label>
-                                <input type="date" name="ngaysinh" class="login-input form-control" />
+                                <input type="date" name="ngaysinh" class="login-input form-control" required/>
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Địa chỉ</label>
                                 <input type="text" class="login-input form-control"
-                                    name="diachi" placeholder="Nhập số nhà, tên đường, phường ..." />
-                                <select name="quan" id="quan" class="login-input form-control">
-                                    <option value="">Vui lòng chọn quận</option>
+                                    name="diachi" placeholder="Nhập số nhà, tên đường, phường ..." required/>
+                                <select name="quan" id="quan" class="login-input form-control" required>
+                                    <option value="" disabled selected>Vui lòng chọn quận</option>
                                     <option value="Quận 1">Quận 1</option>
                                     <option value="Quận 3">Quận 3</option>
                                     <option value="Quận 4">Quận 4</option>
@@ -62,23 +62,23 @@
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Giới tính</label>
-                                <select name="gioitinh" id="gioitinh" class="login-input form-control">
-                                    <option value="">Vui lòng chọn giới tính</option>
+                                <select name="gioitinh" id="gioitinh" class="login-input form-control" required>
+                                    <option value="" disabled selected>Vui lòng chọn giới tính</option>
                                     <option value="1">Nam</option>
                                     <option value="0">Nữ</option>
                                 </select>
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Số điện thoại</label>
-                                <input type="text" name="sodienthoai"  class="login-input form-control" placeholder="Nhập số điện thoại ..."/>
+                                <input type="text" name="sodienthoai"  class="login-input form-control" placeholder="Nhập số điện thoại ..." required/>
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Email</label>
-                                <input type="text" name="email"  class="login-input form-control" placeholder="Nhập email ..."/>
+                                <input type="text" name="email"  class="login-input form-control" placeholder="Nhập email ..." required/>
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Mật khẩu</label>
-                                <input type="text" name="matkhau"  class="login-input form-control" placeholder="Nhập mật khẩu ..."/>
+                                <input type="text" name="matkhau"  class="login-input form-control" placeholder="Nhập mật khẩu ..." required/>
                             </div>
 
                             <button type="submit" class="login-btn">Đăng ký</button>

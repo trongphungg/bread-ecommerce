@@ -284,13 +284,12 @@
 }
 
 .user-content {
-    position: absolute;
-    width: auto;
-    right: -5;
+    width: 200px;
+    right: -20px;
     top: 35px;
     display: none;
     z-index: 1000;
-    border-radius: 5px;
+    border-radius: 20px;
     bottom: auto;
     padding: 10px 10px;
 }
@@ -304,7 +303,7 @@
 }
 
 
-.cart-content {
+.cart-content ,.user-content{
         position: absolute;
     transition: opacity 3s ease-in-out;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);

@@ -17,14 +17,33 @@
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Địa chỉ<sup>*</sup></label>
-                                <input type="text" name="diachi" class="form-control" required >
+                                <input type="text" name="diachi" class="form-control" required />
+                                 <select name="quan" id="quan" class="form-control">
+                                    <option value="" disabled selected>Vui lòng chọn quận</option>
+                                    <option value="Quận 1">Quận 1</option>
+                                    <option value="Quận 3">Quận 3</option>
+                                    <option value="Quận 4">Quận 4</option>
+                                    <option value="Quận 5">Quận 5</option>
+                                    <option value="Quận 6">Quận 6</option>
+                                    <option value="Quận 7">Quận 7</option>
+                                    <option value="Quận 8">Quận 8</option>
+                                    <option value="Quận 10">Quận 10</option>
+                                    <option value="Quận 11">Quận 11</option>
+                                    <option value="Quận 12">Quận 12</option>
+                                    <option value="Quận Tân Bình">Quận Tân Bình</option>
+                                    <option value="Quận Tân Phú">Quận Tân Phú</option>
+                                    <option value="Quận Bình Tân">Quận Bình Tân</option>
+                                    <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
+                                    <option value="Quận Gò Vấp">Quận Gò Vấp</option>
+                                    <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                                </select>
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Điện thoại<sup>*</sup></label>
                                 <input name="sodienthoai" type="tel" class="form-control" required >
                             </div>
                             <div class="form-item">
-                                <label class="form-label my-3">Địa chỉ Email<sup>*</sup></label>
+                                <label class="form-label my-3">Email<sup>*</sup></label>
                                 <input type="email" name="email" class="form-control" required >
                             </div>
                             <hr>
