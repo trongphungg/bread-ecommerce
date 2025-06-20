@@ -4,8 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class nguoidung extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class nguoidung extends Authenticatable
 {
     protected $table = 'nguoidung';
     public $timestamps = false;
+    protected $fillable = [
+        'email', 'password', 'tennguoidung', 'role' 
+    ];
+    protected $primaryKey = 'idnguoidung';        
+    public $incrementing = true;                 
+    protected $keyType = 'int'; 
 }

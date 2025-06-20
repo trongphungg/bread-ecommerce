@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    public function showCart(){
+        return view('customer.cart');
+    }
+
+
     public function index(){
         $cart = session()->get('cart',new \stdClass());
         return response()->json($cart);
@@ -31,6 +36,19 @@ class CartController extends Controller
         return response()->json([
             'message' => 'Thêm sản phẩm vào giỏ hàng thành công',
             'cart'=>$cart,
+        ]);
+    }
+
+    public function delete($id){
+        $cart = session()->get('cart',new \StdClass());
+        if (property_exists($cart, $id)) {
+        unset($cart->{$id});
+
+        session()->put('cart', $cart);
+    }
+        return response()->json([
+            'message' => 'Product removed!',
+            'cart' => $cart
         ]);
     }
 }

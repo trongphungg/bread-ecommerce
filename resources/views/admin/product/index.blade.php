@@ -13,6 +13,7 @@
           <table class="mt-3 table table-hover">
             <tr>
                 <td>Mã sản phẩm</td>
+                <td>Hình ảnh</td>
                 <td>Tên sản phẩm</td>
                 <td>Mô tả</td>
                 <td>Đơn vị tính</td>
@@ -25,10 +26,15 @@
             @foreach($dssp as $sp)
             <tr>
                 <td>{{$sp->idsanpham}}</td>
+                <td><img src="{{asset('customer/assets/img/'.$sp->hinh)}}" alt=""  class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
                 <td>{{$sp->tensanpham}}</td>
                 <td>{{Str::limit($sp->motasanpham,50)}}</td>
                 <td>{{$sp->donvitinh}}</td>
-                <td>{{$sp->trangthai}}</td>
+                <td>@php
+                  if($sp->trangthai == 1)
+                    echo "Còn hàng";
+                  else echo "Hết hàng";
+                @endphp</td>
                 <td>{{number_format($sp->dongia,0,',',',').'VNĐ'}}</td>
                 <td>{{$sp->soluong}}</td>
                 <td>

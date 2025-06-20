@@ -49,7 +49,7 @@
                 <td>{{$user->email}}</td>
                 <td>{{$user->role ==1 ?'Quản trị viên':'Khách hàng'}}</td>
                 <td>
-                    <form action="{{route('opinionUpdate',$user->idnguoidung)}}" method="POST"
+                    <form action="{{route('userUpdate',$user->idnguoidung)}}" method="POST"
                         style="display: inline;">
                             @csrf
                             <button type="submit" style="background:none; border:none; cursor:pointer;">
@@ -58,7 +58,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="{{route('opinionDelete',$user->idnguoidung)}}" method="POST"
+                    <form action="{{route('userDelete',$user->idnguoidung)}}" method="POST"
                     style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm  không?');">
                         @csrf
                         @method('delete')

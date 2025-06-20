@@ -9,6 +9,9 @@ use App\Http\Controllers\customer\ContactController;
 use App\Http\Controllers\customer\ContentController;
 use App\Http\Controllers\customer\CartController;
 use App\Http\Controllers\customer\TintucController;
+use App\Http\Controllers\customer\DetailController;
+use App\Http\Controllers\customer\CheckoutController;
+use App\Http\Controllers\customer\LoginController;
 
 //Route cho admin
 use App\Http\Controllers\admin\DashboardController;
@@ -17,13 +20,18 @@ use App\Http\Controllers\admin\OpinionController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\NewsController;
+use App\Http\Controllers\admin\OrderController;
 
 
 
+
+//Customer
 Route::get('/', [HomeController::class,'index'])
 ->name('home');
 Route::get('/shop', [ShopController::class,'index'])
 ->name('shop');
+Route::get('/detail/{id}',[DetailController::class,'detail'])
+->name('detail');
 Route::get('/contact', [ContactController::class,'index'])
 ->name('contact');
 Route::get('/content', [ContentController::class,'index'])
@@ -32,6 +40,29 @@ Route::post('/contact/sendMail',[ContactController::class,'sendMail'])
 ->name('sendMail');
 Route::get('/customer/news',[TintucController::class,'index'])
 ->name('news');
+Route::get('/cart',[CartController::class,'showCart'])
+->name('showCart');
+Route::post('/api/delete/{id}',[CartController::class,'delete'])
+->name('deleteAPI');
+Route::get('/checkout',[CheckoutController::class,'index'])
+->name('checkout');
+Route::get('/checkout',[CheckoutController::class,'index'])
+->name('checkout');
+Route::post('checkout/finish',[CheckoutController::class,'finish'])
+->name('checkout.finish');
+
+
+Route::get('/register',[LoginController::class,'register'])
+->name('register');
+Route::post('/createRegister',[LoginController::class,'handleCreate'])
+->name('createRegister');
+Route::get('/login',[LoginController::class,'index'])
+->name('login');
+Route::post('/handleLogin',[LoginController::class,'login'])
+->name('handleLogin');
+Route::get('/logout',[LoginController::class,'logout'])
+->name('logout');
+
 
 
 //Dashboard Admin
@@ -111,6 +142,14 @@ Route::post('/news/{id}', [NewsController::class,'handleUpdate'])
 ->name('handleUpdateNews');
 Route::delete('/news/{id}',[NewsController::class,'delete'])
 ->name('newsDelete');
+
+//Order
+Route::get('/orders',[OrderController::class,'index'])
+->name('orders.index');
+Route::post('/orders/detail/{id}',[OrderController::class,'detail'])
+->name('orders.detail');
+Route::put('/orders/update/{id}',[OrderController::class,'update'])
+->name('orders.update');
 
 //Cart API
 Route::get('/api',[CartController::class,'index']);

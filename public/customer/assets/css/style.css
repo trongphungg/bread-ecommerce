@@ -34,7 +34,7 @@
 .green-color,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link:hover,
 .fixed-top.bg-white .navbar .navbar-nav .nav-link.active {
-    color: var(--bs-primary);
+    color: var(--bs-primary) !important;
 }
 
 .navbar {
@@ -275,21 +275,24 @@
 .cart-content {
     width: 300px;
     right: 40px;
-    top: 65px;
+    top: 35px;
     display: none;
     z-index: 1000;
     border-radius: 20px;
     bottom: auto;
+    padding: 10px 10px;
 }
 
 .user-content {
+    position: absolute;
     width: auto;
     right: -5;
-    top: 65px;
+    top: 35px;
     display: none;
     z-index: 1000;
     border-radius: 5px;
     bottom: auto;
+    padding: 10px 10px;
 }
 
 .cart-icon:hover + .cart-content,
@@ -302,6 +305,7 @@
 
 
 .cart-content {
+        position: absolute;
     transition: opacity 3s ease-in-out;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -437,3 +441,4 @@
 }
 
 /*** End Footer ***/
+

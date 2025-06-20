@@ -12,6 +12,39 @@ $(".back-to-top").click(function () {
 });
 
 
+//Shadow cho navbar
+$(window).scroll(function () {
+        if ($(window).width() < 992) {
+            if ($(this).scrollTop() > 55) {
+                $('.fixed-top').addClass('shadow');
+            } else {
+                $('.fixed-top').removeClass('shadow');
+            }
+        } else {
+            if ($(this).scrollTop() > 55) {
+                $('.fixed-top').addClass('shadow').css('top', -55);
+            } else {
+                $('.fixed-top').removeClass('shadow').css('top', 0);
+            }
+        } 
+    });
+
+
+ $('.quantity button').on('click', function () {
+        var button = $(this);
+        var oldValue = button.parent().parent().find('input').val();
+        if (button.hasClass('btn-plus')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
+        button.parent().parent().find('input').val(newVal);
+    });
+
 //Tự động tuần tự các sản phẩm
 $(".testimonial-carousel").owlCarousel({
     autoplay: true,
@@ -103,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if(form.querySelector('#productQuantity'))
                 soluongsp = form.querySelector('#productQuantity').value;
             else 
-                soluongsp = 1;
+                soluongsp = parseInt("1");
 
 
             const response = await fetch(`${apiBaseUrl}/add`,{
@@ -121,3 +154,102 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+//ListCard
+
+async function loadListCart() {
+    const response = await fetch(apiBaseUrl);
+    const cart = await response.json();
+
+    const cartItem = document.getElementById('listCart');
+    cartItem.innerHTML = '';
+    let tongtien = 0;
+    let dem = 0;
+    let soluong=0;
+    
+    for (let id in cart) {
+        const item = cart[id];
+        
+        let itemHTML= `<tr>
+                                <td scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <input type="hidden" value="${item.idsanpham}" id="item-id"/>
+                                        <img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4">${item.tensanpham}</p>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.dongia)}</p>
+                                </td>
+                                <td>
+                                    <div class="input-group quantity mb-5" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border" onclick="handleQuantityChange(event,${item.idsanpham})">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input id="product-quantity" type="text" class="form-control form-control-sm text-center border-0" value="${item.soluongsp}">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="handleQuantityChange(event,${item.idsanpham})">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                </td>
+                                <td>
+                                    <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.dongia*item.soluongsp)}</p>
+                                </td>
+                                <td>
+                                    <button class="btn btn-md rounded-circle bg-light border mt-4">
+                                        <a onclick="handleDelete(event)"><i class="fa fa-times text-danger"></i></a>
+                                    </button>
+                                </td>  
+                            </tr>
+                                `;
+        cartItem.innerHTML += itemHTML;
+        tongtien += item.dongia*item.soluongsp;
+        dem++;
+        soluong += item.soluongsp;
+    }
+    let VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(tongtien);
+    document.getElementById("lastTotal").innerHTML = `<h5 class="mb-0 ps-4 me-4">Tổng tiền</h5>
+                                <p class="mb-0 pe-4">${VND}</p>`
+    document.getElementById("quantity").innerHTML = `<h5 class="mb-0 ps-4 me-4">Số lượng bánh</h5>
+                                <p class="mb-0 pe-4">${soluong} cái</p>`
+    document.getElementById("loaibanh").innerHTML = `<h5 class="mb-0 ps-4 me-4">Số loại bánh</h5>
+                                <p class="mb-0 pe-4">${dem} loại</p>`
+
+}
+if(document.getElementById('listCart'))
+    loadListCart();
+
+
+
+//Delete api
+
+function handleDelete(event) {
+    event.preventDefault(); 
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
+    const id = document.getElementById('item-id').value;
+
+    if (confirm('Bạn có chắc chắn muốn xóa?')) {
+        fetch(`/api/delete/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Xóa thành công!');
+                loadCart();
+                if(document.getElementById("listCart"))
+                    loadListCart();
+            }})
+    }
+}

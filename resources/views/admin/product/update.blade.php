@@ -43,7 +43,8 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-text">Mô tả</span>
-                                <textarea class="form-control" name ="motasanpham" aria-label="With textarea" required>{{ $sp->motasanpham }}</textarea>
+                                <textarea class="form-control" style="height: 200px !important;" name ="motasanpham" aria-label="With textarea"
+                                    required>{{ $sp->motasanpham }}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -54,23 +55,19 @@
                         <div class="form-group">
                             @if ($sp->hinh)
                                 <div style="margin-bottom: 10px;">
-                                    <img src="{{ asset('customer/assets/img/'.$sp->hinh) }}" alt="Hình hiện tại"
+                                    <img src="{{ asset('customer/assets/img/' . $sp->hinh) }}" alt="Hình hiện tại"
                                         width="150">
                                 </div>
                             @endif
-                            <input type="hidden" name="hinh_cu" value="{{ $sp->hinh}}">
+                            <input type="hidden" name="hinh_cu" value="{{ $sp->hinh }}">
                             <label for="email2">Chọn hình</label>
-                            <input type="file" class="form-control" name ="hinh_moi"
-                                required />
+                            <input type="file" class="form-control" name ="hinh_moi" />
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Trạng thái đơn hàng</label>
                             <select class="form-select" name="trangthai" required>
-                                @if ($sp->trangthai == 1)
-                                    <option value="1">Còn hàng</option>
-                                @else
-                                    <option value="0">Hết hàng</option>
-                                @endif
+                                <option value="1" {{ $sp->trangthai == 1 ? 'selected' : '' }}>Còn hàng</option>
+                                <option value="0" {{ $sp->trangthai == 0 ? 'selected' : '' }}>Hết hàng</option>
                             </select>
                         </div>
                         <div class="form-group">

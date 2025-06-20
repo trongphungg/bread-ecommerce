@@ -64,7 +64,7 @@
                                 <a href="#" class="h5 text-decoration-none">{{$bm->tensanpham}}</a>
                                 <p class="mb-3">Số lượng: {{$bm->soluong}}</p>
                                 <h5 class="mb-3">{{ number_format($bm->dongia, 0, ',', '.') }} VNĐ</h5>
-                                <a href="#" class="btn border border-warning green-color rounded-pill px-3"><i
+                                <a href="#" class="btn border border-secondary green-color rounded-pill px-3 text-primary"><i
                                         class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</a>
                             </div>
                         </div>
@@ -78,8 +78,8 @@
                         <div class="py-4">
                             <a href="#" class="h5 text-decoration-none">{{$bb->tensanpham}}</a>
                             <p class="mb-3">Số lượng: {{$bm->soluong}}</p>
-                            <h5 class="mb-3">{{ number_format($bm->dongia, 0, ',', '.') }} VNĐ</h5>
-                            <a href="#" class="btn border border-warning green-color rounded-pill px-3"><i
+                            <h5 class="mb-3">{{ number_format($bm->dongia, 0, ',', '.')}} VNĐ</h5>
+                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-3"><i
                                         class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</a>
                         </div>
                     </div>

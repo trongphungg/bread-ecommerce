@@ -56,7 +56,7 @@
                             <input type="hidden" name="hinh_cu" value="{{ $tintuc->hinhanh}}">
                             <label for="email2">Chọn hình</label>
                             <input type="file" class="form-control" name ="hinh_moi"
-                                required />
+                                 />
                         </div>
                         <div class="form-group">
                             <label for="Tensanpham">Tác giả</label>

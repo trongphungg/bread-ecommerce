@@ -26,7 +26,7 @@ class UserController extends Controller
         $nguoidung->gioitinh = $request->input('gioitinh');
         $nguoidung->sodienthoai = $request->input('sodienthoai');
         $nguoidung->email = $request->input('email');
-        $nguoidung->matkhau = Hash::make($request->input('matkhau'));
+        $nguoidung->password = Hash::make($request->input('password'));
         $nguoidung->role = $request->input('role');
         $nguoidung->save();
 
@@ -34,14 +34,27 @@ class UserController extends Controller
     }
 
     public function update($id){
-
+        $user = nguoidung::where('idnguoidung',$id)->first();
+        return view('admin.user.update',compact('user'));
     }
 
     public function handleUpdate(Request $request, $id){
-
+        $nguoidung = nguoidung::where('idnguoidung',$id)
+                            ->update([
+                                'tennguoidung' => $request->input('tennguoidung'),
+                                'ngaysinh' => $request->input('ngaysinh'),
+                                'diachi' =>$request->input('diachi'),
+                                'gioitinh'=>$request->input('gioitinh'),
+                                'sodienthoai' => $request->input('sodienthoai'),
+                                'role' => $request->input('role'),
+                                'email' => $request->input('email')
+                            ]);
+        return redirect('/users');
     }
 
     public function delete($id){
-
+        $user = nguoidung::where('idnguoidung',$id);
+        $user->delete();
+        return redirect('/users');
     }
 }
