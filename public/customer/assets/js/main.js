@@ -83,41 +83,41 @@ $(".testimonial-carousel").owlCarousel({
 
 const apiBaseUrl = "http://127.0.0.1:8000/api";
 
-async function loadCart() {
-    const response = await fetch(apiBaseUrl);
-    const cart = await response.json();
-
-    const cartItem = document.getElementById('cart-item');
-    cartItem.innerHTML='';
-    let total =0;
-    let dem = 0;
-    for (let id in cart){
-        const item = cart[id];
-
-        let itemHTML = `<div class="cart-item d-flex align-items-center mb-3">
-                                    <img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" class="img-fluid rounded-circle" style="width: 50px;" alt="">
-                                    <div class="ms-3">
-                                        <h6 class="mb-0">${item.tensanpham}</h6>
-                                        <div class="d-flex justify-content-between">
-                                            <span class="text-primary">${item.dongia}VND</span>
-                                            <span class="text-secondary ms-3">x ${item.soluongsp}</span>
+    async function loadCart() {
+        const response = await fetch(apiBaseUrl);
+        const cart = await response.json();
+    
+        const cartItem = document.getElementById('cart-item');
+        cartItem.innerHTML='';
+        let total =0;
+        let dem = 0;
+        for (let id in cart){
+            const item = cart[id];
+    
+            let itemHTML = `<div class="cart-item d-flex align-items-center mb-3" data-id="${item.idsanpham}">
+                                        <img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" class="img-fluid rounded-circle" style="width: 50px;" alt="">
+                                        <div class="ms-3">
+                                            <h6 class="mb-0 " id="item-name">${item.tensanpham}</h6>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="text-primary">${item.dongia}VND</span>
+                                                <span class="text-secondary ms-3">x ${item.soluongsp}</span>
+                                            </div>
                                         </div>
+                                        <a onclick="handleDelete(event)" class="btn btn-sm text-danger ms-auto remove-item ">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+    
                                     </div>
-                                <button class="btn btn-sm text-danger ms-auto remove-item ">
-                                    <input type="hidden" value="${item.idsanpham}" id="item-id"/>
-                                    <a href="#" onclick=""><i class="fas fa-times"></i></a>
-                                </button>
+                                    `;
+            cartItem.innerHTML += itemHTML;
+            total += item.dongia*item.soluongsp;
+            dem++;
+        }
+        document.getElementById('total').innerHTML=`<h6>Tổng tiền:</h6>
+                                        <h6>${total} VNĐ</h6>`;
+        document.getElementById('slsp').innerText=dem;
+    };
 
-                                </div>
-                                `;
-        cartItem.innerHTML += itemHTML;
-        total += item.dongia*item.soluongsp;
-        dem++;
-    }
-    document.getElementById('total').innerHTML=`<h6>Tổng tiền:</h6>
-                                    <h6>${total} VNĐ</h6>`;
-    document.getElementById('slsp').innerText=dem;
-}
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 document.addEventListener('DOMContentLoaded', function() {
@@ -262,10 +262,8 @@ async function handleQuantityChange(event,idsanpham) {
 
 
 //Delete api
-
 function handleDelete(event) {
     event.preventDefault(); 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     const cartItem = event.target.closest('.cart-item');
 
@@ -273,7 +271,7 @@ function handleDelete(event) {
     const name = cartItem.querySelector('#item-name').innerText;
 
     if (confirm('Bạn có chắc chắn muốn xóa sản phẩm '+name+' khỏi giỏ hàng không?')) {
-        fetch(`/api/delete/${id}`, {
+        fetch(`${apiBaseUrl}/delete/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -289,3 +287,10 @@ function handleDelete(event) {
             }})
     }
 }
+
+function test(event){
+    event.preventDefault();
+    alert('123');
+}
+
+

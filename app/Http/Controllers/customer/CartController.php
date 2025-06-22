@@ -4,6 +4,13 @@ namespace App\Http\Controllers\customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\donhang;
+use App\Models\sanpham;
+use App\Models\chitietdonhang;
+
+
 
 class CartController extends Controller
 {
@@ -14,6 +21,56 @@ class CartController extends Controller
 
     public function index(){
         $cart = session()->get('cart',new \stdClass());
+        if(empty((array)$cart)){
+            if(Auth::user()){
+                $user_id = Auth::user()->idnguoidung;
+                $dh = donhang::where('idnguoidung',$user_id)
+                                ->where('trangthaidh','')
+                                ->first();
+                if($dh){
+                    $data = chitietdonhang::where('iddonhang',$dh->iddonhang)->get();
+                    $dataFormatted = $data->map(function($item) {
+                    $sp = sanpham::where('idsanpham', $item->idsanpham)->first();
+                    return (object)[
+                        'idsanpham' => $item->idsanpham,
+                        'tensanpham' => $item->sanpham->tensanpham,
+                        'dongia' => $item->sanpham->dongia,
+                        'soluongsp' => $item->soluongsp,
+                        'hinh' => $item->sanpham->hinh
+                    ];
+                    })->keyBy('idsanpham')->toArray();
+
+                    foreach($dataFormatted as $key => $value){
+                        $cart->{$key} = $value;
+                    }
+                }
+            }
+        }
+        else{
+            if(Auth::user()){
+                $user_id = Auth::user()->idnguoidung;
+                $dh = donhang::where('idnguoidung',$user_id)
+                                ->where('trangthaidh','')
+                                ->first();
+                if(!$dh){
+                    $dh = new donhang();
+                    $dh->idnguoidung=$user_id;
+                    $dh->ngaylapdh=now();
+                    $dh->trangthaidh='';
+                    $dh->tongtien=0;
+                    $dh->diachi='';
+                    $dh->save();
+                }
+
+                foreach($cart as $item){
+                    DB::table('chitietdonhang')->updateOrInsert(
+                        ['idsanpham'=>$item->idsanpham,'iddonhang'=>$dh->iddonhang],
+                        ['soluongsp'=>$item->soluongsp]
+                );
+                }
+            }
+        }
+        session()->put('cart', $cart);
         return response()->json($cart);
     }
 
@@ -65,10 +122,19 @@ class CartController extends Controller
         $cart = session()->get('cart',new \StdClass());
         if (property_exists($cart, $id)) {
         unset($cart->{$id});
-
         session()->put('cart', $cart);
+        if (Auth::check()) {
+            $dh = donhang::where('idnguoidung',Auth::user()->idnguoidung)
+                        ->where('trangthaidh',"")
+                        ->first();
+            DB::table('chitietdonhang')
+                ->where('idsanpham', $id)
+                ->where('iddonhang', $dh->iddonhang) 
+                ->delete();
+        }
+        
     }
-        return response()->json([
+    return response()->json([
             'message' => 'Product removed!',
             'cart' => $cart
         ]);

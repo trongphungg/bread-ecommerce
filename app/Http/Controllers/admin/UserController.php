@@ -19,10 +19,11 @@ class UserController extends Controller
     }
 
     public function handleCreate(Request $request){
+        $diachi = $request->diachi.'-'.$request->quan;
         $nguoidung = new nguoidung();
         $nguoidung->tennguoidung = $request->input('tennguoidung');
         $nguoidung->ngaysinh = $request->input('ngaysinh');
-        $nguoidung->diachi = $request->input('diachi');
+        $nguoidung->diachi = $diachi;
         $nguoidung->gioitinh = $request->input('gioitinh');
         $nguoidung->sodienthoai = $request->input('sodienthoai');
         $nguoidung->email = $request->input('email');

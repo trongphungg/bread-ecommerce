@@ -283,6 +283,7 @@
     padding: 10px 10px;
 }
 
+
 .user-content {
     width: 200px;
     right: -20px;
@@ -292,6 +293,12 @@
     border-radius: 20px;
     bottom: auto;
     padding: 10px 10px;
+}
+.cart-item:hover{
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+        transition: all 0.3s ease-in-out;
+    border-radius: 15px;
 }
 
 .cart-icon:hover + .cart-content,

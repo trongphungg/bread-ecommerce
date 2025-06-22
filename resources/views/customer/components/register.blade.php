@@ -78,7 +78,7 @@
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Mật khẩu</label>
-                                <input type="text" name="matkhau"  class="login-input form-control" placeholder="Nhập mật khẩu ..." required/>
+                                <input type="password" name="matkhau"  class="login-input form-control" placeholder="Nhập mật khẩu ..." required/>
                             </div>
 
                             <button type="submit" class="login-btn">Đăng ký</button>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\sanpham;
+use App\Services\PublicService;
 use App\Models\nguoidung;
 use App\Models\donhang;
 use App\Models\chitietdonhang;
@@ -19,22 +20,22 @@ class CheckoutController extends Controller
         return view('customer.checkout',compact('data','dssp'));
     }
 
-    public function finish(Request $request){
+    public function finish(Request $request,PublicService $pub){
+        $diachi=$request->diachi.'-'.$request->quan;
         $nguoidung = new nguoidung();
             $nguoidung->tennguoidung = $request->tennguoidung;
-            $nguoidung->diachi = $request->diachi;
+            $nguoidung->diachi = $diachi;
             $nguoidung->sodienthoai = $request->sodienthoai;
             $nguoidung->email = $request->email;
             $nguoidung->role = 1;
             $nguoidung->save();
-
 
             $dh = new donhang();
             $dh->idnguoidung = $nguoidung->idnguoidung;
 	        $dh->ngaylapdh= now();
             $dh->trangthaidh = 'CXN';
             $dh->tongtien = $request->input('Tongtien');
-            $dh->diachi = $request->diachi;
+            $dh->diachi = $diachi;
             $dh->save();
 
 
@@ -43,9 +44,10 @@ class CheckoutController extends Controller
                 DB::table('chitietdonhang')->updateOrInsert(
                                ['idsanpham' => $item->idsanpham, 'iddonhang' => $dh->iddonhang], 
                                [
-                                   'soluongsp' => $item->soluongsp,
+                                   'soluongsp' => $item->soluongsp
                                ]
                            );
+            // $pub->xoaNguyenlieu($item);
            }
         session()->put('cart', new \stdClass()); 
         return redirect('/');

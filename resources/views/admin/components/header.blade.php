@@ -13,28 +13,26 @@
                                 class="avatar-img rounded-circle" />
                         </div>
                         <span class="profile-username">
-                            <span class="op-7">Hi,</span>
-                            {{-- <span class="fw-bold">{{Auth::user()->role == 1 ? 'Admin' : 'User'}}</span> --}}
+                            <span class="op-7">Xin chào Quản trị viên</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-user animated fadeIn">
                         <div class="dropdown-user-scroll scrollbar-outer">
-                            <li>
+                            {{-- <li>
                                 <div class="user-box">
                                     <div class="avatar-lg">
                                         <img src="{{ asset('admin/assets/img/admin.png') }}" alt="image profile"
                                             class="avatar-img rounded" />
                                     </div>
                                     <div class="u-text">
-                                        {{-- <p class="text-muted">{{Auth::user()->email}}</p> --}}
                                         <a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Thông tin tài
                                             khoản</a>
                                     </div>
                                 </div>
-                            </li>
+                            </li> --}}
                             <li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
+                                <a class="dropdown-item" href="{{route('logout')}}">Đăng xuất</a>
                             </li>
                         </div>
                     </ul>

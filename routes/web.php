@@ -22,8 +22,11 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\admin\TestController;
+use App\Http\Controllers\admin\WarehouseController;
+use App\Http\Controllers\admin\IngredientController;
+use App\Http\Controllers\admin\RecipeController;
 use App\Http\Middleware\AdminMiddleware;
-
 
 
 
@@ -61,8 +64,7 @@ Route::middleware([ UserMiddleware::class])->group(function() {
 Route::get('/api',[CartController::class,'index']);
 Route::post('api/add',[CartController::class,'add']);
 Route::put('api/update',[CartController::class,'update']);
-Route::post('/api/delete/{id}',[CartController::class,'delete'])
-->name('deleteAPI');
+Route::post('api/delete/{id}',[CartController::class,'delete']);
 
 
 //Login
@@ -165,9 +167,50 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     ->name('orders.detail');
     Route::put('/orders/update/{id}',[OrderController::class,'update'])
     ->name('orders.update');
+
+    //Kho
+    Route::get('/api/nguyenlieu',[WarehouseController::class,'apiNguyenlieu']);
+    Route::get('/warehouse',[WarehouseController::class,'index'])
+    ->name('warehouseIndex');
+    Route::get('/warehouse/create',[WarehouseController::class,'create'])
+    ->name('warehouseCreate');
+    Route::post('/warehouse/handleCreate',[WarehouseController::class,'handleCreate'])
+    ->name('handleCreateWarehouse');
+
+    //Ingredient
+    Route::get('/ingredients',[IngredientController::class,'index'])
+    ->name('ingredientIndex');
+    Route::get('/ingredients/create',[IngredientController::class,'create'])
+    ->name('ingredientCreate');
+    Route::post('/ingredients/handleCreata',[IngredientController::class,'handleCreate'])
+    ->name('handleCreateIngredient');
+    Route::post('/ingredients/update/{id}',[IngredientController::class,'update'])
+    ->name('ingredientUpdate');
+    Route::post('/ingredients/{id}',[IngredientController::class,'handleUpdate'])
+    ->name('handleUpdateIngredient');
+    Route::delete('/ingredients/{id}',[IngredientController::class,'delete'])
+    ->name('ingredientDelete');
+
+
+    //Recipe
+    Route::get('/recipes',[RecipeController::class,'index'])
+    ->name('recipeIndex');
+    Route::get('/recipes/create/{id}',[RecipeController::class,'create'])
+    ->name('recipeCreate');
+    Route::post('/recipes/handleCreate/{id}',[RecipeController::class,'handleCreate'])
+    ->name('handleCreateRecipe');
+    Route::get('/recipes/detail/{id}',[RecipeController::class,'detail'])
+    ->name('recipeDetail');
+    Route::post('/recipes/update/{id}',[RecipeController::class,'update'])
+    ->name('recipeUpdate');
+    Route::post('/recipes/{id}',[RecipeController::class,'handleUpdate'])
+    ->name('handleUpdateRecipe');
+    Route::delete('/recipes/{id}',[RecipeController::class,'delete'])
+    ->name('recipeDelete');
 });
 
-//Dashboard Admin
+//Test
+Route::get('/test',[TestController::class,'test']);
 
 
 

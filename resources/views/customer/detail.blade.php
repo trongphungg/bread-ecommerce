@@ -26,6 +26,7 @@
                                 <i class="fa fa-star text-warning"></i>
                                 <i class="fa fa-star"></i>
                             </div>
+                            <p class="mb-3">Số lượng: {{$sanpham->soluong}}</p>
                             <p class="mb-4">{{$sanpham->motasanpham}}</p>
                             <div class="input-group quantity mb-5" style="width: 100px;">
                                 <div class="input-group-btn">
@@ -40,7 +41,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <button type="submit" class="btn border border-warning green-color rounded-pill px-4 py-2 mb-4 text-primary">
+                            <button type="submit" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
                                 <i class="fa fa-shopping-bag me-2 green-color"></i> Thêm vào giỏ hàng
                             </button>
                         </div>

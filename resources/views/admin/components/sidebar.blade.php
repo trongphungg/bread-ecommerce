@@ -162,6 +162,32 @@
             </ul>
           </div>
         </li>
+        <li class="nav-item {{ request()->routeIs('warehouseIndex') ? 'active' : '' }}">
+          <a data-bs-toggle="collapse" href="#kho">
+            <i class="far fa-chart-bar"></i>
+            <p>Quản lý kho</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="kho">
+            <ul class="nav nav-collapse">
+              <li class="{{ request()->routeIs('warehouseIndex') ? 'active' : '' }}">
+                <a href="{{route('warehouseIndex')}}">
+                  <span class="sub-item">Danh sách nhập kho</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{route('ingredientIndex')}}">
+                  <span class="sub-item">Danh sách nguyên liệu</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{route('recipeIndex')}}">
+                  <span class="sub-item">Danh sách công thức</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

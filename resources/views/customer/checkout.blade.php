@@ -11,13 +11,13 @@
                                 <div class="col-md-12 col-lg-6">
                                     <div class="form-item w-100">
                                         <label class="form-label my-3">Tên Khách hàng<sup>*</sup></label>
-                                        <input type="text" name="tennguoidung" class="form-control" required >
+                                        <input type="text" name="tennguoidung" class="form-control" placeholder="Nhập tên khách hàng ..." required  >
                                     </div>
                                 </div>
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Địa chỉ<sup>*</sup></label>
-                                <input type="text" name="diachi" class="form-control" required />
+                                <input type="text" name="diachi" class="form-control" placeholder="Nhập số nhà, tên đường, phường ..." required />
                                  <select name="quan" id="quan" class="form-control">
                                     <option value="" disabled selected>Vui lòng chọn quận</option>
                                     <option value="Quận 1">Quận 1</option>
@@ -40,11 +40,11 @@
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Điện thoại<sup>*</sup></label>
-                                <input name="sodienthoai" type="tel" class="form-control" required >
+                                <input name="sodienthoai" type="tel" class="form-control" placeholder="Nhập số điện thoại ..." required >
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Email<sup>*</sup></label>
-                                <input type="email" name="email" class="form-control" required >
+                                <input type="email" name="email" class="form-control" placeholder="Nhập email ..." required >
                             </div>
                             <hr>
                         </div>
@@ -53,7 +53,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Products</th>
+                                            <th scope="col">Hình ảnh</th>
                                             <th scope="col">Tên sản phẩm</th>
                                             <th scope="col">Đơn giá</th>
                                             <th scope="col">Số lượng</th>
@@ -106,7 +106,7 @@
                                 </table>
                             </div>
                             <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                                <button type="submit" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đặt hàng</button>
+                                <button type="submit" class="btn border border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đặt hàng</button>
                             </div>
                             
                         </div>
