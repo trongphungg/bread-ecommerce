@@ -8,7 +8,7 @@
                           <tr>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Tên sản phẩm</th>
-                            <th scope="col">Ghi chú</th>
+                            <th class="text-center" data-intro="Bạn có thể viết chú thích về bánh mì tại đây để bọn mình làm phù hợp với sở thích của bạn nhé !!!(Ví dụ: Ít ớt, nhiều rau, ... Mặc định sẽ là đầy đủ nhé !!)&#10145;"  scope="col" >Ghi chú</th>
                             <th scope="col">Đơn giá</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Thành tiền</th>

@@ -64,8 +64,8 @@
                                 <a href="#" class="h5 text-decoration-none">{{$bm->tensanpham}}</a>
                                 <p class="mb-3">Số lượng: {{$bm->soluong}}</p>
                                 <h5 class="mb-3">{{ number_format($bm->dongia, 0, ',', '.') }} VNĐ</h5>
-                                <a href="#" class="btn border border-secondary green-color rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</a>
+                                <a href="" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ</a>
                             </div>
                         </div>
                     </div>
@@ -77,10 +77,10 @@
                         <img src="{{asset('customer/assets/img/'.$bb->hinh)}}" class="img-fluid rounded" alt="">
                         <div class="py-4">
                             <a href="#" class="h5 text-decoration-none">{{$bb->tensanpham}}</a>
-                            <p class="mb-3">Số lượng: {{$bm->soluong}}</p>
-                            <h5 class="mb-3">{{ number_format($bm->dongia, 0, ',', '.')}} VNĐ</h5>
-                            <a href="#" class="btn border border-secondary text-primary rounded-pill px-3"><i
-                                        class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</a>
+                            <p class="mb-3">Số lượng: {{$bb->soluong}}</p>
+                            <h5 class="mb-3">{{ number_format($bb->dongia, 0, ',', '.')}} VNĐ</h5>
+                            <a href="{{ route('detail', $bb->idsanpham) }}" class="btn border border-secondary text-primary rounded-pill px-3"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i>Xem chi tiết</a>
                         </div>
                     </div>
                 </div>

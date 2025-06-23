@@ -24,7 +24,7 @@
                         method="POST">
                             @csrf
                             <div class="login-form-group">
-                                <input type="email" 
+                                <input type="text" 
                                 class="login-input form-control" 
                                 placeholder="Nhập email ..." 
                                 name="email" 
@@ -62,7 +62,6 @@
                                     Đăng nhập với Facebook(Coming soon)
                                 </a>
                             </div>
-                            
                         </form>
                     </div>
                 </div>

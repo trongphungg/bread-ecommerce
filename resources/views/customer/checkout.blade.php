@@ -6,49 +6,50 @@
                 <form action="{{ route('checkout.finish')}}" method="POST">
                     @csrf
                     <div class="row g-5">
-                        <div class="col-md-12 col-lg-6 col-xl-7">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-6">
-                                    <div class="form-item w-100">
-                                        <label class="form-label my-3">Tên Khách hàng<sup>*</sup></label>
-                                        <input type="text" name="tennguoidung" class="form-control" placeholder="Nhập tên khách hàng ..." required  >
-                                    </div>
+                        <div class="col-md-12 col-lg-6 col-xl-5">
+                                <div class="form-item w-100">
+                                    <label class="form-label my-3">Tên Khách hàng<sup>*</sup></label>
+                                    <input type="text" name="tennguoidung" class="form-control" placeholder="Nhập tên khách hàng ..." value="{{Auth::user()->tennguoidung ?? ''}}" required  >
                                 </div>
-                            </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Địa chỉ<sup>*</sup></label>
-                                <input type="text" name="diachi" class="form-control" placeholder="Nhập số nhà, tên đường, phường ..." required />
+                                <input type="text" name="diachi" class="form-control" placeholder="Nhập số nhà, tên đường, phường ..." value="{{strstr(Auth::user()->diachi,'-',true) ?? ''}}" required />
                                  <select name="quan" id="quan" class="form-control">
                                     <option value="" disabled selected>Vui lòng chọn quận</option>
-                                    <option value="Quận 1">Quận 1</option>
-                                    <option value="Quận 3">Quận 3</option>
-                                    <option value="Quận 4">Quận 4</option>
-                                    <option value="Quận 5">Quận 5</option>
-                                    <option value="Quận 6">Quận 6</option>
-                                    <option value="Quận 7">Quận 7</option>
-                                    <option value="Quận 8">Quận 8</option>
-                                    <option value="Quận 10">Quận 10</option>
-                                    <option value="Quận 11">Quận 11</option>
-                                    <option value="Quận 12">Quận 12</option>
-                                    <option value="Quận Tân Bình">Quận Tân Bình</option>
-                                    <option value="Quận Tân Phú">Quận Tân Phú</option>
-                                    <option value="Quận Bình Tân">Quận Bình Tân</option>
-                                    <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
-                                    <option value="Quận Gò Vấp">Quận Gò Vấp</option>
-                                    <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
+                                    @php
+                                    $diachi = Auth::user()->diachi;
+                                    $diachiParts = explode('-', $diachi);
+                                    $selectedQuan = isset($diachiParts[1]) ? trim($diachiParts[1]) : '';
+                                    @endphp
+                                    @foreach($dsquan as $quan)
+                                        <option value="{{$quan}}" {{$selectedQuan==$quan ? 'selected':''}}>{{$quan}}</option>
+                                    @endforeach
+                                    
                                 </select>
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Điện thoại<sup>*</sup></label>
-                                <input name="sodienthoai" type="tel" class="form-control" placeholder="Nhập số điện thoại ..." required >
+                                <input name="sodienthoai" type="tel" class="form-control" value="{{Auth::user()->sodienthoai ?? ''}}" placeholder="Nhập số điện thoại ..." required >
                             </div>
                             <div class="form-item">
                                 <label class="form-label my-3">Email<sup>*</sup></label>
-                                <input type="email" name="email" class="form-control" placeholder="Nhập email ..." required >
+                                <input type="email" name="email" class="form-control" value="{{Auth::user()->email ?? ''}}" placeholder="Nhập email ..." required >
                             </div>
                             <hr>
+                            @if(Auth::user())
+                            <div class="form-item">
+                                <label class="form-label my-3">Địa chỉ giao hàng khác<sup>*</sup>(Nếu khác địa điểm giao ở trên)</label>
+                                <input type="text" name="diachigiao" class="form-control" placeholder="Nhập số nhà, tên đường, phường..." />
+                                 <select name="quangiao" id="quangiao" class="form-control">
+                                    <option value="" disabled selected>Vui lòng chọn quận</option>
+                                    @foreach($dsquan as $quan)
+                                        <option value="{{$quan}}">{{$quan}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
                         </div>
-                        <div class="col-md-12 col-lg-6 col-xl-5">
+                        <div class="col-md-12 col-lg-6 col-xl-7">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -57,26 +58,24 @@
                                             <th scope="col">Tên sản phẩm</th>
                                             <th scope="col">Đơn giá</th>
                                             <th scope="col">Số lượng</th>
+                                            <th scope="col">Ghi chú</th>
                                             <th scope="col">Thành tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($data as $v)
-                                            @foreach($dssp as $sp)
-                                                @if($v->idsanpham == $sp->idsanpham)
+                                        @foreach($dsct as $v)
                                         <tr>
                                             <th scope="row">
                                                 <div class="d-flex align-items-center mt-2">
-                                                    <img src="{{ asset('customer/assets/img/'.$sp->hinh) }}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
+                                                    <img src="{{ asset('customer/assets/img/'.$v->hinh) }}" class="img-fluid rounded-circle" style="width: 90px; height: 90px;" alt="">
                                                 </div>
                                             </th>
-                                            <td class="py-5">{{$sp->tensanpham}}</td>
+                                            <td class="py-5">{{$v->tensanpham}}</td>
                                             <td class="py-5">{{number_format($v->dongia,0,',','.')}} VNĐ</td>
                                             <td class="py-5">{{$v->soluongsp}}</td>
+                                            <td class="py-5">{{$v->ghichu}}</td>
                                             <td class="py-5">{{number_format($v->dongia*$v->soluongsp,0,',','.')}} VNĐ</td>
                                         </tr>
-                                                @endif
-                                            @endforeach
                                         @endforeach
                                         <tr>
                                             <th scope="row">
@@ -86,12 +85,13 @@
                                             </td>
                                             <td class="py-5"></td>
                                             <td class="py-5"></td>
+                                            <td></td>
                                             <td class="py-5">
                                                 <div class="py-3 border-bottom border-top">
                                                     <p class="mb-0 text-dark">
                                                         @php
                                                         $tongtien = 0;
-                                                            foreach($data as $v)
+                                                            foreach($dsct as $v)
                                                             {
                                                                 $tongtien += $v->dongia*$v->soluongsp;
                                                             }

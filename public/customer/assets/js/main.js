@@ -1,13 +1,20 @@
 // Thanh cuộn lên đầu trang
-$(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-        $(".back-to-top").fadeIn("slow");
-    } else {
-        $(".back-to-top").fadeOut("slow");
-    }
-});
+$(document).ready(function () {
+    $(".back-to-top").fadeOut(0);
+    introJs().setOptions({
+        steps:[],
+        doneLabel: 'Đã hiểu',
+    }).start();
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 300) {
+            $(".back-to-top").fadeIn("slow");
+        } else {
+            $(".back-to-top").fadeOut("slow"); 
+        }
+    });});
 $(".back-to-top").click(function () {
-    $("html, body").animate({ scrollTop: 0 }, 1500, "easeInOutExpo");
+    $("html, body").animate({ scrollTop: 0 }, 50);
     return false;
 });
 
@@ -22,9 +29,9 @@ $(window).scroll(function () {
             }
         } else {
             if ($(this).scrollTop() > 55) {
-                $('.fixed-top').addClass('shadow').css('top', -55);
+                $('.fixed-top').addClass('shadow');
             } else {
-                $('.fixed-top').removeClass('shadow').css('top', 0);
+                $('.fixed-top').removeClass('shadow');
             }
         } 
     });
@@ -36,10 +43,10 @@ $(window).scroll(function () {
         if (button.hasClass('btn-plus')) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = 0;
+                newVal = 1;
             }
         }
         button.parent().parent().find('input').val(newVal);
@@ -99,7 +106,7 @@ const apiBaseUrl = "http://127.0.0.1:8000/api";
                                         <div class="ms-3">
                                             <h6 class="mb-0 " id="item-name">${item.tensanpham}</h6>
                                             <div class="d-flex justify-content-between">
-                                                <span class="text-primary">${item.dongia}VND</span>
+                                                <span class="text-primary">${new Intl.NumberFormat('vi-VN').format(item.dongia)} VNĐ</span>
                                                 <span class="text-secondary ms-3">x ${item.soluongsp}</span>
                                             </div>
                                         </div>
@@ -114,7 +121,7 @@ const apiBaseUrl = "http://127.0.0.1:8000/api";
             dem++;
         }
         document.getElementById('total').innerHTML=`<h6>Tổng tiền:</h6>
-                                        <h6>${total} VNĐ</h6>`;
+                                        <p>${new Intl.NumberFormat('vi-VN').format(total)} VNĐ</p>`;
         document.getElementById('slsp').innerText=dem;
     };
 
@@ -133,6 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let srcHinh = form.querySelector('#productImage').src;
             let hinh = srcHinh.split('/').pop();
             let soluongsp;
+            let ghichu='';
             if(form.querySelector('#productQuantity'))
                 soluongsp = form.querySelector('#productQuantity').value;
             else 
@@ -145,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': csrfToken,
                 },
-                body: JSON.stringify({idsanpham,tensanpham,dongia,hinh,soluongsp}),
+                body: JSON.stringify({idsanpham,tensanpham,dongia,hinh,soluongsp,ghichu}),
                 mode: 'cors',
             });
 
@@ -182,10 +190,10 @@ async function loadListCart() {
                                     <p class="mb-0 mt-4" id="item-name">${item.tensanpham}</p>
                                 </td>
                                 <td>
-                                    <textarea class="mt-2 " style="width:100%;" placeholder="Nếu bạn muốn thêm chi tiết(Bỏ ngò, nhiều ớt,...)"></textarea>
+                                    <textarea class="mt-2" data-id="${item.idsanpham}" style="width:100%; border-radius:8px;" onblur="handleQuantityChange(event, ${item.idsanpham})" >${item.ghichu || 'Đầy đủ'}</textarea>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.dongia)}</p>
+                                    <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN').format(item.dongia)} VNĐ</p>
                                 </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
@@ -194,7 +202,7 @@ async function loadListCart() {
                                             <i class="fa fa-minus"></i>
                                         </button>
                                     </div>
-                                    <input id="product-quantity" type="text" class="form-control form-control-sm text-center border-0" value="${item.soluongsp}">
+                                    <input id="product-quantity-${item.idsanpham}" type="text" class="form-control form-control-sm text-center border-0" value="${item.soluongsp}">
                                     <div class="input-group-btn">
                                         <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border" onclick="handleQuantityChange(event,${item.idsanpham})">
                                             <i class="fa fa-plus"></i>
@@ -203,7 +211,7 @@ async function loadListCart() {
                                 </div>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.dongia*item.soluongsp)}</p>
+                                    <p class="mb-0 mt-4">${new Intl.NumberFormat('vi-VN').format(item.dongia*item.soluongsp)} VNĐ</p>
                                 </td>
                                 <td>
                                     <a onclick="handleDelete(event)">
@@ -219,45 +227,50 @@ async function loadListCart() {
         dem++;
         soluong += item.soluongsp;
     }
-    let VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(tongtien);
+    let VND = new Intl.NumberFormat('vi-VN').format(tongtien);
     document.getElementById("lastTotal").innerHTML = `<h5 class="mb-0 ps-4 me-4">Tổng tiền</h5>
-                                <p class="mb-0 pe-4">${VND}</p>`
+                                <p class="mb-0 pe-4">${VND} VNĐ</p>`
     document.getElementById("quantity").innerHTML = `<h5 class="mb-0 ps-4 me-4">Số lượng bánh</h5>
                                 <p class="mb-0 pe-4">${soluong} cái</p>`
     document.getElementById("loaibanh").innerHTML = `<h5 class="mb-0 ps-4 me-4">Số loại bánh</h5>
                                 <p class="mb-0 pe-4">${dem} loại</p>`
-
 }
-if(document.getElementById('listCart'))
+if(document.getElementById('listCart')){
     loadListCart();
+}
 
 
 //Update api
 async function handleQuantityChange(event,idsanpham) {
-    const button = event.target.closest('button');
-    if (!button) return;
-
-    const quantityInput = button.closest('.quantity').querySelector('#product-quantity');
-    let quantity = parseInt(quantityInput.value, 10);
-
-    if (button.classList.contains('btn-plus')) {
-        quantity += 1; 
-    } else if (button.classList.contains('btn-minus')) {
-        quantity -= 1;
+    let quantity = document.querySelector(`#product-quantity-${idsanpham}`).value;
+    let note = document.querySelector(`textarea[data-id="${idsanpham}"]`).value;
+    if(note == null)
+        note = 'Đầy đủ';
+    if (event.target.closest('button')) {
+        const button = event.target.closest('button');
+        const quantityInput = button.closest('.quantity').querySelector(`#product-quantity-${idsanpham}`);
+        quantity = parseInt(quantityInput.value, 10);
+        if (button.classList.contains('btn-plus')) {
+            quantity += 1;
+        } else if (button.classList.contains('btn-minus')) {
+            if (quantity > 1) {
+            quantity -= 1;
+        }
+        }
+        quantityInput.value = quantity;
     }
-    quantityInput.value = quantity;
 
-    const response = await fetch(`${apiBaseUrl}/update`, {
+    const response = await fetch(`${apiBaseUrl}/update/${idsanpham}`, {
         method: 'PUT',
         headers: { 
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': csrfToken,
         },
-        body: JSON.stringify({ idsanpham, quantity }),
+        body: JSON.stringify({ quantity, note }),
         mode: 'cors',
     });
     const result = await response.json();
-    loadListCart();
+    loadListCart(); 
 }
 
 

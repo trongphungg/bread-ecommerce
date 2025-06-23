@@ -21,32 +21,6 @@ class CartController extends Controller
 
     public function index(){
         $cart = session()->get('cart',new \stdClass());
-        if(empty((array)$cart)){
-            if(Auth::user()){
-                $user_id = Auth::user()->idnguoidung;
-                $dh = donhang::where('idnguoidung',$user_id)
-                                ->where('trangthaidh','')
-                                ->first();
-                if($dh){
-                    $data = chitietdonhang::where('iddonhang',$dh->iddonhang)->get();
-                    $dataFormatted = $data->map(function($item) {
-                    $sp = sanpham::where('idsanpham', $item->idsanpham)->first();
-                    return (object)[
-                        'idsanpham' => $item->idsanpham,
-                        'tensanpham' => $item->sanpham->tensanpham,
-                        'dongia' => $item->sanpham->dongia,
-                        'soluongsp' => $item->soluongsp,
-                        'hinh' => $item->sanpham->hinh
-                    ];
-                    })->keyBy('idsanpham')->toArray();
-
-                    foreach($dataFormatted as $key => $value){
-                        $cart->{$key} = $value;
-                    }
-                }
-            }
-        }
-        else{
             if(Auth::user()){
                 $user_id = Auth::user()->idnguoidung;
                 $dh = donhang::where('idnguoidung',$user_id)
@@ -61,15 +35,31 @@ class CartController extends Controller
                     $dh->diachi='';
                     $dh->save();
                 }
-
                 foreach($cart as $item){
                     DB::table('chitietdonhang')->updateOrInsert(
                         ['idsanpham'=>$item->idsanpham,'iddonhang'=>$dh->iddonhang],
-                        ['soluongsp'=>$item->soluongsp]
+                        ['soluongsp'=>$item->soluongsp,
+                         'ghichu'=>$item->ghichu
+                        ]
                 );
                 }
+                $data = chitietdonhang::where('iddonhang',$dh->iddonhang)->get();
+                    $dataFormatted = $data->map(function($item) {
+                    $sp = sanpham::where('idsanpham', $item->idsanpham)->first();
+                    return (object)[
+                        'idsanpham' => $item->idsanpham,
+                        'tensanpham' => $item->sanpham->tensanpham,
+                        'dongia' => $item->sanpham->dongia,
+                        'soluongsp' => $item->soluongsp,
+                        'hinh' => $item->sanpham->hinh,
+                        'ghichu'=> $item->ghichu
+                    ];
+                    })->keyBy('idsanpham')->toArray();
+
+                    foreach($dataFormatted as $key => $value){
+                        $cart->{$key} = $value;
+                    }
             }
-        }
         session()->put('cart', $cart);
         return response()->json($cart);
     }
@@ -84,7 +74,8 @@ class CartController extends Controller
                 'tensanpham' => $request->tensanpham,
                 'dongia' => $request->dongia,
                 'soluongsp' => $request->soluongsp,
-                'hinh' => $request->hinh
+                'hinh' => $request->hinh,
+                'ghichu'=>''
             ];
         }
         session()->put('cart',$cart);
@@ -95,26 +86,23 @@ class CartController extends Controller
         ]);
     }
 
-    public function update(Request $request)
+    public function update(Request $request,$id)
 {
     $cart = session()->get('cart', new \stdClass());
-
-
-    if (property_exists($cart, $request->idsanpham)) {
-
-        $cart->{$request->idsanpham}->soluongsp = $request->quantity;
+    if (property_exists($cart, $id)) {
+        $cart->{$id}->soluongsp = $request->quantity;
+        $cart->{$id}->ghichu = $request->note;
     } else {
         return response()->json([
             'message' => 'Product not found in cart!'
         ], 404);
     }
 
-
     session()->put('cart', $cart);
 
     return response()->json([
         'message' => 'Product quantity updated!',
-        'cart' => $cart
+        'cart' => $cart,
     ]);
 }
 

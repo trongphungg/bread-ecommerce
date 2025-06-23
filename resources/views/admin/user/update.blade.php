@@ -62,12 +62,12 @@
 
                             <div class="form-group col-md-6">
                                 <label>Mật khẩu</label>
-                                <input type="password" class="form-control" name="password" value="{{$user->password}}" hidden>
+                                <input type="password" class="form-control" name="password" value="{{$user->password}}">
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label>Vai trò</label>
-                                <select class="form-control" name="role">
+                                <select class="form-control" name="role" >
                                     <option value="0" {{ $user->role == '0' ? 'selected' : '' }}>Khách hàng</option>
                                     <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>Admin</option>
                                 </select>

@@ -12,7 +12,10 @@ use App\Http\Controllers\customer\TintucController;
 use App\Http\Controllers\customer\DetailController;
 use App\Http\Controllers\customer\CheckoutController;
 use App\Http\Controllers\customer\LoginController;
+use App\Http\Controllers\customer\ProfileController;
+use App\Http\Controllers\customer\OrderUserController;
 use App\Http\Middleware\UserMiddleware;
+use App\Http\Middleware\LoginMiddleware;
 
 //Route cho admin
 use App\Http\Controllers\admin\DashboardController;
@@ -32,7 +35,7 @@ use App\Http\Middleware\AdminMiddleware;
 
 //Customer
 
-Route::middleware([ UserMiddleware::class])->group(function() {
+Route::middleware([UserMiddleware::class])->group(function() {
 
     Route::get('/', [HomeController::class,'index'])
     ->name('home');
@@ -58,12 +61,30 @@ Route::middleware([ UserMiddleware::class])->group(function() {
     ->name('checkout.finish');
 });
 
+Route::middleware([LoginMiddleware::class])->group(function() {
+    //Profile
+    Route::get('/profile',[ProfileController::class,'index'])
+    ->name('profileIndex');
+    Route::get('/profile/update',[ProfileController::class,'update'])
+    ->name('profileUpdate');
+    Route::post('/profile/handleUpdate',[ProfileController::class,'handleUpdate'])
+    ->name('handleUpdateProfile');
+
+    //Order
+    Route::get('/my-orders',[OrderUserController::class,'index'])
+    ->name('orderUserIndex');
+    Route::post('/my-orders/{id}',[OrderUserController::class,'detail'])
+    ->name('orderUserDetail');
+    Route::get('/history-orders',[OrderUserController::class,'history'])
+    ->name('orderUserHistory');
+});
+
 
 
 //Cart API
 Route::get('/api',[CartController::class,'index']);
 Route::post('api/add',[CartController::class,'add']);
-Route::put('api/update',[CartController::class,'update']);
+Route::put('api/update/{id}',[CartController::class,'update']);
 Route::post('api/delete/{id}',[CartController::class,'delete']);
 
 

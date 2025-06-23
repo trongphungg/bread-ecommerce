@@ -19,13 +19,30 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required'
-        ]);
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user(); 
-            if (Auth::user()->role == 1)
-                return redirect('/dashboard'); 
-            else
-                return redirect('/');
+        ], [
+    'email.required' => 'Bạn cần nhập địa chỉ email',
+    'email.email' => 'Địa chỉ email không hợp lệ',
+    'password.required' => 'Bạn cần nhập mật khẩu'
+]);
+
+        $user = nguoidung::where('email', $credentials['email'])->first();
+
+        if (!$user) {
+            return back()->withErrors([
+                'email' => 'Email không tồn tại trong hệ thống.',
+            ])->withInput();
+        }
+
+        if (!Hash::check($credentials['password'], $user->password)) {
+            return back()->withErrors([
+                'password' => 'Mật khẩu không chính xác.',
+            ])->withInput();
+        }
+        Auth::login($user);
+        if ($user->role == 1) {
+            return redirect('/dashboard');
+        } else {
+            return redirect('/');
         }
     }
 

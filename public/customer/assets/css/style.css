@@ -18,6 +18,13 @@
     font-family: "Open Sans", sans-serif;
     font-weight: 400;
 }
+.center-text {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+
+
 
 .navbar {
     height: 100px;
@@ -129,6 +136,11 @@
 }
 
 .btn.green-color:hover {
+    background: var(--bs-secondary) !important;
+    color: var(--bs-white) !important;
+}
+
+.btn.border-secondary:hover {
     background: var(--bs-secondary) !important;
     color: var(--bs-white) !important;
 }
@@ -295,9 +307,9 @@
     padding: 10px 10px;
 }
 .cart-item:hover{
-    background-color: #f8f9fa;
-    transform: translateX(5px);
-        transition: all 0.3s ease-in-out;
+    background-color: #c9dcea68;
+    /* transform: translateX(5px); */
+    transition: all 0.3s ease-in-out;
     border-radius: 15px;
 }
 

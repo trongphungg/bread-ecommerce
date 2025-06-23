@@ -60,11 +60,11 @@
                                 <div class="px-3 py-3 text-muted small text-center border-bottom bg-light">
                                     Xin chào! {{ Auth::user()->tennguoidung }}
                                 </div>
-                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="">
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('profileIndex')}}">
                                     <i class="fas fa-user-circle me-3 text-primary"></i>Thông tin</a>
-                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="">
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('orderUserIndex')}}">
                                     <i class="fas fa-shopping-bag me-3 text-primary"></i>Đơn hàng</a>
-                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="">
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('orderUserHistory')}}">
                                     <i class="fas fa-history me-3 text-primary"></i>Lịch sử mua hàng</a>
                                 <a class="dropdown-item py-3 px-4 d-flex align-items-center text-danger hover-bg-danger-light" href="{{ route('logout') }}">
                                     <i class="fas fa-sign-out-alt me-3"></i>Đăng xuất</a>
