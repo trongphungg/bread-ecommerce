@@ -27,8 +27,8 @@ class OrderUserController extends Controller
 
     public function history(){
         $dsdh = donhang::where('idnguoidung', Auth::user()->idnguoidung)
-                            ->whereIn('Trangthaidh', ['HT', 'HD'])
-                            ->orderBy('Ngaylapdh', 'desc')
+                            ->whereIn('trangthaidh', ['HT', 'HD'])
+                            ->orderBy('ngaylapdh', 'desc')
                             ->paginate(10);
         return view('customer.historyOrder',compact('dsdh'));
     }

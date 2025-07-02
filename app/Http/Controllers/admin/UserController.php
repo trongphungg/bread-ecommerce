@@ -40,15 +40,19 @@ class UserController extends Controller
     }
 
     public function handleUpdate(Request $request, $id){
+        if($request->diachimoi)
+            $diachi = $request->diachimoi;
+        else $diachi = $request->diachi;
+        dd($diachi);
         $nguoidung = nguoidung::where('idnguoidung',$id)
                             ->update([
-                                'tennguoidung' => $request->input('tennguoidung'),
-                                'ngaysinh' => $request->input('ngaysinh'),
-                                'diachi' =>$request->input('diachi'),
-                                'gioitinh'=>$request->input('gioitinh'),
-                                'sodienthoai' => $request->input('sodienthoai'),
-                                'role' => $request->input('role'),
-                                'email' => $request->input('email')
+                                'tennguoidung' => $request->tennguoidung,
+                                'ngaysinh' => $request->ngaysinh,
+                                'diachi' =>$diachi,
+                                'gioitinh'=>$request->gioitinh,
+                                'sodienthoai' => $request->sodienthoai,
+                                'role' => $request->role,
+                                'email' => $request->email
                             ]);
         return redirect('/users');
     }

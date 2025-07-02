@@ -29,6 +29,8 @@ use App\Http\Controllers\admin\TestController;
 use App\Http\Controllers\admin\WarehouseController;
 use App\Http\Controllers\admin\IngredientController;
 use App\Http\Controllers\admin\RecipeController;
+use App\Http\Controllers\admin\ReviewController;
+use App\Http\Controllers\admin\RevenueController;
 use App\Http\Middleware\AdminMiddleware;
 
 
@@ -77,6 +79,10 @@ Route::middleware([LoginMiddleware::class])->group(function() {
     ->name('orderUserDetail');
     Route::get('/history-orders',[OrderUserController::class,'history'])
     ->name('orderUserHistory');
+
+
+    Route::post('/detail/review',[DetailController::class,'handleCreate'])
+    ->name('createReview');
 });
 
 
@@ -104,8 +110,8 @@ Route::get('/logout',[LoginController::class,'logout'])
 
 
 Route::middleware([ AdminMiddleware::class])->group(function() {
-    Route::get('/dashboard', [DashboardController::class,'index'])
-    ->name('dashboard');
+    // Route::get('/dashboard', [DashboardController::class,'index'])
+    // ->name('dashboard');
 
     //Products
     Route::get('/products', [ProductController::class,'index'])
@@ -228,6 +234,17 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     ->name('handleUpdateRecipe');
     Route::delete('/recipes/{id}',[RecipeController::class,'delete'])
     ->name('recipeDelete');
+
+    //Review
+    Route::get('/reviews',[ReviewController::class,'index'])
+    ->name('reviewIndex');
+    Route::get('/reviews/update/{id}',[ReviewController::class,'handleUpdate'])
+    ->name('reviewUpdate');
+
+
+    //Revenue
+    Route::get('/dashboard',[RevenueController::class,'index'])
+    ->name('dashboard');
 });
 
 //Test

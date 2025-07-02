@@ -127,6 +127,7 @@ const apiBaseUrl = "http://127.0.0.1:8000/api";
 
 
 const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
 document.addEventListener('DOMContentLoaded', function() {
     let forms = document.querySelectorAll('#productForm');
     forms.forEach(form=>{
@@ -301,9 +302,78 @@ function handleDelete(event) {
     }
 }
 
+// API Google
+  async function loadDistricts() {
+    const res = await fetch(`https://provinces.open-api.vn/api/p/79?depth=2`);
+    const districts = (await res.json()).districts;
+    const districtSelect = document.getElementById('quan');
+    districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>` + 
+      districts.map(d => `<option value="${d.code}">${d.name}</option>`).join('');
+  }
+
+
+  async function loadWards(districtCode) {
+    if (!districtCode) {
+      document.getElementById('phuong').innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
+      return;
+    }
+
+    const res = await fetch(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`);
+    const wards = (await res.json()).wards;
+
+    const wardSelect = document.getElementById('phuong');
+    wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>` + 
+      wards.map(w => `<option value="${w.code}">${w.name}</option>`).join('');
+  }
+
+
+  function updateFullAddress() {
+    const house = document.getElementById('duong').value.trim() ;
+    const quan = document.getElementById('quan').selectedOptions[0]?.text || '';
+    const phuong = document.getElementById('phuong').selectedOptions[0]?.text || '';
+
+    const full = `${house} - ${phuong} - ${quan}`;
+    document.getElementById('full_address').value = full;
+  }
+
+  if(document.getElementById('quan')){
+    loadDistricts();
+    loadWards();
+    document.getElementById('quan').addEventListener('change', function (e) {
+      loadWards(e.target.value);})
+    document.getElementById('phuong').addEventListener('change', function (e) {
+      updateFullAddress();})
+  }
+
 function test(event){
     event.preventDefault();
     alert('123');
 }
 
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const stars = document.querySelectorAll('#star-rating .star');
+    const scoreInput = document.getElementById('sodiem');
+
+    stars.forEach(star => {
+      star.addEventListener('click', function () {
+        const selected = parseInt(this.getAttribute('data-value'));
+        scoreInput.value = selected;
+
+        // Update màu các sao
+        stars.forEach(s => {
+          const val = parseInt(s.getAttribute('data-value'));
+          if (val <= selected) {
+            s.classList.remove('text-muted');
+            s.classList.add('text-warning'); // sao đã chọn màu vàng
+          } else {
+            s.classList.remove('text-warning');
+            s.classList.add('text-muted'); // sao chưa chọn
+          }
+        });
+      });
+    });
+  });
 

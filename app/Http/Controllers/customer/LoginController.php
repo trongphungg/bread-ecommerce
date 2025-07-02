@@ -20,9 +20,9 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ], [
-    'email.required' => 'Bạn cần nhập địa chỉ email',
-    'email.email' => 'Địa chỉ email không hợp lệ',
-    'password.required' => 'Bạn cần nhập mật khẩu'
+            'email.required' => 'Bạn cần nhập địa chỉ email',
+            'email.email' => 'Địa chỉ email không hợp lệ',
+            'password.required' => 'Bạn cần nhập mật khẩu'
 ]);
 
         $user = nguoidung::where('email', $credentials['email'])->first();

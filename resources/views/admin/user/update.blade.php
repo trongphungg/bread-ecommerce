@@ -40,8 +40,14 @@
                                 <input type="date" class="form-control" name="ngaysinh" value="{{$user->ngaysinh}}">
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Địa chỉ</label>
-                                <input type="text" class="form-control" name="diachi" value="{{ $user->diachi }}">
+                                <label class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-control" name="diachi" placeholder="Nhập số nhà, tên đường, phường ..." value="{{$user->diachi ?? ''}}" required />
+                                <label for="">Địa chỉ mới</label>
+                                <input type="text" name="duong" id="duong" class="form-control" placeholder="Nhập số nhà, tên đường, phường ..."  />
+                                 <div class="select-group d-flex gap-2 mt-1">
+                                <select class="form-select" id="quan" name="quan"></select>
+                                <select class="form-select" id="phuong" name="phuong"></select>
+                                <input type="hidden" name="diachimoi" id="full_address" />
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Giới tính</label>

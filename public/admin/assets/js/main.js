@@ -8,8 +8,9 @@ async function fetchNguyenlieu() {
 }
 
 // Hàm để thêm một dòng mới vào bảng
-// Hàm để thêm một dòng mới vào bảng
 function addRow() {
+  const table = document.querySelector("#nguyenlieuTable tbody");
+    if (!table) return; // Nếu bảng không tồn tại, không làm gì cả
     // Kiểm tra xem trang hiện tại có cần ô tổng tiền hay không
   const currentPage = window.location.pathname;
   const showTongTien = currentPage.includes('warehouse');
@@ -67,4 +68,117 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
+});
+
+
+//Api Google
+async function loadDistricts() {
+    const res = await fetch(`https://provinces.open-api.vn/api/p/79?depth=2`);
+    const districts = (await res.json()).districts;
+    const districtSelect = document.getElementById('quan');
+    districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>` + 
+      districts.map(d => `<option value="${d.code}">${d.name}</option>`).join('');
+  }
+
+
+  async function loadWards(districtCode) {
+    if (!districtCode) {
+      document.getElementById('phuong').innerHTML = `<option value="">-- Chọn phường/xã --</option>`;
+      return;
+    }
+
+    const res = await fetch(`https://provinces.open-api.vn/api/d/${districtCode}?depth=2`);
+    const wards = (await res.json()).wards;
+
+    const wardSelect = document.getElementById('phuong');
+    wardSelect.innerHTML = `<option value="">-- Chọn phường/xã --</option>` + 
+      wards.map(w => `<option value="${w.code}">${w.name}</option>`).join('');
+  }
+
+
+  function updateFullAddress() {
+    const house = document.getElementById('duong').value.trim() ;
+    const quan = document.getElementById('quan').selectedOptions[0]?.text || '';
+    const phuong = document.getElementById('phuong').selectedOptions[0]?.text || '';
+
+    const full = `${house} - ${phuong} - ${quan}`;
+    document.getElementById('full_address').value = full;
+  }
+
+  if(document.getElementById('quan')){
+    loadDistricts();
+    loadWards();
+    document.getElementById('quan').addEventListener('change', function (e) {
+      loadWards(e.target.value);})
+    document.getElementById('phuong').addEventListener('change', function (e) {
+      updateFullAddress();})
+  }
+
+
+  //Doanh thu
+document.addEventListener('DOMContentLoaded', function () {
+
+  const formattedLabels = chartLabels.map(dateStr => {
+    const parts = dateStr.split('-');
+    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+  });
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: formattedLabels,
+      datasets: [{
+        label: 'Doanh thu (VNĐ)',
+        data: chartData,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function (value) {
+              return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+              }).format(value);
+            }
+          }
+        }
+      }
+    }
+  });
+
+
+  const doughnutCtx  = document.getElementById('doughnutChart');
+  
+  new Chart(doughnutCtx, {
+    type: 'doughnut',
+    data: {
+      labels: productLabels,
+      datasets: [{
+        label: 'Tổng số lượng đã bán',
+        data: productData,
+        backgroundColor: colors,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'right'
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              return `${context.label}: ${context.parsed} sản phẩm`;
+            }
+          }
+        }
+      }
+    }
+  });
 });

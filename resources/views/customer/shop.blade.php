@@ -23,22 +23,27 @@
                         <div class="row g-4">
                             <div class="col-lg-12">
                                 <div class="mb-3">
-                                    <h4 >Danh mục sản phẩm</h4>
+                                    <h4>Danh mục sản phẩm</h4>
                                     <ul class="list-unstyled fruite-categorie">
                                         @php
-                                        foreach($dslsp as $lsp){
-                                            $dem=0;
-                                            foreach($dsspp as $sp)
-                                            if($sp->idloaisanpham==$lsp->idloaisanpham){
-                                                $dem++;
-                                            }
-                                            echo '<li>
+                                            foreach ($dslsp as $lsp) {
+                                                $dem = 0;
+                                                foreach ($dsspp as $sp) {
+                                                    if ($sp->idloaisanpham == $lsp->idloaisanpham) {
+                                                        $dem++;
+                                                    }
+                                                }
+                                                echo '<li>
                                                 <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>'.$lsp->tenloai.'</a>
-                                                    <span>('.$dem.')</span>
+                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>' .
+                                                    $lsp->tenloai .
+                                                    '</a>
+                                                    <span>(' .
+                                                    $dem .
+                                                    ')</span>
                                                 </div>
                                             </li>';
-                                        }
+                                            }
                                         @endphp
                                     </ul>
                                 </div>
@@ -58,14 +63,15 @@
                     <div class="col-lg-9">
                         <div class="row g-4 justify-content-center">
                             @foreach ($dssp as $sp)
-                                    <div class="col-md-6 col-lg-6 col-xl-4" id="productForm">
-                                        <div class="rounded position-relative fruite-item">
-                                             <form id="form{{$sp->idsanpham}}">
-                                            <input  type="text" value={{$sp->idsanpham}} id="productId" hidden>
-                                            <a href="{{route('detail',$sp->idsanpham)}}" class="text-decoration-none">
+                                <div class="col-md-6 col-lg-6 col-xl-4" id="productForm">
+                                    <div class="rounded position-relative fruite-item">
+                                        <form id="form{{ $sp->idsanpham }}">
+                                            <input type="text" value={{ $sp->idsanpham }} id="productId" hidden>
+                                            <a href="{{ route('detail', $sp->idsanpham) }}" class="text-decoration-none">
                                                 <div class="fruite-img">
                                                     <img src="{{ asset('customer/assets/img/' . $sp->hinh) }}"
-                                                        class="img-fluid w-100 rounded-top" alt="" id="productImage">
+                                                        class="img-fluid w-100 rounded-top" alt=""
+                                                        id="productImage">
                                                 </div>
                                                 <div class="p-4 border border-top-0 rounded-bottom ">
                                                     <h4 id="productName">{{ $sp->tensanpham }}</h4>
@@ -73,28 +79,26 @@
                                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                                         <p class="text-dark fs-6 fw-bold mb-0" id="productPrice">
                                                             {{ number_format($sp->dongia, 0, ',', '.') }} VNĐ</p>
-                                                            </a>
-                                                        <button type="submit"
-                                                            class="btn border border-warning rounded-pill px-3 green-color"><i
-                                                                class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            
-                                        </div>
+                                            </a>
+                                            <button type="submit"
+                                                class="btn border border-warning rounded-pill px-3 green-color"><i
+                                                    class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ</button>
+                                        </form>
                                     </div>
-                                </form>
-                            @endforeach
-                            <div class="col-12" id="pagination">
-                                <div class=" d-flex justify-content-center mt-5">
-                                    {{ $dssp->links() }}
                                 </div>
-                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                    <div class="col-12" id="pagination">
+                        <div class=" d-flex justify-content-center mt-5">
+                            {{ $dssp->links() }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     </div>
 @endsection

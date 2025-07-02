@@ -17,32 +17,14 @@ class CheckoutController extends Controller
     public function index(){
         $cart = session()->get('cart', new \stdClass());
         $dsct = $cart;
-        $dsquan = [
-            "Quận 1", 
-            "Quận 3", 
-            "Quận 4", 
-            "Quận 5", 
-            "Quận 6", 
-            "Quận 7", 
-            "Quận 8", 
-            "Quận 10", 
-            "Quận 11", 
-            "Quận 12", 
-            "Quận Tân Bình", 
-            "Quận Tân Phú", 
-            "Quận Bình Tân", 
-            "Quận Bình Thạnh", 
-            "Quận Gò Vấp", 
-            "Quận Phú Nhuận"
-        ];
-        return view('customer.checkout',compact('dsct','dsquan'));
+        return view('customer.checkout',compact('dsct'));
     }
 
     public function finish(Request $request,PublicService $pub){
-        if($request->diachigiao != null){
-            $diachi = $request->diachigiao.'-'.$request->quangiao;
-        }
-        else $diachi = $request->diachi.'-'.$request->quan;
+        if($request->diachigiao) 
+            $diachi = $request->diachigiao;
+        else 
+            $diachi = $request->diachi;
         if(Auth::user()){
             $id=Auth::user()->idnguoidung;
             $id_dh = donhang::where('idnguoidung',$id)

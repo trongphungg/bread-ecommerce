@@ -48,7 +48,7 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-                <h1 class="display-4">Sản phẩm của chúng tôi</h1>
+                <h1 class="display-4">Nguyễn Văn Phong</h1>
                 <p>Bánh mì thơm ngon, đa dạng hương vị, được làm từ nguyên liệu tươi mới mỗi ngày. 
                     Thưởng thức sự hoàn hảo trong từng ổ bánh!</p>
             </div>
@@ -64,8 +64,8 @@
                                 <a href="#" class="h5 text-decoration-none">{{$bm->tensanpham}}</a>
                                 <p class="mb-3">Số lượng: {{$bm->soluong}}</p>
                                 <h5 class="mb-3">{{ number_format($bm->dongia, 0, ',', '.') }} VNĐ</h5>
-                                <a href="" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ</a>
+                                <a href="{{ route('detail', $bm->idsanpham) }}" class="btn border border-secondary text-primary rounded-pill px-3"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i>Xem chi tiết</a>
                             </div>
                         </div>
                     </div>

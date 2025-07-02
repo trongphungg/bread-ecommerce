@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('admin/assets/css/plugins.min.css')}}" />
+    {{-- <link rel="stylesheet" href="{{asset('admin/assets/css/plugins.min.css')}}" /> --}}
     <link rel="stylesheet" href="{{asset('admin/assets/css/kaiadmin.min.css')}}" />
 
 <script src="{{asset('admin/assets/js/plugin/webfont/webfont.min.js')}}"></script>
@@ -37,10 +37,7 @@
 
 <body>
      <div class="wrapper">
-      <!-- Sidebar -->
         @include('admin.components.sidebar')
-      <!-- End Sidebar -->
-
       <div class="main-panel">
         @include('admin.components.header')
         <div class="container">
@@ -50,7 +47,7 @@
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="{{ asset('admin/assets/js/main.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/kaiadmin.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/assets/js/kaiadmin.min.js') }}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

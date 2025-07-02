@@ -41,7 +41,7 @@
                                         @case('HT')
                                             <span class="badge bg-success">Hoàn tất</span>
                                             @break
-                                        @case('DTN')
+                                        @case('DTT')
                                             <span class="badge bg-primary">Đã thanh toán</span>
                                             @break
                                         @case('DG')

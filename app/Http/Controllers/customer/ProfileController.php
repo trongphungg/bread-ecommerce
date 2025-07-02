@@ -18,29 +18,14 @@ class ProfileController extends Controller
 
     public function update(){
         $user = nguoidung::where('idnguoidung',Auth::user()->idnguoidung)->first();
-        $dsquan = [
-            "Quận 1", 
-            "Quận 3", 
-            "Quận 4", 
-            "Quận 5", 
-            "Quận 6", 
-            "Quận 7", 
-            "Quận 8", 
-            "Quận 10", 
-            "Quận 11", 
-            "Quận 12", 
-            "Quận Tân Bình", 
-            "Quận Tân Phú", 
-            "Quận Bình Tân", 
-            "Quận Bình Thạnh", 
-            "Quận Gò Vấp", 
-            "Quận Phú Nhuận"
-        ];
-        return view('customer.updateProfile',compact('user','dsquan'));
+        return view('customer.updateProfile',compact('user'));
     }
 
     public function handleUpdate(Request $request){
-        $diachi = $request->diachi.'-'.$request->quan;
+        if($request->diachimoi)
+            $diachi = $request->diachimoi;
+        else $diachi = $request->diachi;
+        dd($diachi);
         $nguoidung = nguoidung::where('idnguoidung',Auth::user()->idnguoidung)
                             ->update([
                                 'tennguoidung' => $request->tennguoidung,

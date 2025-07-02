@@ -2,13 +2,14 @@
   <div class="sidebar-logo">
     <!-- Logo Header -->
     <div class="logo-header" data-background-color="dark">
-      <a href="../index.html" class="logo">
+      <a class="logo">
         <img
           src="{{asset('admin/assets/img/banner-fruits.jpg')}}"
           alt="navbar brand"
           class="navbar-brand"
           height="20"
         />
+        <p class="text-white p-3 my-4">Bánh mì Phong Hiền</p>
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
@@ -29,24 +30,11 @@
       <ul class="nav nav-secondary">
         <li class="nav-item">
           <a
-            data-bs-toggle="collapse"
-            href="#dashboard"
-            class="collapsed"
-            aria-expanded="false"
+            href="{{route('dashboard')}}"
           >
             <i class="fas fa-home"></i>
             <p>Dashboard</p>
-            <span class="caret"></span>
           </a>
-          <div class="collapse" id="dashboard">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="../../demo1/index.html">
-                  <span class="sub-item">Dashboard 1</span>
-                </a>
-              </li>
-            </ul>
-          </div>
         </li>
         <li class="nav-section">
           <span class="sidebar-mini-icon">
@@ -155,7 +143,7 @@
           <div class="collapse" id="charts">
             <ul class="nav nav-collapse">
               <li>
-                <a href="">
+                <a href="{{route('reviewIndex')}}">
                   <span class="sub-item">Danh sách đánh giá</span>
                 </a>
               </li>
