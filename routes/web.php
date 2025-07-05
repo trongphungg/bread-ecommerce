@@ -110,8 +110,7 @@ Route::get('/logout',[LoginController::class,'logout'])
 
 
 Route::middleware([ AdminMiddleware::class])->group(function() {
-    // Route::get('/dashboard', [DashboardController::class,'index'])
-    // ->name('dashboard');
+    
 
     //Products
     Route::get('/products', [ProductController::class,'index'])
@@ -245,6 +244,14 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     //Revenue
     Route::get('/dashboard',[RevenueController::class,'index'])
     ->name('dashboard');
+
+    Route::post('/api/top5',[RevenueController::class,'filter'])
+    ->name('filter');
+
+
+    //Test
+    Route::get('/filter_products',[RevenueController::class,'filterProducts'])
+    ->name('filter_products');
 });
 
 //Test

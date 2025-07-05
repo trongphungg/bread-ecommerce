@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//ListCard
+//ListCart
 
 async function loadListCart() {
     const response = await fetch(apiBaseUrl);

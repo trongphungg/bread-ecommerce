@@ -1,13 +1,11 @@
-let data = []; // Khai báo biến toàn cục để lưu trữ dữ liệu
+let data = []; 
 
-// Hàm fetch dữ liệu từ API
 async function fetchNguyenlieu() {
     const response = await fetch('http://127.0.0.1:8000/api/nguyenlieu');
     const result = await response.json();
     data = result.dsnl; // Lưu dữ liệu vào biến data (giả sử dữ liệu trả về từ API là { dsnl: [...] })
 }
 
-// Hàm để thêm một dòng mới vào bảng
 function addRow() {
   const table = document.querySelector("#nguyenlieuTable tbody");
     if (!table) return; // Nếu bảng không tồn tại, không làm gì cả
@@ -41,9 +39,8 @@ function addRow() {
 }
 
 
-// Gọi hàm fetch dữ liệu khi trang tải hoặc khi cần
+
 fetchNguyenlieu().then(() => {
-    // Dữ liệu đã được fetch xong, có thể gọi addRow để thêm row vào bảng
     addRow(); // Nếu cần thêm row ngay lập tức sau khi fetch xong, uncomment dòng này
 });
 
@@ -118,6 +115,8 @@ async function loadDistricts() {
   //Doanh thu
 document.addEventListener('DOMContentLoaded', function () {
 
+
+
   const formattedLabels = chartLabels.map(dateStr => {
     const parts = dateStr.split('-');
     return `${parts[2]}/${parts[1]}/${parts[0]}`;
@@ -126,10 +125,40 @@ document.addEventListener('DOMContentLoaded', function () {
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: formattedLabels,
+      labels: chartLabels,
       datasets: [{
         label: 'Doanh thu (VNĐ)',
         data: chartData,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function (value) {
+              return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+              }).format(value);
+            }
+          }
+        }
+      }
+    }
+  });
+
+
+  const chartMonth = document.getElementById('chartMonth');
+  new Chart(chartMonth, {
+    type: 'bar',
+    data: {
+      labels: labelsMonth,
+      datasets: [{
+        label: 'Doanh thu (VNĐ)',
+        data: dataMonth,
         borderWidth: 1
       }]
     },
@@ -182,3 +211,55 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+
+async function fetchTop5(){
+  const response = await fetch('http://127.0.0.1:8000/api/top5');
+  const result = await response.json();
+
+  const list = document.getElementById('showKQ');
+  list.innerHTML='';
+
+  for(let sp in result){
+    let item = `Nguyen Trong Phung`;
+    list.innerHTML += item;
+  }
+}
+
+
+
+document.getElementById('monthSelect').addEventListener('change',async function (e) {
+
+  const month = document.getElementById('monthSelect').value;
+  const parts = month.split('-');
+  const thang = parts[1];
+  
+
+  
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  const response = await fetch(`http://127.0.0.1:8000/api/top5`, {
+        method: 'POST',  
+        headers: { 
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify({ thang }),
+        mode: 'cors',
+    });
+    const result = await response.json();   
+    const list = document.getElementById('showKQ');
+
+        list.innerHTML =''; 
+        if(result.spbc && result.spbc.length > 0)
+        result.spbc.forEach(item => {
+            let itemHTML = `<tr>
+                            <td><img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" alt=""  class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
+                            <td>${item.tensanpham}</td>
+                            <td>${item.tongsoluong}</td>
+                        </tr>`;
+            list.innerHTML += itemHTML;  
+        });
+        else {
+          list.innerHTML = '<tr><td colspan="3">Không có sản phẩm được bán trong tháng này.</td></tr>';
+        }
+})
