@@ -31,7 +31,7 @@
                                 value="{{ old('email') }}">
                             </div>
                             @if($errors->has('email'))
-                                <span class="login-alert">
+                                <span class="login-alert fs-6">
                                     {{ $errors->first('email') }}
                                 </span>
                             @endif
@@ -44,21 +44,25 @@
                             </div>
 
                             @if($errors->has('password'))
-                                <span class="login-alert">
+                                <span class="login-alert fs-6">
                                     {{ $errors->first('password') }}
                                 </span>
                             @endif
                             <button type="submit" class="login-btn">Đăng nhập</button>
-                            
+                            @if($errors->has('google_login'))
+                                <span class="login-alert fs-6">
+                                    {{ $errors->first('google_login') }}
+                                </span>
+                            @endif
                             <div class="login-links">
                                 <p class="text-muted mb-2">Bạn chưa có tài khoản?</p>
                                 <a href="{{route('register')}}" class=" login-link d-block mb-2">Đăng ký</a>
-                                <a href="" class="login-link inline-block px-3 py-2 ">
-                                    <img src="{{ asset('assets/img/google.png') }}" />
+                                <a href="{{route('google.login')}}" class="login-link inline-block px-3 py-2 ">
+                                    <img src="{{ asset('customer/assets/img/google.png') }}" style="width:20px;" />
                                     Đăng nhập với Google
                                 </a>
                                 <a href="" class="mb-2 login-link inline-block px-3 py-2 ">
-                                    <img src="{{ asset('assets/img/facebook.png') }}"/>
+                                    <img src="{{ asset('customer/assets/img/facebook.png') }}" style="width:20px;"/>
                                     Đăng nhập với Facebook(Coming soon)
                                 </a>
                             </div>

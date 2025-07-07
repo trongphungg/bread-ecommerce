@@ -14,6 +14,7 @@ use App\Http\Controllers\customer\CheckoutController;
 use App\Http\Controllers\customer\LoginController;
 use App\Http\Controllers\customer\ProfileController;
 use App\Http\Controllers\customer\OrderUserController;
+use App\Http\Controllers\customer\SocialiteController;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\LoginMiddleware;
 
@@ -256,6 +257,13 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
 
 //Test
 Route::get('/test',[TestController::class,'test']);
+
+//Socialite login
+
+Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle'])
+->name('google.login');
+Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])
+->name('google.callback');
 
 
 
