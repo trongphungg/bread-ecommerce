@@ -16,7 +16,7 @@
           <i class="icon-arrow-right"></i>
         </li>
         <li class="nav-item">
-          <a href="{{route('orders.index')}}">Danh sách đơn hàng</a>
+          <a href="{{route('orderIndex')}}">Danh sách đơn hàng</a>
         </li>
       </ul>
     </div>
@@ -69,7 +69,7 @@
               <td>{{$dh->diachi}}</td>
               <td>{{number_format($dh->tongtien,0,',','.')}} VNĐ</td>
               <td>
-                  <form action="{{route('orders.detail',$dh->iddonhang)}}" method="POST"
+                  <form action="{{route('orderDetail',$dh->iddonhang)}}" method="POST"
                       style="display: inline;">
                           @csrf
                           <button type="submit" style="background:none; border:none; cursor:pointer;">

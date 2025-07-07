@@ -189,11 +189,11 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
 
     //Order
     Route::get('/orders',[OrderController::class,'index'])
-    ->name('orders.index');
+    ->name('orderIndex');
     Route::post('/orders/detail/{id}',[OrderController::class,'detail'])
-    ->name('orders.detail');
+    ->name('orderDetail');
     Route::put('/orders/update/{id}',[OrderController::class,'update'])
-    ->name('orders.update');
+    ->name('orderUpdate');
 
     //Kho
     Route::get('/api/nguyenlieu',[WarehouseController::class,'apiNguyenlieu']);

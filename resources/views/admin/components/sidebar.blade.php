@@ -127,7 +127,7 @@
           <div class="collapse" id="maps">
             <ul class="nav nav-collapse">
               <li>
-                <a href="{{route('orders.index')}}">
+                <a href="{{route('orderIndex')}}">
                   <span class="sub-item">Danh sách đơn hàng</span>
                 </a>
               </li>

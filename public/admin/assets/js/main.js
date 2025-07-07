@@ -123,13 +123,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   const ctx = document.getElementById('myChart');
   new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: chartLabels,
       datasets: [{
         label: 'Doanh thu (VNĐ)',
         data: chartData,
-        borderWidth: 1
+        borderColor: "#1d7af3",
+              pointBorderColor: "#FFF",
+              pointBackgroundColor: "#1d7af3",
+              pointBorderWidth: 2,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 1,
+              pointRadius: 4,
+              backgroundColor: "transparent",
+              fill: true,
+              borderWidth: 2,
       }]
     },
     options: {
@@ -252,14 +261,17 @@ document.getElementById('monthSelect').addEventListener('change',async function 
         list.innerHTML =''; 
         if(result.spbc && result.spbc.length > 0)
         result.spbc.forEach(item => {
-            let itemHTML = `<tr>
+            let itemHTML = `
+            <tr>
                             <td><img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" alt=""  class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
                             <td>${item.tensanpham}</td>
+                            <td>${item.dongia}</td>
+                            <td>${item.soluong}</td>
                             <td>${item.tongsoluong}</td>
                         </tr>`;
             list.innerHTML += itemHTML;  
         });
         else {
-          list.innerHTML = '<tr><td colspan="3">Không có sản phẩm được bán trong tháng này.</td></tr>';
+          list.innerHTML = '<tr><td colspan="5">Không có sản phẩm được bán trong tháng này.</td></tr>';
         }
 })

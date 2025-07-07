@@ -53,9 +53,9 @@ class RevenueController extends Controller
         $spbc = sanpham::join('chitietdonhang','sanpham.idsanpham', '=','chitietdonhang.idsanpham'
         )
         ->join('donhang','chitietdonhang.iddonhang','=','donhang.iddonhang')
-        ->select('sanpham.tensanpham','sanpham.hinh', DB::raw('SUM(chitietdonhang.soluongsp) as tongsoluong'))
+        ->select('sanpham.tensanpham','sanpham.hinh','sanpham.dongia','sanpham.soluong', DB::raw('SUM(chitietdonhang.soluongsp) as tongsoluong'))
         ->where('trangthaidh','HT')
-        ->groupBy('sanpham.tensanpham','sanpham.hinh')
+        ->groupBy('sanpham.tensanpham','sanpham.hinh','sanpham.dongia','sanpham.soluong')
         ->orderByDesc('tongsoluong')
         ->limit(5)
         ->get();
@@ -68,22 +68,30 @@ class RevenueController extends Controller
                 ->pluck('year');
 
 
+        //Đơn hàng gần đây
+        $dsdh = donhang::where('trangthaidh','!=','')
+        ->orderBy('ngaylapdh', 'desc')
+        ->get();
+
+        
+
+
         $colors = [];
         foreach ($productLabels as $label) {
         $colors[] = 'rgba(' . rand(100,255) . ',' . rand(100,255) . ',' . rand(100,255) . ', 1)';
 }
 
-        return view('admin.revenue.index',compact('labels','data','productLabels','productData','colors','labelsMonth','dataMonth','spbc','years'));
+        return view('admin.revenue.index',compact('labels','data','productLabels','productData','colors','labelsMonth','dataMonth','spbc','dsdh','years'));
     }
 
     public function filter(Request $request){
         $spbc = sanpham::join('chitietdonhang','sanpham.idsanpham', '=','chitietdonhang.idsanpham'
         )
         ->join('donhang','chitietdonhang.iddonhang','=','donhang.iddonhang')
-        ->select('sanpham.tensanpham','sanpham.hinh', DB::raw('SUM(chitietdonhang.soluongsp) as tongsoluong'))
+        ->select('sanpham.tensanpham','sanpham.hinh','sanpham.dongia','sanpham.soluong', DB::raw('SUM(chitietdonhang.soluongsp) as tongsoluong'))
         ->where('trangthaidh','HT')
         ->whereMonth('ngaylapdh',$request->thang)
-        ->groupBy('sanpham.tensanpham','sanpham.hinh')
+        ->groupBy('sanpham.tensanpham','sanpham.hinh','sanpham.dongia','sanpham.soluong')
         ->orderByDesc('tongsoluong')
         ->limit(5)
         ->get();

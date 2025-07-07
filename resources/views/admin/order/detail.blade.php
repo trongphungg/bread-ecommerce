@@ -15,7 +15,7 @@
             <i class="icon-arrow-right"></i>
           </li>
           <li class="nav-item">
-            <a href="{{route('orders.index')}}">Danh sách đơn hàng</a>
+            <a href="{{route('orderIndex')}}">Danh sách đơn hàng</a>
           </li>
         </ul>
       </div>
@@ -49,7 +49,7 @@
             @if($dh->trangthaidh != "HT" && $dh->trangthaidh != "HD")
             <tr>
               <td >
-                <form action="{{route('orders.update',$dh->iddonhang)}}" method="POST">
+                <form action="{{route('orderUpdate',$dh->iddonhang)}}" method="POST">
                   @csrf
                   @method('put')
                     <input
@@ -61,7 +61,7 @@
                 </form>
               </td>
               <td>
-                <form action="{{route('orders.update',$dh->iddonhang)}}" method="POST">
+                <form action="{{route('orderUpdate',$dh->iddonhang)}}" method="POST">
                   @csrf
                   @method('put')
                     <input
@@ -73,7 +73,7 @@
                 </form>
               </td>
               <td>
-                <form action="{{route('orders.update',$dh->iddonhang)}}" method="POST">
+                <form action="{{route('orderUpdate',$dh->iddonhang)}}" method="POST">
                   @csrf
                   @method('put')
                     <input
@@ -85,7 +85,7 @@
                 </form>
               </td>
               <td>
-                <form action="{{route('orders.update',$dh->iddonhang)}}" method="POST">
+                <form action="{{route('orderUpdate',$dh->iddonhang)}}" method="POST">
                   @csrf
                   @method('put')
                     <input
@@ -97,7 +97,7 @@
                 </form>
               </td>
               <td>
-                <form action="{{route('orders.update',$dh->iddonhang)}}" method="POST">
+                <form action="{{route('orderUpdate',$dh->iddonhang)}}" method="POST">
                   @csrf
                   @method('put')
                     <input
