@@ -387,21 +387,21 @@ function searchProducts(query) {
             productList.innerHTML = ''; 
 
             data.data.forEach(product =>{
-                let truncatedText = product.motasanpham.slice(0, 50)+'...';
+                let truncatedText = product.motasanpham.slice(0, 70)+'...';
                 let amount = product.dongia; 
-                let VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+                let VND = new Intl.NumberFormat('vi-VN').format(amount);
                 let productHTML = `
                                                  <div class="col-md-6 col-lg-6 col-xl-4 ">
                                                         <div class="rounded position-relative fruite-item">
                 <div class="fruite-img">
                                                <img src="customer/assets/img/${product.hinh}" class="img-fluid w-100 rounded-top" alt="">
                                             </div>
-                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                            <div class="p-4 border border-top-0 rounded-bottom">
                                                 <h4>${product.tensanpham}</h4>
-                                                <p>${truncatedText}</p>
+                                                <p class="green-color">${truncatedText}</p>
                                                 <div class="d-flex justify-content-between flex-lg-wrap">
-                                                    <p class="text-dark fs-5 fw-bold mb-0">${VND}</p>
-                                                    <a onclick="addCart('${product.idsanpham}','${product.tensanpham}','${product.dongia}','1','${product.hinh}')" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                    <p class="text-dark fs-6 fw-bold mb-0">${VND} VNĐ</p>
+                                                    <a onclick="addCart('${product.idsanpham}','${product.tensanpham}','${product.dongia}','1','${product.hinh}')" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-1 text-primary"></i> Thêm vào giỏ</a>
                                                 </div>
                                             </div>
                                             </div>

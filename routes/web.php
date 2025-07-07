@@ -32,6 +32,7 @@ use App\Http\Controllers\admin\IngredientController;
 use App\Http\Controllers\admin\RecipeController;
 use App\Http\Controllers\admin\ReviewController;
 use App\Http\Controllers\admin\RevenueController;
+use App\Http\Controllers\admin\PolicyController;
 use App\Http\Middleware\AdminMiddleware;
 
 
@@ -39,7 +40,6 @@ use App\Http\Middleware\AdminMiddleware;
 //Customer
 
 Route::middleware([UserMiddleware::class])->group(function() {
-
     Route::get('/', [HomeController::class,'index'])
     ->name('home');
     Route::get('/shop', [ShopController::class,'index'])
@@ -62,9 +62,11 @@ Route::middleware([UserMiddleware::class])->group(function() {
     ->name('checkout');
     Route::post('checkout/finish',[CheckoutController::class,'finish'])
     ->name('checkout.finish');
+    Route::get('/customer/policy',[PolicyController::class,'view'])
+    ->name('policyView');
 });
 
-Route::middleware([LoginMiddleware::class])->group(function() {
+Route::middleware([LoginMiddleware::class,UserMiddleware::class])->group(function() {
     //Profile
     Route::get('/profile',[ProfileController::class,'index'])
     ->name('profileIndex');
@@ -111,8 +113,6 @@ Route::get('/logout',[LoginController::class,'logout'])
 
 
 Route::middleware([ AdminMiddleware::class])->group(function() {
-    
-
     //Products
     Route::get('/products', [ProductController::class,'index'])
     ->name('productIndex');
@@ -241,11 +241,24 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     Route::get('/reviews/update/{id}',[ReviewController::class,'handleUpdate'])
     ->name('reviewUpdate');
 
+    //Policy
+    Route::get('/policy',[PolicyController::class,'index'])
+    ->name('policyIndex');
+    Route::get('/policy/create',[PolicyController::class,'create'])
+    ->name('policyCreate');
+    Route::post('/policy/handleCreate',[PolicyController::class,'handleCreate'])
+    ->name('handleCreatePolicy');
+    Route::post('/policy/update/{id}',[PolicyController::class,'update'])
+    ->name('policyUpdate');
+    Route::post('/policy/{id}',[PolicyController::class,'handleUpdate'])
+    ->name('handleUpdatePolicy');
+    Route::delete('/policy/{id}',[PolicyController::class,'delete'])
+    ->name('policyDelete');
+
 
     //Revenue
     Route::get('/dashboard',[RevenueController::class,'index'])
     ->name('dashboard');
-
     Route::post('/api/top5',[RevenueController::class,'filter'])
     ->name('filter');
 
