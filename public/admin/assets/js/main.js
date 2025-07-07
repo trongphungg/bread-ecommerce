@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //Api Google
 async function loadDistricts() {
-    const res = await fetch(`https://provinces.open-api.vn/api/p/79?depth=2`);
+    const res = await fetch(`http://provinces.open-api.vn/api/p/79?depth=2`);
     const districts = (await res.json()).districts;
     const districtSelect = document.getElementById('quan');
     districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>` + 

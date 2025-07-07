@@ -27,7 +27,6 @@ class DetailController extends Controller
     $exists = chitietdonhang::whereIn('iddonhang', $donhangs)
                             ->where('idsanpham', $request->idsanpham)
                             ->exists();
-    dd($exists);
     if ($exists) {
         $danhgia = new danhgia();
         $danhgia->danhgia = $request->danhgia;

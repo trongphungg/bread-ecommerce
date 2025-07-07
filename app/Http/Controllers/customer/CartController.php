@@ -90,7 +90,7 @@ class CartController extends Controller
 {
     $cart = session()->get('cart', new \stdClass());
     if (property_exists($cart, $id)) {
-        $cart->{$id}->soluongsp = $request->quantity;
+        $cart->{$id}->soluongsp = (int)$request->quantity;
         $cart->{$id}->ghichu = $request->note;
     } else {
         return response()->json([

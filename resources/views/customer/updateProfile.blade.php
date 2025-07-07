@@ -15,7 +15,8 @@
                         </div>
                         <div class="form-group my-1">
                             <label>Ngày sinh</label>
-                            <input type="date" class="form-control" name="ngaysinh" value="{{ $user->ngaysinh }}">
+                            <input type="date" class="form-control" name="ngaysinh" 
+       value="{{ \Carbon\Carbon::parse($user->ngaysinh)->format('Y-m-d') }}">
                         </div>
                         @php
                             $diachiParts = explode('-', Auth::user()->diachi);
@@ -27,7 +28,7 @@
                             <label class="form-label">Địa chỉ</label>
                             <input type="text" class="form-control" name="diachi"
                                 placeholder="Nhập số nhà, tên đường, phường ..." value="{{ Auth::user()->diachi ?? '' }}"
-                                required />
+                                readonly />
                             <label for="">Địa chỉ mới</label>
                             <input type="text" name="duong" id="duong" class="form-control"
                                 placeholder="Nhập số nhà, tên đường, phường ..." />
@@ -60,9 +61,8 @@
 
                         <div class="form-group my-1">
                             <label>Vai trò</label>
-                            <select class="form-select" name="role">
-                                <option value="0" selected>Khách hàng</option>
-                            </select>
+                            <input class="form-control" name="role" readonly value="Khách hàng">
+                            </input>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Sửa người dùng</button>

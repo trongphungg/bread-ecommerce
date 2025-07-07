@@ -47,7 +47,7 @@ class CheckoutController extends Controller
                 $nguoidung->email = $request->email;
                 $nguoidung->role = 1;
                 $nguoidung->save();
-    
+                
                 $dh = new donhang();
                 $dh->idnguoidung = $nguoidung->idnguoidung;
                 $dh->ngaylapdh= now();
@@ -55,8 +55,7 @@ class CheckoutController extends Controller
                 $dh->tongtien = $request->input('Tongtien');
                 $dh->diachi = $diachi;
                 $dh->save();
-    
-    
+
                 $cart = session()->get('cart', new \stdClass());
                 foreach ($cart as $item) {
                     DB::table('chitietdonhang')->updateOrInsert(

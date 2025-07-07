@@ -304,7 +304,7 @@ function handleDelete(event) {
 
 // API Google
   async function loadDistricts() {
-    const res = await fetch(`https://provinces.open-api.vn/api/p/79?depth=2`);
+    const res = await fetch(`http://provinces.open-api.vn/api/p/79?depth=2`);
     const districts = (await res.json()).districts;
     const districtSelect = document.getElementById('quan');
     districtSelect.innerHTML = `<option value="">-- Chọn quận/huyện --</option>` + 
@@ -361,16 +361,14 @@ document.addEventListener('DOMContentLoaded', function () {
       star.addEventListener('click', function () {
         const selected = parseInt(this.getAttribute('data-value'));
         scoreInput.value = selected;
-
-        // Update màu các sao
         stars.forEach(s => {
           const val = parseInt(s.getAttribute('data-value'));
           if (val <= selected) {
             s.classList.remove('text-muted');
-            s.classList.add('text-warning'); // sao đã chọn màu vàng
+            s.classList.add('text-warning'); 
           } else {
             s.classList.remove('text-warning');
-            s.classList.add('text-muted'); // sao chưa chọn
+            s.classList.add('text-muted'); 
           }
         });
       });

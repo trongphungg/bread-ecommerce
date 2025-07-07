@@ -25,7 +25,6 @@ class ProfileController extends Controller
         if($request->diachimoi)
             $diachi = $request->diachimoi;
         else $diachi = $request->diachi;
-        dd($diachi);
         $nguoidung = nguoidung::where('idnguoidung',Auth::user()->idnguoidung)
                             ->update([
                                 'tennguoidung' => $request->tennguoidung,

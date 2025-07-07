@@ -41,7 +41,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="form-label">Địa chỉ</label>
-                                <input type="text" class="form-control" name="diachi" placeholder="Nhập số nhà, tên đường, phường ..." value="{{$user->diachi ?? ''}}" required />
+                                <input type="text" class="form-control" name="diachi" readonly value="{{$user->diachi ?? ''}}" />
                                 <label for="">Địa chỉ mới</label>
                                 <input type="text" name="duong" id="duong" class="form-control" placeholder="Nhập số nhà, tên đường, phường ..."  />
                                  <div class="select-group d-flex gap-2 mt-1">

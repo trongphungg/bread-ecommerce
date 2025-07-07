@@ -39,7 +39,7 @@
                                 <i class="fas fa-birthday-cake text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Ngày sinh</p>
-                                    <h5 class="mb-0">{{ $nguoidung->ngaysinh }}</h5>
+                                    <h5 class="mb-0">{{\Carbon\Carbon::parse($nguoidung->ngaysinh)->format('d/m/Y')}}</h5>
                                 </div>
                             </div>
                         </div>

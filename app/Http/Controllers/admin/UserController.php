@@ -43,7 +43,6 @@ class UserController extends Controller
         if($request->diachimoi)
             $diachi = $request->diachimoi;
         else $diachi = $request->diachi;
-        dd($diachi);
         $nguoidung = nguoidung::where('idnguoidung',$id)
                             ->update([
                                 'tennguoidung' => $request->tennguoidung,

@@ -42,7 +42,7 @@
                     {{$user->idnguoidung}}
                 </td>
                 <td>{{$user->tennguoidung}}</td>
-                <td>{{$user->ngaysinh}}</td>
+                <td>{{\Carbon\Carbon::parse($user->ngaysinh)->format('d/m/Y')}}</td>
                 <td>{{$user->diachi}}</td>
                 <td>{{ $user->gioitinh == 1 ? 'Nam' : 'Nữ' }}</td>
                 <td>{{$user->sodienthoai}}</td>

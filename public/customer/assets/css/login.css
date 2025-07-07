@@ -71,7 +71,10 @@
     text-align: left;
     position: relative;
     font-size: clamp(14px, 2vw, 16px);
+    padding: 12px;
+    margin: 0 auto 10px;
 }
+
 
 .label{
     transition: all 0.3s ease;

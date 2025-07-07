@@ -58,7 +58,8 @@ class LoginController extends Controller
     }
 
     public function handleCreate(Request $request){
-        $diachi = $request->diachi.'-'.$request->quan;
+
+        $diachi = $request->diachimoi;
         $nguoidung = new nguoidung();
         $nguoidung->tennguoidung = $request->input('tennguoidung');
         $nguoidung->ngaysinh = $request->input('ngaysinh');
@@ -68,6 +69,7 @@ class LoginController extends Controller
         $nguoidung->email = $request->input('email');
         $nguoidung->password = Hash::make($request->input('matkhau'));
         $nguoidung->role = 0;
+
         $nguoidung->save();
         return redirect('/login');
     }

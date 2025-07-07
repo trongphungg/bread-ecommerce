@@ -29,7 +29,7 @@
                 </td>
                 <td>{{$v->danhgia}}</td>
                 <td>{{$v->sodiem}}</td>
-                <td>{{$v->ngaydanhgia}}</td>
+                <td>{{\Carbon\Carbon::parse($v->ngaydanhgia)->format('d/m/Y')}}</td>
                 <td>
                   @switch($v->trangthaidg)
                   @case("1")

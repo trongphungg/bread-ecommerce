@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="icon" href="{{ asset('customer/assets/img/banner-fruits.jpg') }}" class="link-icon">
     <title>Đăng ký</title>
     <link rel="stylesheet" href="{{ asset('customer/assets/css/style.css') }}">
@@ -39,30 +41,14 @@
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Địa chỉ</label>
                                 <input type="text" class="login-input form-control"
-                                    name="diachi" placeholder="Nhập số nhà, tên đường, phường ..." required/>
-                                <select name="quan" id="quan" class="login-input form-control" required>
-                                    <option value="" disabled selected>Vui lòng chọn quận</option>
-                                    <option value="Quận 1">Quận 1</option>
-                                    <option value="Quận 3">Quận 3</option>
-                                    <option value="Quận 4">Quận 4</option>
-                                    <option value="Quận 5">Quận 5</option>
-                                    <option value="Quận 6">Quận 6</option>
-                                    <option value="Quận 7">Quận 7</option>
-                                    <option value="Quận 8">Quận 8</option>
-                                    <option value="Quận 10">Quận 10</option>
-                                    <option value="Quận 11">Quận 11</option>
-                                    <option value="Quận 12">Quận 12</option>
-                                    <option value="Quận Tân Bình">Quận Tân Bình</option>
-                                    <option value="Quận Tân Phú">Quận Tân Phú</option>
-                                    <option value="Quận Bình Tân">Quận Bình Tân</option>
-                                    <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
-                                    <option value="Quận Gò Vấp">Quận Gò Vấp</option>
-                                    <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
-                                </select>
+                                id="duong" name="duong" placeholder="Nhập số nhà, tên đường ..." required/>
+                                <select class="form-select" id="quan" name="quan" required ></select>
+                                <select class="form-select" id="phuong" name="phuong" required></select>
+                                <input type="hidden" name="diachimoi" id="full_address" />
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Giới tính</label>
-                                <select name="gioitinh" id="gioitinh" class="login-input form-control" required>
+                                <select name="gioitinh" id="gioitinh" class="form-select" required>
                                     <option value="" disabled selected>Vui lòng chọn giới tính</option>
                                     <option value="1">Nam</option>
                                     <option value="0">Nữ</option>
@@ -71,10 +57,16 @@
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Số điện thoại</label>
                                 <input type="text" name="sodienthoai"  class="login-input form-control" placeholder="Nhập số điện thoại ..." required/>
+                                @error('sodienthoai')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Email</label>
                                 <input type="text" name="email"  class="login-input form-control" placeholder="Nhập email ..." required/>
+                                @error('email')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Mật khẩu</label>
@@ -92,6 +84,10 @@
             </div>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{{asset ('customer/assets/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
+    <script src="{{asset('customer/assets/js/main.js')}}"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 <div class="container-fluid text-white-50 footer pt-5 mt-5">
     <div class="container py-5">
         <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
-            <div class="row g-4">
+            <div class="row g-4 col-sm-12">
                 <div class="col-lg-6">
                     <a href="#" class="text-decoration-none">
                         <h1 class="orange-color mb-0">Bánh mì Phong Hiền</h1>
@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="row g-5">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3">
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Vì sao bạn lựa chọn chúng tôi?</h4>
                     <p class="mb-4">Bánh mì của chúng tôi được làm từ nguyên liệu tươi ngon, công thức chuẩn vị và sự
@@ -36,7 +36,7 @@
                     <a href="" class="btn border-warning py-2 px-4 rounded-pill green-color">Đọc thêm</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3">
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Thông tin cửa hàng</h4>
                     <a class="btn-link" href="">Giới thiệu</a>
@@ -45,7 +45,7 @@
                     <a class="btn-link" href="">Chính sách đổi trả</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3">
                 <div class="d-flex flex-column text-start footer-item">
                     <h4 class="text-light mb-3">Tài khoản</h4>
                     <a class="btn-link" href="">Tài khoản của tôi</a>
@@ -53,7 +53,7 @@
                     <a class="btn-link" href="">Lịch sử mua hàng</a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3">
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Liên hệ</h4>
                     <p>Địa chỉ: 79 thôn Mỹ Yên, Đức Minh, Đăk Mil, Đăk Nông</p>
