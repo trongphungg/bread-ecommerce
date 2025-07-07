@@ -15,4 +15,23 @@ class ShopController extends Controller
         $dslsp = loaisanpham::all();
         return view('customer.shop',compact('dssp','dslsp','dsspp'));
     }
+
+    public function search(Request $request){
+        $message = null;
+        $query = $request->input('query');
+        if(empty($request))
+            $data = sanpham::all();
+        else
+        {
+        $data = sanpham::where('tensanpham','like','%'.$query.'%')
+                        ->orWhere('idloaisanpham','like','%'.$query.'%')
+                        ->get();
+        if ($data->isEmpty()) {
+        $data = sanpham::all();
+        }
+        }
+        return response()->json([
+            'data'=>$data
+    ]);
+    }
 }

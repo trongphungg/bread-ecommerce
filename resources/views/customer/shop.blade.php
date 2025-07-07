@@ -12,7 +12,7 @@
                         <div class="col-xl-3">
                             <div class="input-group w-100 mx-auto d-flex">
                                 <input type="search" class="form-control p-3" placeholder="Nhập từ khoá tìm kiếm"
-                                    aria-describedby="search-icon-1">
+                                    aria-describedby="search-icon-1" id="search-input" onsearch="searchProducts()">
                                 <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                             </div>
                         </div>
@@ -25,26 +25,23 @@
                                 <div class="mb-3">
                                     <h4>Danh mục sản phẩm</h4>
                                     <ul class="list-unstyled fruite-categorie">
-                                        @php
-                                            foreach ($dslsp as $lsp) {
+                                        @foreach ($dslsp as $lsp)
+                                            @php
                                                 $dem = 0;
                                                 foreach ($dsspp as $sp) {
                                                     if ($sp->idloaisanpham == $lsp->idloaisanpham) {
                                                         $dem++;
                                                     }
                                                 }
-                                                echo '<li>
+                                            @endphp
+                                            <li data-product-id="{{ $lsp->idloaisanpham }}" class="category-item"
+                                                onclick="searchProducts()">
                                                 <div class="d-flex justify-content-between fruite-name">
-                                                    <a href="#"><i class="fas fa-apple-alt me-2"></i>' .
-                                                    $lsp->tenloai .
-                                                    '</a>
-                                                    <span>(' .
-                                                    $dem .
-                                                    ')</span>
+                                                    <a><i class="fas fa-apple-alt me-2"></i>{{ $lsp->tenloai }}</a>
+                                                    <span>({{ $dem }})</span>
                                                 </div>
-                                            </li>';
-                                            }
-                                        @endphp
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -61,7 +58,9 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
-                        <div class="row g-4 justify-content-center">
+                        <div class="text-danger" id="showMessage"></div>
+                        <div class="row g-4 justify-content-center" id="showProducts">
+                            
                             @foreach ($dssp as $sp)
                                 <div class="col-md-6 col-lg-6 col-xl-4" id="productForm">
                                     <div class="rounded position-relative fruite-item">

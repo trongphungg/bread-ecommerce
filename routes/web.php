@@ -265,5 +265,6 @@ Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle'])
 Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback'])
 ->name('google.callback');
 
-
+// Search Products
+Route::get('search-products',[ShopController::class,'search'])->name('searchProduct');
 

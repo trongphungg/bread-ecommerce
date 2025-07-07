@@ -375,3 +375,80 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+
+
+  //SearchProducts
+function searchProducts(query) {
+    let url = 'search-products?query='+(query ? query :'');
+    fetch(url) 
+        .then(response => response.json())
+        .then(data => {
+            let productList = document.getElementById('showProducts');
+            productList.innerHTML = ''; 
+
+            data.data.forEach(product =>{
+                let truncatedText = product.motasanpham.slice(0, 50)+'...';
+                let amount = product.dongia; 
+                let VND = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+                let productHTML = `
+                                                 <div class="col-md-6 col-lg-6 col-xl-4 ">
+                                                        <div class="rounded position-relative fruite-item">
+                <div class="fruite-img">
+                                               <img src="customer/assets/img/${product.hinh}" class="img-fluid w-100 rounded-top" alt="">
+                                            </div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>${product.tensanpham}</h4>
+                                                <p>${truncatedText}</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold mb-0">${VND}</p>
+                                                    <a onclick="addCart('${product.idsanpham}','${product.tensanpham}','${product.dongia}','1','${product.hinh}')" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                                </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            
+                `;
+                productList.innerHTML += productHTML;
+            });
+        })
+        .catch(error => console.error('Error fetching products:', error));
+}
+
+
+//Search when input
+
+const searchInput = document.getElementById('search-input')
+if(searchInput){
+    searchInput.addEventListener('input',()=>{
+    let query = document.getElementById('search-input').value;
+    searchProducts(query);
+})
+}
+
+//Search when click
+const searchClick = document.querySelectorAll('.category-item');
+if(searchClick){
+    searchClick.forEach(category=>{
+    category.addEventListener('click',()=>{
+        let categoryId= category.getAttribute('data-product-id');
+        searchProducts(categoryId);
+    })
+})
+}
+
+//Add Cart
+async function addCart(idsanpham,tensanpham,dongia,soluongsp,hinh){
+    const response = await fetch(`${apiBaseUrl}/add`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: JSON.stringify({ idsanpham, tensanpham, dongia, soluongsp, hinh }),
+        mode: 'cors',
+    });
+
+    const result = await response.json();
+    alert(result.message);
+    loadCart();
+}

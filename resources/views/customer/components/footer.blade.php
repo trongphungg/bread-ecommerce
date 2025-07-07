@@ -59,7 +59,7 @@
                     <p>Địa chỉ: 79 thôn Mỹ Yên, Đức Minh, Đăk Mil, Đăk Nông</p>
                     <p>Email: trongphung020103@gmail.com</p>
                     <p>Phone: 0338 737 003</p>
-                    <img src="img/payment.png" class="img-fluid" alt="">
+                    <img src="customer/assets/img/payment.png" class="img-fluid" alt="">
                 </div>
             </div>
         </div>
