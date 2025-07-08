@@ -196,7 +196,7 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     ->name('orderUpdate');
 
     //Kho
-    Route::get('/api/nguyenlieu',[WarehouseController::class,'apiNguyenlieu']);
+    
     Route::get('/warehouse',[WarehouseController::class,'index'])
     ->name('warehouseIndex');
     Route::get('/warehouse/create',[WarehouseController::class,'create'])
@@ -259,8 +259,7 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     //Revenue
     Route::get('/dashboard',[RevenueController::class,'index'])
     ->name('dashboard');
-    Route::post('/api/top5',[RevenueController::class,'filter'])
-    ->name('filter');
+    
 
 
     //Test
@@ -281,3 +280,6 @@ Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCal
 // Search Products
 Route::get('search-products',[ShopController::class,'search'])->name('searchProduct');
 
+Route::get('/api/nguyenlieu',[WarehouseController::class,'apiNguyenlieu']);
+Route::get('/api/top5',[RevenueController::class,'filter'])
+    ->name('filter');

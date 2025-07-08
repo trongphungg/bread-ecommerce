@@ -48,9 +48,8 @@ function xoaNguyenlieu($item){
     ->get();
 
     foreach ($ct as $a) {
-    $tongLuong = $item->soluongsp * $a->soluong; // Tổng số lượng nguyên liệu cần
+    $tongLuong = $item->soluongsp * $a->soluong; 
 
-    // Trừ trực tiếp trong bảng kho
     DB::table('nguyenlieu')
         ->where('idnguyenlieu', $a->idnguyenlieu)
         ->decrement('soluongton', $tongLuong);

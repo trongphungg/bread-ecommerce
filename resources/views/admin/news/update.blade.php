@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-text">Mô tả</span>
-                                <textarea class="form-control" name ="mota" aria-label="With textarea" required>{{$tintuc->mota}}</textarea>
+                                <textarea class="form-control" name ="mota" style="height: 200px !important;" aria-label="With textarea" required>{{$tintuc->mota}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

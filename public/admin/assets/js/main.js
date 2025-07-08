@@ -162,13 +162,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const chartMonth = document.getElementById('chartMonth');
   new Chart(chartMonth, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: labelsMonth,
       datasets: [{
         label: 'Doanh thu (VNĐ)',
         data: dataMonth,
-        borderWidth: 1
+        borderColor: "#1d7af3",
+              pointBorderColor: "#FFF",
+              pointBackgroundColor: "#1d7af3",
+              pointBorderWidth: 2,
+              pointHoverRadius: 4,
+              pointHoverBorderWidth: 1,
+              pointRadius: 4,
+              backgroundColor: "transparent",
+              fill: true,
+              borderWidth: 2,
       }]
     },
     options: {
@@ -237,41 +246,56 @@ async function fetchTop5(){
 
 
 
-document.getElementById('monthSelect').addEventListener('change',async function (e) {
+  document.getElementById('monthSelect').addEventListener('change',async function (e) {
 
-  const month = document.getElementById('monthSelect').value;
-  const parts = month.split('-');
-  const thang = parts[1];
-  
+    const month = document.getElementById('monthSelect').value;
+    const parts = month.split('-');
+    const thang = parts[1];
+    
 
-  
-  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  const response = await fetch(`http://127.0.0.1:8000/api/top5`, {
-        method: 'POST',  
-        headers: { 
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': csrfToken,
-        },
-        body: JSON.stringify({ thang }),
-        mode: 'cors',
-    });
-    const result = await response.json();   
-    const list = document.getElementById('showKQ');
+    
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // const response = await fetch(`http://127.0.0.1:8000/api/top5`, {
+    //       method: 'POST',  
+    //       headers: { 
+    //           'Content-Type': 'application/json',
+    //           'X-CSRF-TOKEN': csrfToken,
+    //       },
+    //       body: JSON.stringify({ thang }),
+    //       mode: 'cors',
+    //   });
 
-        list.innerHTML =''; 
-        if(result.spbc && result.spbc.length > 0)
-        result.spbc.forEach(item => {
-            let itemHTML = `
-            <tr>
-                            <td><img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" alt=""  class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
-                            <td>${item.tensanpham}</td>
-                            <td>${item.dongia}</td>
-                            <td>${item.soluong}</td>
-                            <td>${item.tongsoluong}</td>
-                        </tr>`;
-            list.innerHTML += itemHTML;  
-        });
-        else {
-          list.innerHTML = '<tr><td colspan="5">Không có sản phẩm được bán trong tháng này.</td></tr>';
-        }
-})
+
+      const response = await fetch(`http://127.0.0.1:8000/api/top5?thang=${thang}`);
+      
+      const result = await response.json();   
+      alert(thang);
+      const list = document.getElementById('showKQ');
+
+          list.innerHTML =''; 
+          if(result.spbc && result.spbc.length > 0)
+         {
+           let lastTotal = 0;
+           result.spbc.forEach(item => {
+              let dongiaPrice = new Intl.NumberFormat('vi-VN').format(item.dongia);
+              let thanhtien = new Intl.NumberFormat('vi-VN').format(item.dongia * item.tongsoluong)
+              let itemHTML = `
+              <tr>
+                              <td><img src="http://127.0.0.1:8000/customer/assets/img/${item.hinh}" alt=""  class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
+                              <td>${item.tensanpham}</td>
+                              <td>${dongiaPrice} VNĐ</td>
+                              <td>${item.soluong}</td>
+                              <td>${item.tongsoluong}</td>
+                              <td>${thanhtien} VNĐ</td>
+                          </tr>`;
+              list.innerHTML += itemHTML;
+              lastTotal +=item.dongia*item.tongsoluong;
+          });
+
+          document.getElementById('lastTotal').innerHTML = `<p>${new Intl.NumberFormat('vi-VN').format(lastTotal)} VNĐ</p>`;
+         }
+          else {
+            list.innerHTML = '<tr><td colspan="6">Không có sản phẩm được bán trong tháng này.</td></tr>';
+             document.getElementById('lastRow').innerHTML = ``;
+          }
+  })

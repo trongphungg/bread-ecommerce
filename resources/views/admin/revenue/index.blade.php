@@ -53,7 +53,9 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Tổng doanh thu</p>
-                                        <h4 class="card-title">{{ number_format($dsdh->where('trangthaidh','HT')->sum('tongtien'), 0, ',', '.') }} VNĐ</h4>
+                                        <h4 class="card-title">
+                                            {{ number_format($dsdh->where('trangthaidh', 'HT')->sum('tongtien'), 0, ',', '.') }}
+                                            VNĐ</h4>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +74,7 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Tổng đơn hàng</p>
-                                        <h4 class="card-title">{{$dsdh->count()}}</h4>
+                                        <h4 class="card-title">{{ $dsdh->count() }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +82,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
+            {{-- Xem xét xem có nên sử dụng không --}}
+            {{-- <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">Biểu đồ doanh thu </div>
@@ -91,6 +94,10 @@
                         </div>
                     </div>
                 </div>
+            </div> --}}
+
+            <div class="col-md-12">
+
             </div>
             <div class="col-md-12">
                 <div class="card">
@@ -106,7 +113,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="card">
                     <div class="card-header">
                         <h3>Thống kê số lượng đã bán theo từng sản phẩm</h3>
@@ -118,17 +125,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
+            <div class="col-md-7 card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="card-title mb-0">Top 5 sản phẩm bán chạy</div>
+                        <div class="card-title mb-0">Doanh thu theo tháng</div>
                         <div class="me-0">
-                        <label for="monthSelect">Chọn tháng:</label>
-                        <input type="month" id="monthSelect" name="monthSelect">
+                            <label for="monthSelect">Chọn tháng:</label>
+                            <input type="month" id="monthSelect" name="monthSelect">
                         </div>
                     </div>
-
-                </div>
                 <table class="mt-3 table table-hover">
                     <tr>
                         <th>
@@ -146,58 +150,50 @@
                         <th>
                             Số lượng bán
                         </th>
+                        <th>
+                            Thành tiền
+                        </th>
                     </tr>
                     <tbody id="showKQ">
+                        @php
+                            $tongdoanhthu = 0;
+                        @endphp
                         @foreach ($spbc as $sp)
+                            @php
+                                $tongdoanhthu += $sp->dongia * $sp->tongsoluong;
+                            @endphp
                             <tr>
                                 <td><img src="{{ asset('customer/assets/img/' . $sp->hinh) }}" alt=""
                                         class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
                                 <td>{{ $sp->tensanpham }}</td>
                                 <td>{{ number_format($sp->dongia, 0, ',', '.') }} VNĐ</td>
+
                                 <td>{{ $sp->soluong }}</td>
                                 <td>{{ $sp->tongsoluong }}</td>
+                                <td>{{ number_format($sp->dongia * $sp->tongsoluong, 0, ',', '.') }} VNĐ</td>
                             </tr>
                         @endforeach
+
                     </tbody>
+                    <tr>
+                        <td id="lastRow" colspan="6">
+                            <div class="d-flex justify-content-between">
+                                <strong>Tổng doanh thu kiếm trong tháng:</strong>
+                                <span id="lastTotal">{{ number_format($tongdoanhthu, 0, ',', '.') }} VNĐ</span>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
             </div>
-
-
-            {{-- <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="card-title mb-0">Top 5 sản phẩm bán chạy</div>
-                        <div class="me-0">
-                            <label for="monthSelect">Chọn tháng:</label>
-                            <input type="month" id="monthSelect" name="monthSelect">
-                        </div>
-                    </div>
-                    <div class="card-body pb-0" id="showKQ">
-                        ` @foreach ($spbc as $sp)
-                            <div class="d-flex">
-                                <div class="avatar">
-                                    <img src="{{ asset('customer/assets/img/' . $sp->hinh) }}" alt="..."
-                                        class="avatar-img rounded-circle" />
-                                </div>
-                                <div class="flex-1 pt-1 ms-2">
-                                    <h6 class="fw-bold mb-1">{{ $sp->tensanpham }}</h6>
-                                </div>
-                                <div class="d-flex ms-auto align-items-center">
-                                    <h4 class="text-info fw-bold">{{ $sp->tongsoluong }}</h4>
-                                </div>
-                            </div>
-                            <div class="separator-dashed"></div>
-                        @endforeach
-                    </div>
-                </div>
-            </div> --}}
         </div>
         <div class="row">
+            
+            
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <div class="card-title mb-0">Đơn hàng gần đây</div>
-                        <a href="{{route('orderIndex')}}" class="me-0 btn btn-outline-primary"> Xem tất cả</a>
+                        <a href="{{ route('orderIndex') }}" class="me-0 btn btn-outline-primary"> Xem tất cả</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-hover">
@@ -248,7 +244,38 @@
                     </div>
                 </div>
             </div>
+
+
+            {{-- <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title mb-0">Top 5 sản phẩm bán chạy</div>
+                        <div class="me-0">
+                            <label for="monthSelect">Chọn tháng:</label>
+                            <input type="month" id="monthSelect" name="monthSelect">
+                        </div>
+                    </div>
+                    <div class="card-body pb-0" id="showKQ">
+                        ` @foreach ($spbc as $sp)
+                            <div class="d-flex">
+                                <div class="avatar">
+                                    <img src="{{ asset('customer/assets/img/' . $sp->hinh) }}" alt="..."
+                                        class="avatar-img rounded-circle" />
+                                </div>
+                                <div class="flex-1 pt-1 ms-2">
+                                    <h6 class="fw-bold mb-1">{{ $sp->tensanpham }}</h6>
+                                </div>
+                                <div class="d-flex ms-auto align-items-center">
+                                    <h4 class="text-info fw-bold">{{ $sp->tongsoluong }}</h4>
+                                </div>
+                            </div>
+                            <div class="separator-dashed"></div>
+                        @endforeach
+                    </div>
+                </div>
+            </div> --}}
         </div>
+        
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
