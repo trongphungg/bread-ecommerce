@@ -27,22 +27,22 @@
                         <p
                             class="text-muted mb-4 login-welcome text-center d-flex justify-content-center align-items-center">
                             Hãy nhập thông tin đăng ký tài khoản</p>
-                        <form class="login-form" action="{{route('createRegister')}}" method="POST">
+                        <form class="login-form" action="{{ route('createRegister') }}" method="POST">
                             @csrf
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Họ và tên</label>
-                                <input type="text" class="login-input form-control"
-                                    name="tennguoidung" placeholder="Nhập họ tên đầy đủ ..." required />
+                                <input type="text" class="login-input form-control" name="tennguoidung"
+                                    placeholder="Nhập họ tên đầy đủ ..." required />
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Ngày sinh</label>
-                                <input type="date" name="ngaysinh" class="login-input form-control" required/>
+                                <input type="date" name="ngaysinh" class="login-input form-control" required />
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Địa chỉ</label>
-                                <input type="text" class="login-input form-control"
-                                id="duong" name="duong" placeholder="Nhập số nhà, tên đường ..." required/>
-                                <select class="form-select" id="quan" name="quan" required ></select>
+                                <input type="text" class="login-input form-control" id="duong" name="duong"
+                                    placeholder="Nhập số nhà, tên đường ..." required />
+                                <select class="form-select" id="quan" name="quan" required></select>
                                 <select class="form-select" id="phuong" name="phuong" required></select>
                                 <input type="hidden" name="diachimoi" id="full_address" />
                             </div>
@@ -56,23 +56,33 @@
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Số điện thoại</label>
-                                <input type="text" name="sodienthoai"  class="login-input form-control" placeholder="Nhập số điện thoại ..." required/>
+                                <input type="text" name="sodienthoai" class="login-input form-control"
+                                    placeholder="Nhập số điện thoại ..." required />
                                 @error('sodienthoai')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Email</label>
-                                <input type="text" name="email"  class="login-input form-control" placeholder="Nhập email ..." required/>
+                                <input type="text" name="email" class="login-input form-control"
+                                    placeholder="Nhập email ..." required />
                                 @error('email')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="login-form-group">
                                 <label class="label text-start d-block">Mật khẩu</label>
-                                <input type="password" name="matkhau"  class="login-input form-control" placeholder="Nhập mật khẩu ..." required/>
+                                <input type="password" name="matkhau" class="login-input form-control"
+                                    placeholder="Nhập mật khẩu ..." required />
                             </div>
-
+                            <div class="login-form-group">
+                                <label class="label text-start d-block">Xác nhận mật khẩu</label>
+                                <input type="password" name="matkhau_confirmation" class="login-input form-control"
+                                    placeholder="Xác nhận mật khẩu ..." required />
+                            </div>
+                            @error('matkhau')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                             <button type="submit" class="login-btn">Đăng ký</button>
                             <div class="login-links">
                                 <p class="text-muted mb-2">Bạn đã có tài khoản?</p>
@@ -85,9 +95,9 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="{{asset ('customer/assets/lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{ asset('customer/assets/lib/owlcarousel/owl.carousel.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
-    <script src="{{asset('customer/assets/js/main.js')}}"></script>
+    <script src="{{ asset('customer/assets/js/main.js') }}"></script>
 </body>
 
 </html>

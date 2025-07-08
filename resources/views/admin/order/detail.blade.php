@@ -21,7 +21,7 @@
       </div>
       <div class="row">
         <div class="card">
-            <h3>Đơn hàng của anh/chị {{$dh->nguoidung->tennguoidung}}. Bao gồm:</h3>
+            <h3>Đơn hàng của anh/chị {{$dh->tennguoidung}}. Bao gồm:</h3>
 
           <table class="mt-3 table table-hover">
             <tr>

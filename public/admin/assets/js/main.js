@@ -252,30 +252,16 @@ async function fetchTop5(){
     const parts = month.split('-');
     const thang = parts[1];
     
-
-    
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    // const response = await fetch(`http://127.0.0.1:8000/api/top5`, {
-    //       method: 'POST',  
-    //       headers: { 
-    //           'Content-Type': 'application/json',
-    //           'X-CSRF-TOKEN': csrfToken,
-    //       },
-    //       body: JSON.stringify({ thang }),
-    //       mode: 'cors',
-    //   });
-
-
       const response = await fetch(`http://127.0.0.1:8000/api/top5?thang=${thang}`);
       
       const result = await response.json();   
-      alert(thang);
       const list = document.getElementById('showKQ');
 
           list.innerHTML =''; 
           if(result.spbc && result.spbc.length > 0)
          {
-           let lastTotal = 0;
+          //  let lastTotal = 0;
            result.spbc.forEach(item => {
               let dongiaPrice = new Intl.NumberFormat('vi-VN').format(item.dongia);
               let thanhtien = new Intl.NumberFormat('vi-VN').format(item.dongia * item.tongsoluong)
@@ -289,13 +275,19 @@ async function fetchTop5(){
                               <td>${thanhtien} VNĐ</td>
                           </tr>`;
               list.innerHTML += itemHTML;
-              lastTotal +=item.dongia*item.tongsoluong;
+              // lastTotal +=item.dongia*item.tongsoluong;
           });
 
-          document.getElementById('lastTotal').innerHTML = `<p>${new Intl.NumberFormat('vi-VN').format(lastTotal)} VNĐ</p>`;
+          // document.getElementById('lastRow').innerHTML = `
+          // <td colspan="6">
+          //                   <div class="d-flex justify-content-between">
+          //                       <strong>Tổng doanh thu kiếm trong tháng:</strong>
+          //                       <span>${new Intl.NumberFormat('vi-VN').format(lastTotal)} VNĐ</span>
+          //                   </div>
+          //               </td>`;
          }
           else {
             list.innerHTML = '<tr><td colspan="6">Không có sản phẩm được bán trong tháng này.</td></tr>';
-             document.getElementById('lastRow').innerHTML = ``;
+            //  document.getElementById('lastRow').innerHTML = ``;
           }
   })

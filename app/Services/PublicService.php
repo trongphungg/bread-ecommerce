@@ -20,7 +20,6 @@ class PublicService
         ->get();
     $ketQua = [];
 
-    // Gom nguyên liệu theo từng sản phẩm
     foreach ($data->groupBy('idsanpham') as $idsanpham => $nguyenlieus) {
         $soLuongToiDa = [];
 
@@ -31,7 +30,6 @@ class PublicService
             $soLuongToiDa[] = $coTheLam;
         }
 
-        // Lưu kết quả cho từng sản phẩm
         $ketQua[$idsanpham] = count($soLuongToiDa) ? min($soLuongToiDa) : 0;
     }
 

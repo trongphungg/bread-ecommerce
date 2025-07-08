@@ -58,9 +58,21 @@ class LoginController extends Controller
     }
 
     public function handleCreate(Request $request){
+        $credentials = $request->validate([
+            'email' => 'unique:nguoidung,email',
+            'sodienthoai' => 'unique:nguoidung,sodienthoai',
+            'matkhau' => 'min:3|confirmed'
+        ],[
+            'email.unique' => 'Bạn đã có tài khoản rồi. Hãy tiến hành đăng nhập',
+            'sodienthoai.unique' => 'Số điện thoại đã được sử dụng',
+            'matkhau.confirmed' => 'Mật khẩu xác nhận không khớp',
+            'matkhau.min' => 'Mật khẩu phải lớn hơn 3 kí tự'
+        ]);
 
         $diachi = $request->diachimoi;
-        $nguoidung = new nguoidung();
+
+        if($credentials){
+            $nguoidung = new nguoidung();
         $nguoidung->tennguoidung = $request->input('tennguoidung');
         $nguoidung->ngaysinh = $request->input('ngaysinh');
         $nguoidung->diachi = $diachi;
@@ -72,5 +84,7 @@ class LoginController extends Controller
 
         $nguoidung->save();
         return redirect('/login');
+        }
+        else return redirect()->back();
     }
 }

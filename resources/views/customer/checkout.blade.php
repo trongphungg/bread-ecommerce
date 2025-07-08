@@ -11,7 +11,7 @@
                             <label class="form-label my-3">Tên Khách hàng<sup>*</sup></label>
                             <input type="text" name="tennguoidung" class="form-control"
                                 placeholder="Nhập tên khách hàng ..." value="{{ Auth::user()->tennguoidung ?? '' }}"
-                                required {{Auth::check() ? 'readonly' : ''}}>
+                                required />
                         </div>
                         @if(Auth::check())
                         <div class="form-item">
@@ -35,12 +35,12 @@
                         <div class="form-item">
                             <label class="form-label my-3">Điện thoại<sup>*</sup></label>
                             <input name="sodienthoai" type="tel" class="form-control"
-                                value="{{ Auth::user()->sodienthoai ?? '' }}" placeholder="Nhập số điện thoại ..." required {{Auth::check() ? 'readonly' : ''}}>
+                                value="{{ Auth::user()->sodienthoai ?? '' }}" placeholder="Nhập số điện thoại ..." required />
                         </div>
                         <div class="form-item">
                             <label class="form-label my-3">Email<sup>*</sup></label>
                             <input type="email" name="email" class="form-control"
-                                value="{{ Auth::user()->email ?? '' }}" placeholder="Nhập email ..." required {{Auth::check() ? 'readonly' : ''}}>
+                                value="{{ Auth::user()->email ?? '' }}" placeholder="Nhập email ..." required />
                         </div>
                         <hr>
                         @if (Auth::user())

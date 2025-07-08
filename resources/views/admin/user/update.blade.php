@@ -51,7 +51,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Giới tính</label>
-                                <select class="form-control" name="gioitinh">
+                                <select class="form-control form-select" name="gioitinh">
                                     <option value="1" {{ $user->gioitinh == '1' ? 'selected' : '' }}>Nam</option>
                                     <option value="0" {{ $user->gioitinh == '0' ? 'selected' : '' }}>Nữ</option>
                                 </select>
@@ -73,7 +73,7 @@
 
                             <div class="form-group col-md-6">
                                 <label>Vai trò</label>
-                                <select class="form-control" name="role" >
+                                <select class="form-control form-select" name="role" >
                                     <option value="0" {{ $user->role == '0' ? 'selected' : '' }}>Khách hàng</option>
                                     <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>Admin</option>
                                 </select>

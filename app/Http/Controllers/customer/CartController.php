@@ -33,6 +33,8 @@ class CartController extends Controller
                     $dh->trangthaidh='';
                     $dh->tongtien=0;
                     $dh->diachi='';
+                    $dh->tennguoidung='';
+                    $dh->sodienthoai='';
                     $dh->save();
                 }
                 foreach($cart as $item){

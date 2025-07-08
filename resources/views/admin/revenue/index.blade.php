@@ -127,7 +127,7 @@
             </div>
             <div class="col-md-7 card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <div class="card-title mb-0">Doanh thu theo tháng</div>
+                        <div class="card-title mb-0">Top 5 sản phẩm bán chạy theo tháng</div>
                         <div class="me-0">
                             <label for="monthSelect">Chọn tháng:</label>
                             <input type="month" id="monthSelect" name="monthSelect">
@@ -155,13 +155,13 @@
                         </th>
                     </tr>
                     <tbody id="showKQ">
-                        @php
+                        {{-- @php
                             $tongdoanhthu = 0;
-                        @endphp
+                        @endphp --}}
                         @foreach ($spbc as $sp)
-                            @php
+                            {{-- @php
                                 $tongdoanhthu += $sp->dongia * $sp->tongsoluong;
-                            @endphp
+                            @endphp --}}
                             <tr>
                                 <td><img src="{{ asset('customer/assets/img/' . $sp->hinh) }}" alt=""
                                         class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;"></td>
@@ -175,14 +175,14 @@
                         @endforeach
 
                     </tbody>
-                    <tr>
-                        <td id="lastRow" colspan="6">
+                    {{-- <tr id="lastRow">
+                        <td colspan="6">
                             <div class="d-flex justify-content-between">
                                 <strong>Tổng doanh thu kiếm trong tháng:</strong>
-                                <span id="lastTotal">{{ number_format($tongdoanhthu, 0, ',', '.') }} VNĐ</span>
+                                <span>{{ number_format($tongdoanhthu, 0, ',', '.') }} VNĐ</span>
                             </div>
                         </td>
-                    </tr>
+                    </tr> --}}
                 </table>
             </div>
         </div>

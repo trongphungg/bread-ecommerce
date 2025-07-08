@@ -29,20 +29,23 @@ class SocialiteController extends Controller
                     ->stateless()
                     ->user();
 
-            $nguoidung = nguoidung::updateOrCreate([
-                'google_id'=> $googleUser->id,
-            ],[
+            $nguoidung = nguoidung::where('email',$googleUser->email)->first();
+            if(!$nguoidung){
+                $nguoidung = nguoidung::create([
                 'tennguoidung' => $googleUser->name,
-                'gioitinh' => '',
+                'gioitinh' => 0,
                 'ngaysinh' => date('Y-m-d'),
                 'sodienthoai' => ' ',
                 'diachi' => ' ',
                 'role'=>0,
                 'facebook_id' => '',
-                'email' => $googleUser->email,
                 'password' => '',
+                'google_id'=> $googleUser->id,
+                'email' => $googleUser->email
             ]);
             DB::commit();
+            }
+            
             Auth::login($nguoidung);
             return redirect('/');
         }

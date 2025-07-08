@@ -11,7 +11,8 @@ use App\Models\chitietdonhang;
 class OrderController extends Controller
 {
     public function index(){
-        $dsdh = donhang::paginate(5);
+        $dsdh = donhang::where('trangthaidh','!=','')
+        ->paginate(5);
         return view('admin.order.index',compact('dsdh'));
     }
 

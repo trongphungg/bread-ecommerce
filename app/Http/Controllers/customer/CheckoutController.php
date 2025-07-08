@@ -37,23 +37,18 @@ class CheckoutController extends Controller
                                 'trangthaidh' => "CXN",
                                 'tongtien' => $request->input('Tongtien'),
                                 'diachi' => $diachi,
+                                'tennguoidung'=> $request->tennguoidung,
+                                'sodienthoai'=> $request->sodienthoai
                             ]);
         }
         else{
-                $nguoidung = new nguoidung();
-                $nguoidung->tennguoidung = $request->tennguoidung;
-                $nguoidung->diachi = $diachi;
-                $nguoidung->sodienthoai = $request->sodienthoai;
-                $nguoidung->email = $request->email;
-                $nguoidung->role = 1;
-                $nguoidung->save();
-                
                 $dh = new donhang();
-                $dh->idnguoidung = $nguoidung->idnguoidung;
                 $dh->ngaylapdh= now();
                 $dh->trangthaidh = 'CXN';
                 $dh->tongtien = $request->input('Tongtien');
                 $dh->diachi = $diachi;
+                $dh->tennguoidung = $request->tennguoidung;
+                $dh->sodienthoai = $request->sodienthoai;
                 $dh->save();
 
                 $cart = session()->get('cart', new \stdClass());
@@ -65,8 +60,10 @@ class CheckoutController extends Controller
                                        'ghichu'=>$item->ghichu
                                    ]
                                );
-                // $pub->xoaNguyenlieu($item);
+                $pub->xoaNguyenlieu($item);
                }
+
+            $pub->tinhSoLuongBanhMi();
         }
         session()->put('cart', new \stdClass()); 
         return redirect('/');

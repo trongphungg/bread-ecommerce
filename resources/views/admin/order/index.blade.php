@@ -34,14 +34,13 @@
               <td></td>
           </tr>
           @foreach($dsdh as $dh)
-          @if($dh->trangthaidh != "")
           <tr>
               <td>{{$dh->iddonhang}}</td>
               <td>
-                {{$dh->nguoidung->tennguoidung}}
+                {{$dh->tennguoidung}}
               </td>
               <td>
-                {{$dh->nguoidung->sodienthoai}}
+                {{$dh->sodienthoai}}
               </td>
               <td>{{\Carbon\Carbon::parse($dh->ngaylapdh)->format('d/m/Y')}}</td>
               <td>
@@ -78,7 +77,6 @@
                   </form>
               </td>
           </tr>
-          @endif
           @endforeach
         </table>
        <div>
