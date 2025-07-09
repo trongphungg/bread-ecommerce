@@ -48,11 +48,11 @@
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center mx-auto mb-5" style="max-width: 700px;">
-                <h1 class="display-4">Nguyễn Văn Phong</h1>
+                <h1 class="display-4">Sản phẩm bán chạy</h1>
                 <p>Bánh mì thơm ngon, đa dạng hương vị, được làm từ nguyên liệu tươi mới mỗi ngày. 
                     Thưởng thức sự hoàn hảo trong từng ổ bánh!</p>
             </div>
-            <div class="row g-4">
+            <div class="row g-2">
                 @foreach($dsbm as $bm)
                 <div class="col-lg-6 col-xl-4">
                     <div class="p-4 rounded bg-light">
@@ -90,6 +90,29 @@
     </div>
     <!-- Bestsaler Product End -->
 
+    <div class="container-fluid vesitable">
+            <div class="container">
+                <h1 class="mb-0">Tất cả sản phẩm</h1>
+                <div class="owl-carousel vegetable-carousel justify-content-center">
+                    @foreach($dssanpham as $sp)
+                    <div class="border border-primary rounded position-relative vesitable-item">
+                        <div class="vesitable-img">
+                            <img src="{{ asset('customer/assets/img/'.$sp->hinh) }}" class="img-fluid w-100 rounded-top" alt="">
+                        </div>
+                       
+                        <div class="p-4 rounded-bottom">
+                            <h4>{{$sp->tensanpham}}</h4>
+                            <p>{{Str::limit($sp->motasanpham,50)}}</p>
+                            <div class="d-flex justify-content-between flex-lg-wrap">
+                                <p class="text-dark fs-5 fw-bold mb-0">{{number_format($sp->dongia,0,',',',').'VNĐ'}}</p>
+                                <a href="{{ route('detail', $sp->idsanpham) }}" class="btn border border-secondary rounded-pill px-3 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i>Xem chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
             <!-- Fact Start -->
         <div class="container-fluid py-5">
             <div class="container">
@@ -173,6 +196,5 @@
             </div>
         </div>
         <!-- End opinion -->
-
         
 @endsection

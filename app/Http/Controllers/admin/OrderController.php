@@ -12,6 +12,7 @@ class OrderController extends Controller
 {
     public function index(){
         $dsdh = donhang::where('trangthaidh','!=','')
+        ->orderBy('ngaylapdh', 'desc')
         ->paginate(5);
         return view('admin.order.index',compact('dsdh'));
     }

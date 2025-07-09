@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\donhang;
 use App\Models\chitietdonhang;
 use App\Models\sanpham;
+use App\Models\nguyenlieu;
+use App\Models\congthuc;
+use App\Models\nguoidung;
 use Illuminate\Support\Facades\DB;
 
 
@@ -60,20 +63,26 @@ class RevenueController extends Controller
         ->limit(5)
         ->get();
         
-        //Bộ lọc
-        $years = DB::table('donhang')
-                ->select(DB::raw('YEAR(ngaylapdh) as year'))
-                ->distinct()
-                ->orderBy('year', 'desc')
-                ->pluck('year');
 
 
         //Đơn hàng gần đây
-        $dsdh = donhang::where('trangthaidh','!=','')
+        $dhgd = donhang::where('trangthaidh','!=','')
         ->orderBy('ngaylapdh', 'desc')
+        ->limit(7)
         ->get();
 
-        
+        $dsdh = donhang::where('trangthaidh','!=','')
+                        ->get();
+
+        //Danh sách sản phẩm
+        $dssp = sanpham::orderBy('soluong','asc')
+        ->limit(7)
+        ->get();
+
+        //Danh sách công thức
+        $dsct = congthuc::all();
+
+        $dsnd = nguoidung::all();
 
 
         $colors = [];
@@ -81,7 +90,7 @@ class RevenueController extends Controller
         $colors[] = 'rgba(' . rand(100,255) . ',' . rand(100,255) . ',' . rand(100,255) . ', 1)';
 }
 
-        return view('admin.revenue.index',compact('labels','data','productLabels','productData','colors','labelsMonth','dataMonth','spbc','dsdh','years'));
+        return view('admin.revenue.index',compact('labels','data','productLabels','productData','colors','dsct','dsdh','dsnd','dssp','labelsMonth','dataMonth','spbc','dhgd'));
     }
 
     public function filter(Request $request){

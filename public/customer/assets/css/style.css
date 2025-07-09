@@ -224,7 +224,9 @@
 /*** End Hero ***/
 
 /*** testimonial Start ***/
-.testimonial .owl-nav .owl-prev {
+.testimonial .owl-nav .owl-prev,
+.vesitable .owl-nav .owl-prev
+ {
     position: absolute;
     top: -58px;
     right: 0;
@@ -235,12 +237,14 @@
     transition: 0.5s;
 }
 
-.testimonial .owl-nav .owl-prev:hover {
+.testimonial .owl-nav .owl-prev:hover,
+.vesitable .owl-nav .owl-prev:hover {
     background: var(--bs-secondary);
     color: var(--bs-white);
 }
 
-.testimonial .owl-nav .owl-next {
+.testimonial .owl-nav .owl-next,
+.vesitable .owl-nav .owl-next {
     position: absolute;
     top: -58px;
     right: 88px;
@@ -251,11 +255,13 @@
     transition: 0.5s;
 }
 
-.testimonial .owl-nav .owl-next:hover {
+.testimonial .owl-nav .owl-next:hover,
+.vesitable .owl-nav .owl-next:hover {
     background: var(--bs-secondary);
     color: var(--bs-white);
 }
-.testimonial-item {
+.testimonial-item,
+.vesitable-item {
     height: 300px;
 }
 /*** testimonial End ***/

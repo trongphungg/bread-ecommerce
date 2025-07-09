@@ -13,6 +13,8 @@
     <link href="{{ asset ('customer/assets/css/style.css')}}" rel="stylesheet">
     <link href="{{asset('customer/assets/css/bootstrap.min.css')}}" rel="stylesheet">
 
+
+
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="{{asset('customer/assets/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
@@ -35,5 +37,7 @@
 
     {{-- Introjs --}}
     <script src="https://cdn.jsdelivr.net/npm/intro.js/minified/intro.min.js"></script>
+
+    
 </body>
 </html>

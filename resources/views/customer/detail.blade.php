@@ -6,7 +6,7 @@
     </div>
     <div class="container py-5">
         <div class="row g-4 mb-5">
-            <div class="col-lg-8 col-xl-9">
+            <div class="col-lg-8 col-xl-9" id="productForm">
                 <form id="form{{ $sanpham->idsanpham }}">
                     <div class="row g-4">
                         <input type="hidden" value="{{ $sanpham->idsanpham }}" id="productId">
@@ -45,10 +45,20 @@
                                     </button>
                                 </div>
                             </div>
-                            <button type="submit"
-                                class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
-                            </button>
+                            @if ($sanpham->trangthai == 0 || $sanpham->soluong <= 0)
+                                {{-- Sản phẩm hết --}}
+                                <span
+                                    class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger bg-light d-inline-flex align-items-center disabled"
+                                    style="cursor: not-allowed;">
+                                    <i class="fa fa-exclamation-triangle me-2 text-danger"></i> Hết hàng
+                                </span>
+                            @else
+                                {{-- Nút thêm vào giỏ --}}
+                                <button type="submit"
+                                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </form>
@@ -90,13 +100,15 @@
                         </div>
                     </div> --}}
                     {{-- Đánh giá --}}
-                    <div class="tab-content mb-5"> 
+                    <div class="tab-content mb-5">
                         <div class="tab-pane active" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                             <!-- mở tab-pane -->
                             @foreach ($dsdg as $d)
                                 @if ($d->trangthaidg == 1)
                                     <div class="d-flex mb-4 border-bottom pb-3">
-                                        <img src="{{ asset('customer/assets/img/avatar.jpg') }}" class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;" alt="">
+                                        <img src="{{ asset('customer/assets/img/avatar.jpg') }}"
+                                            class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;"
+                                            alt="">
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
                                                 <h5 class="mb-0">{{ $d->nguoidung->tennguoidung }}</h5>
@@ -111,11 +123,11 @@
                                             </div>
                                             <p class="mb-0" style="font-size: 15px;">{{ $d->danhgia }}</p>
                                         </div>
-                                    </div> 
+                                    </div>
                                 @endif
                             @endforeach
-                        </div> 
-                    </div> 
+                        </div>
+                    </div>
                     {{-- Kết thúc đánh --}}
 
                 </div>
@@ -150,7 +162,8 @@
                                     @endfor
                                 </div>
                             </div>
-                            <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3">
+                            <button type="submit"
+                                class="btn border border-secondary text-primary rounded-pill px-4 py-3">
                                 Đánh giá
                             </button>
                         </div>

@@ -48,11 +48,6 @@
                                 </span>
                             @endif
 
-                            @if (session('error'))
-                                <span class="login-alert fs-6 text-danger">
-                                    {{ session('error') }}
-                                </span>
-                            @endif
                             <button type="submit" class="login-btn">Đăng nhập</button>
                             @if ($errors->has('google_login'))
                                 <span class="login-alert fs-6">

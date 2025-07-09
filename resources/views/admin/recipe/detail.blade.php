@@ -12,7 +12,7 @@
             </div>
           <table class="mt-3 table table-hover">
             <tr>
-                <td>Mã công thức</td>
+                <td>Số thứ tự</td>
                 <td>Tên nguyên liệu</td>
                 <td>Số lượng</td>
                 <td>Đơn vị tính</td>
@@ -21,7 +21,7 @@
             </tr>
             @foreach($dsct as $ct)
             <tr>
-                <td>{{$ct->idcongthuc}}</td>
+                <td>{{$loop->iteration}}</td>
                 <td>{{$ct->nguyenlieu->tennguyenlieu}}</td>
                 <td>{{$ct->soluong}}</td>
                 <td>{{$ct->nguyenlieu->donvitinh}}</td>

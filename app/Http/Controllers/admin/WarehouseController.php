@@ -50,6 +50,7 @@ class WarehouseController extends Controller
             $nguyenlieu = nguyenlieu::where('idnguyenlieu',$idnguyenlieu)->first();
             $nguyenlieu->soluongton += $validated['soluong'][$index];
             $nguyenlieu->dongia = round($validated['tongtien'][$index]/$validated['soluong'][$index]);
+            $nguyenlieu->ngaynhap = now();
             $nguyenlieu->update(); 
         }
 

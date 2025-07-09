@@ -34,23 +34,57 @@ class PublicService
     }
 
     foreach ($ketQua as $idsanpham => $soluong) {
-    DB::table('sanpham')
+        
+    $currentStatus = DB::table('sanpham')
         ->where('idsanpham', $idsanpham)
-        ->update(['soluong' => $soluong]);
+        ->value('trangthai');
+
+    if ($soluong > 0 && $currentStatus == 0) {
+        DB::table('sanpham')
+            ->where('idsanpham', $idsanpham)
+            ->update([
+                'soluong' => $soluong,
+                'trangthai' => 1
+            ]);
+    } else {
+        DB::table('sanpham')
+            ->where('idsanpham', $idsanpham)
+            ->update(['soluong' => $soluong]);
+    }
 }
+
 }
 
 function xoaNguyenlieu($item){
+
     $ct = DB::table('congthuc')
     ->where('idsanpham', $item->idsanpham)
     ->get();
 
+
+      $hetNguyenLieu = false;
     foreach ($ct as $a) {
     $tongLuong = $item->soluongsp * $a->soluong; 
 
     DB::table('nguyenlieu')
         ->where('idnguyenlieu', $a->idnguyenlieu)
         ->decrement('soluongton', $tongLuong);
+
+        $nlTon = DB::table('nguyenlieu')
+            ->where('idnguyenlieu', $a->idnguyenlieu)
+            ->value('soluongton');
+
+        if ($nlTon <= 0) {
+            $hetNguyenLieu = true;
+        }
+        }
+        if ($hetNguyenLieu) {
+            DB::table('sanpham')
+                ->where('idsanpham', $item->idsanpham)
+                ->update(['trangthai' => 0]);
+    }
+
+    $this->tinhSoLuongBanhMi();
 }
-}
+
 }

@@ -38,7 +38,11 @@ class RecipeController extends Controller
                 $congthuc->idnguyenlieu = $idnguyenlieu;
                 $congthuc->soluong = $validated['soluong'][$index];
                 $congthuc->save();
-            }
+            } else {
+            // Nếu đã tồn tại, cộng dồn số lượng nguyên liệu
+            $existingRecord->soluong += $validated['soluong'][$index];
+            $existingRecord->save();
+        }
         }
 
         $pub->tinhSoLuongBanhMi();

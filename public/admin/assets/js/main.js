@@ -3,7 +3,22 @@ let data = [];
 async function fetchNguyenlieu() {
     const response = await fetch('http://127.0.0.1:8000/api/nguyenlieu');
     const result = await response.json();
-    data = result.dsnl; // Lưu dữ liệu vào biến data (giả sử dữ liệu trả về từ API là { dsnl: [...] })
+    data = result.dsnl;
+
+    data.sort((a, b) => {
+        // Chuyển cả hai tên về chữ thường để sắp xếp chính xác
+        const nameA = a.tennguyenlieu.toLowerCase();
+        const nameB = b.tennguyenlieu.toLowerCase();
+
+        // So sánh tên nguyên liệu
+        if (nameA < nameB) {
+            return -1; // a trước b
+        }
+        if (nameA > nameB) {
+            return 1; // b trước a
+        }
+        return 0; // bằng nhau
+    });
 }
 
 function addRow() {
@@ -114,13 +129,10 @@ async function loadDistricts() {
 
   //Doanh thu
 document.addEventListener('DOMContentLoaded', function () {
-
-
-
-  const formattedLabels = chartLabels.map(dateStr => {
-    const parts = dateStr.split('-');
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-  });
+  // const formattedLabels = chartLabels.map(dateStr => {
+  //   const parts = dateStr.split('-');
+  //   return `${parts[2]}/${parts[1]}/${parts[0]}`;
+  // });
   const ctx = document.getElementById('myChart');
   new Chart(ctx, {
     type: 'line',

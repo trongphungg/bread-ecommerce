@@ -77,7 +77,7 @@ class CartController extends Controller
                 'dongia' => $request->dongia,
                 'soluongsp' => $request->soluongsp,
                 'hinh' => $request->hinh,
-                'ghichu'=>''
+                'ghichu'=>'Đầy đủ'
             ];
         }
         session()->put('cart',$cart);

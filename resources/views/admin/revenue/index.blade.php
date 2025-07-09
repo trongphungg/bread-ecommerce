@@ -15,7 +15,7 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Số lượng người dùng</p>
-                                        <h4 class="card-title">1,294</h4>
+                                        <h4 class="card-title">{{$dsnd->count()}}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                 <div class="col col-stats ms-3 ms-sm-0">
                                     <div class="numbers">
                                         <p class="card-category">Tổng đơn hàng</p>
-                                        <h4 class="card-title">{{ $dsdh->count() }}</h4>
+                                        <h4 class="card-title">{{ $dsdh->count() }} <span class="text-success small position-absolute" style="right: 10px; bottom: 10px;"> {{$dsdh->where('trangthaidh','HT')->count()}} đơn đã thanh toán</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($dsdh as $dh)
+                                @foreach ($dhgd as $dh)
                                     <tr>
                                         <td>#{{ $dh->iddonhang }}</td>
                                         <td>{{ \Carbon\Carbon::parse($dh->ngaylapdh)->format('d/m/Y') }}</td>
@@ -244,7 +244,46 @@
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div class="card-title mb-0">Danh sách sản phẩm sắp hết</div>
+                        <a href="{{ route('ingredientIndex') }}" class="me-0 btn btn-outline-primary"> Xem tất cả</a>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã sản phẩm</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Số lượng còn</th>
+                                    <th scope="col">Nguyên liệu cần</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dssp as $sp)
+                                    <tr>
+                                        <td>#{{ $sp->idsanpham }}</td>
+                                        <td>{{$sp->tensanpham}}</td>
+                                        <td>{{$sp->soluong}}</td>
+                                        <td>
+                                            @php
+                $nguyenlieus = [];
+                foreach ($dsct as $ct) {
+                    if ($ct->idsanpham == $sp->idsanpham) {
+                        $nguyenlieus[] = $ct->nguyenlieu->tennguyenlieu;
+                    }
+                }
+                echo implode(', ', $nguyenlieus);
+            @endphp
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             {{-- <div class="col-md-4">
                 <div class="card">

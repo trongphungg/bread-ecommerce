@@ -28,8 +28,9 @@
                 <td>Mã sản phẩm</td>
                 <td>Tên sản phẩm</td>
                 <td>Đơn giá</td>
-                <td>Số lượng sản phẩm</td>
+                <td>Số lượng</td>
                 <td>Đơn vị tính</td>
+                <td>Ghi chú</td>
                 <td>Thành tiền</td>
             </tr>
             @foreach($ctdh as $v)
@@ -43,6 +44,7 @@
                     <td>
                         {{$v->sanpham->donvitinh}}
                     </td>
+                    <td>{{$v->ghichu}}</td>
                     <td>{{number_format($v->sanpham->dongia *$v->soluongsp,0,',','.')}} VNĐ</td>
                 </tr>
             @endforeach

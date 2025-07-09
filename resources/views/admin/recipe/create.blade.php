@@ -23,7 +23,7 @@
             </tbody>
         </table>
 
-        <button type="submit" class="btn btn-primary">Nhập kho</button>
+        <button type="submit" class="btn btn-primary">Thêm công thức</button>
     </form>
          <div>
           <div>

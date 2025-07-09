@@ -11,7 +11,7 @@ use App\Models\ykien;
 class HomeController extends Controller
 {
     public function index(){
-        $sanpham = sanpham::all();
+        $dssanpham = sanpham::all();
         $dssp = sanpham::inRandomOrder()
                         ->get();
         $dsbm = sanpham::where('idloaisanpham',1)
@@ -23,6 +23,6 @@ class HomeController extends Controller
                         ->take(3)
                         ->get();
         $dsyk = ykien::all();
-        return view('customer.home',compact('sanpham','dsbm','dsbb','dsyk'));
+        return view('customer.home',compact('dssanpham','dsbm','dsbb','dsyk'));
     }
 }

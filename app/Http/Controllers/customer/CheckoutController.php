@@ -11,6 +11,10 @@ use App\Models\donhang;
 use App\Models\chitietdonhang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use App\Mail\CheckoutSuccess;
+
+
 
 class CheckoutController extends Controller
 {
@@ -21,6 +25,23 @@ class CheckoutController extends Controller
     }
 
     public function finish(Request $request,PublicService $pub){
+        $cart = session()->get('cart', new \stdClass());
+
+        if (empty((array) $cart)) {
+        return redirect()->back()->with('error', 'Giỏ hàng đang trống. Vui lòng chọn sản phẩm trước khi đặt.');
+    }
+
+    DB::beginTransaction();
+// Bước 1: Kiểm tra tồn kho trước
+foreach ($cart as $item) {
+    $sanpham = sanpham::find($item->idsanpham);
+        if (!$sanpham) {
+            return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
+        }
+    if ($sanpham->soluong < $item->soluongsp) {
+        return redirect()->back()->with('error', 'Sản phẩm ' . $sanpham->tensanpham . ' hiện tại đã hết. Mời bạn thay đổi sản phẩm. Chúng tôi xin lỗi vì sự bất tiện này');
+    }
+}
         if($request->diachigiao) 
             $diachi = $request->diachigiao;
         else 
@@ -30,6 +51,7 @@ class CheckoutController extends Controller
             $id_dh = donhang::where('idnguoidung',$id)
                             ->where('trangthaidh','')
                             ->first();
+            $ctdh = chitietdonhang::where('iddonhang',$id_dh->iddonhang)->get();
             $dh = donhang::where('idnguoidung',$id)
                             ->where('trangthaidh','')
                             ->update([
@@ -50,8 +72,6 @@ class CheckoutController extends Controller
                 $dh->tennguoidung = $request->tennguoidung;
                 $dh->sodienthoai = $request->sodienthoai;
                 $dh->save();
-
-                $cart = session()->get('cart', new \stdClass());
                 foreach ($cart as $item) {
                     DB::table('chitietdonhang')->updateOrInsert(
                                    ['idsanpham' => $item->idsanpham, 'iddonhang' => $dh->iddonhang], 
@@ -60,12 +80,21 @@ class CheckoutController extends Controller
                                        'ghichu'=>$item->ghichu
                                    ]
                                );
-                $pub->xoaNguyenlieu($item);
                }
-
-            $pub->tinhSoLuongBanhMi();
+               $ctdh = chitietdonhang::where('iddonhang',$dh->iddonhang)->get();
         }
+        foreach($cart as $item){
+            $pub->xoaNguyenlieu($item);
+        }
+        
+
+        $ten = $request->tennguoidung;
+        Mail::to($request->email)->send(new CheckoutSuccess($ten,$ctdh,$diachi));
+
         session()->put('cart', new \stdClass()); 
+
+        DB::commit();
+        
         return redirect('/');
     }
 }
