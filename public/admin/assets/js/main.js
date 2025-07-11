@@ -39,12 +39,12 @@ function addRow() {
             <td>
                 <select name="idnguyenlieu[]" class="form-control nguyenlieu-select" required>
                     <option value="">-- Chọn nguyên liệu --</option>
-                    ${selectOptions} <!-- Các option sẽ được chèn vào đây -->
+                    ${selectOptions}
                 </select>
             </td>
             <td><input name="soluong[]" class="form-control" type="number" required></td>
             <td><input name="donvitinh[]" class="form-control" required></td>
-            ${showTongTien ? '<td><input name="tongtien[]" class="form-control" required></td>' : ''} <!-- Nếu cần thì hiển thị ô tổng tiền -->
+            ${showTongTien ? '<td><input name="tongtien[]" class="form-control" oninput="handleCurrencyInput(this)" required></td>' : ''} <!-- Nếu cần thì hiển thị ô tổng tiền -->
             <td><button type="button" onclick="removeRow(this)" class="btn btn-danger btn-sm">-</button></td>
         </tr>
     `;
@@ -62,7 +62,41 @@ fetchNguyenlieu().then(() => {
 
 function removeRow(button) {
     button.closest('tr').remove();
+    updateTongTien();
 }
+
+function updateTongTien() {
+    const tongTienInputs = document.querySelectorAll('input[name="tongtien[]"]');
+    let tong = 0;
+
+    tongTienInputs.forEach(input => {
+        const val = parseFloat(input.value.replace(/[^\d.-]/g, '')); 
+        if (!isNaN(val)) tong += val;
+    });
+
+    const totalField = document.getElementById('total');
+    totalField.value = tong.toLocaleString('vi-VN') + ' VNĐ';
+}
+
+
+
+function handleCurrencyInput(input) {
+    let value = input.value.replace(/[^\d]/g, '');
+    if (value === '') {
+        input.value = '';
+    } else {
+        input.value = new Intl.NumberFormat('vi-VN').format(value) + ' VNĐ';
+    }
+    let tong = 0;
+    document.querySelectorAll('input[name="tongtien[]"]').forEach(item => {
+        const val = parseFloat(item.value.replace(/[^\d]/g, ''));
+        if (!isNaN(val)) tong += val;
+    });
+    const totalField = document.getElementById('total');
+    if (totalField) {
+        totalField.value = tong.toLocaleString('vi-VN') + ' VNĐ';
+    }
+  }
 
 document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('change', function (e) {
@@ -303,3 +337,12 @@ async function fetchTop5(){
             //  document.getElementById('lastRow').innerHTML = ``;
           }
   })
+
+
+
+  document.getElementById('warehouseForm').addEventListener('submit', function(e) {
+    let input = document.getElementById('ghichu');
+    if (input.text.trim() === '') {
+      input.text = input.placeholder;
+    }
+  });

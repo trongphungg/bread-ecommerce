@@ -50,9 +50,9 @@
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Loại chính sách</label>
                             <select class="form-select" name="loaichinhsach" required>
-                                <option value="Bảo mật">Bảo mật</option>
-                                <option value="Chính sách khách hàng">Chính sách khách hàng</option>
-                                <option value="Vận chuyển">Vận chuyển</option>
+                                @foreach($dslcs as $cs)
+                                <option value="{{$cs->idloaichinhsach}}">{{$cs->tenloai}}</option>
+                                @endforeach
                             </select>
                         </div>
                         

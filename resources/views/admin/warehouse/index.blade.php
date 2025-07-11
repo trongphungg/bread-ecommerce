@@ -13,24 +13,20 @@
           <table class="mt-3 table table-hover">
             <tr>
                 <td>Mã nhập kho</td>
-                <td>Tên nguyên liệu</td>
-                <td>Số lượng</td>
-                <td>Đơn vị tính</td>
-                <td>Tổng tiền</td>
+                <td>Ghi chú</td>
                 <td>Ngày nhập</td>
+                <td>Tổng tiền</td>
                 <td></td>
                 <td></td>
             </tr>
             @foreach($dskho as $kho)
             <tr>
                 <td>{{$kho->idkho}}</td>
-                <td>{{$kho->nguyenlieu->tennguyenlieu}}</td>
-                <td>{{$kho->soluong}}</td>
-                <td>{{$kho->donvitinh}}</td>
-                <td>{{number_format($kho->tongtien,0,',','.').'VNĐ'}}</td>
+                <td>{{$kho->ghichu}}</td>
                 <td>{{\Carbon\Carbon::parse($kho->ngaynhap)->format('d/m/Y')}}</td>
+                <td>{{number_format($kho->tongtien,0,',','.').'VNĐ'}}</td>
                 <td>
-                    <form action="" method="POST"
+                    <form action="{{route('details',$kho->idkho)}}" method="POST"
                         style="display: inline;">
                             @csrf
                             <button type="submit" style="background:none; border:none; cursor:pointer;">

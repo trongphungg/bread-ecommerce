@@ -203,6 +203,8 @@ Route::middleware([ AdminMiddleware::class])->group(function() {
     ->name('warehouseCreate');
     Route::post('/warehouse/handleCreate',[WarehouseController::class,'handleCreate'])
     ->name('handleCreateWarehouse');
+    Route::post('/warehouse/details/{id}',[WarehouseController::class,'details'])
+    ->name('details');
 
     //Ingredient
     Route::get('/ingredients',[IngredientController::class,'index'])

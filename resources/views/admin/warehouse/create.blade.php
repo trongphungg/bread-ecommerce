@@ -9,8 +9,26 @@
       <div class="row">
         <div class="card">
             
-            <form action="{{route('handleCreateWarehouse')}}" method="POST">
+            <form id="warehouseForm" action="{{route('handleCreateWarehouse')}}" method="POST">
         @csrf
+        <div class="row py-4">
+        <div class="col-md-6">
+            <label for="ghichu" class="form-label fw-semibold">Ghi chú về đơn hàng</label>
+            <input type="text"
+                   class="form-control"
+                   name="ghichu"
+                   id="ghichu"
+                  value="Phiếu nhập ngày {{ \Carbon\Carbon::parse($date)->format('d/m/Y') }}"></input>
+        </div>
+        <div class="col-md-6">
+            <label for="total" class="form-label fw-semibold">Tổng tiền</label>
+            <input type="text"
+                   class="form-control"
+                   name="total"
+                   id="total"
+                   placeholder="0 VNĐ"
+                   readonly />
+        </div>
         <table class="table table-bordered" id="nguyenlieuTable">
             <thead>
                 <tr>
@@ -36,4 +54,14 @@
       </div>
     </div>
 </div>
+
+<script>
+  function fillPlaceholderIfEmpty() {
+    let input = document.getElementById('ghichu');
+    if (input.value.trim() === '') {
+      input.value = input.placeholder;
+    }
+    return true; 
+  }
+</script>
 @endsection

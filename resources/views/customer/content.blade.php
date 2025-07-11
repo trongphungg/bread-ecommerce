@@ -41,7 +41,7 @@
                                     <i class="fas fa-shipping-fast text-primary fa-2x me-3"></i>
                                     <div>
                                         <h5 class="mb-1">Giao hàng nhanh chóng</h5>
-                                        <span class="text-muted small">Trên toàn quốc</span>
+                                        {{-- <span class="text-muted small">Trên toàn quốc</span> --}}
                                     </div>
                                 </div>
                             </div>

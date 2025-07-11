@@ -9,5 +9,10 @@ class chinhsach extends Model
     protected $table = 'chinhsach';
     public $timestamps = false;
     protected $primaryKey = 'idchinhsach';        
-    public $incrementing = true;   
+    public $incrementing = true;
+
+    public function loaichinhsach()
+    {
+        return $this->belongsTo(loaichinhsach::class, 'idloaichinhsach', 'idloaichinhsach');
+    }
 }

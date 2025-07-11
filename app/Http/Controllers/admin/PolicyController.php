@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\chinhsach;
+use App\Models\loaichinhsach;
 
 class PolicyController extends Controller
 {
@@ -14,12 +15,14 @@ class PolicyController extends Controller
     }
 
     public function create(){
-        return view('admin.policy.create');
+        $dslcs = loaichinhsach::all();
+        return view('admin.policy.create',compact('dslcs'));
     }
 
     public function view(){
         $dscs = chinhsach::all();
-        return view('customer.policy',compact('dscs'));
+        $dslcs = loaichinhsach::all();
+        return view('customer.policy',compact('dscs','dslcs'));
     }
 
     public function handleCreate(Request $request){
@@ -34,7 +37,8 @@ class PolicyController extends Controller
 
     public function update($id){
         $cs = chinhsach::where('idchinhsach',$id)->first();
-        return view('admin.policy.update',compact('cs'));
+        $dslcs = loaichinhsach::all();
+        return view('admin.policy.update',compact('cs','dslcs'));
     }
 
     public function handleUpdate(Request $request,$id){

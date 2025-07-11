@@ -7,10 +7,10 @@
                 <div class="bg-light p-4 mb-4 sticky-top" style="top: 100px;">
                     <h4 class="mb-3">Loại chính sách</h4>
                     <ul class="list-unstyled policy-categories">
-                        @foreach($dscs as $cs)
+                        @foreach($dslcs as $lcs)
                         <li class="mb-2">
-                            <a href="#policy-{{$cs->idchinhsach}}" class="d-flex justify-content-between align-items-center">
-                                <span><i class="fa fa-chevron-right me-2"></i>{{$cs->loaichinhsach}}</span>
+                            <a href="#policy-{{$lcs->idloaichinhsach}}" class="d-flex justify-content-between align-items-center">
+                                <span><i class="fa fa-chevron-right me-2"></i>{{$lcs->tenloai}}</span>
                             </a>
                         </li>
                         @endforeach
@@ -20,7 +20,7 @@
 
             <div class="col-lg-9">
                 @foreach($dscs as $cs)
-                <div class="bg-light p-4 mb-4" id="policy-{{$cs->idchinhsach}}" style="scroll-margin-top: 100px;">
+                <div class="bg-light p-4 mb-4" id="policy-{{$cs->idloaichinhsach}}" style="scroll-margin-top: 100px;">
                     <div class="policy-header mb-4">
                         <h2 class="mb-3">{{$cs->tenchinhsach}}</h2>
                         <div class="text-muted">
@@ -30,7 +30,7 @@
 
                     <div class="policy-type mb-4">
                         <h5>Loại chính sách:</h5>
-                        <span class="badge bg-primary">{{$cs->loaichinhsach}}</span>
+                        <span class="badge bg-primary">{{$cs->loaichinhsach->tenloai}}</span>
                     </div>
 
                     <div class="policy-description">

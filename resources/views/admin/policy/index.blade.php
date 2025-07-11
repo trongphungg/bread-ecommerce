@@ -31,7 +31,7 @@
                   {{$cs->mota}}
                 </td>
                 <td>
-                  {{$cs->loaichinhsach}}
+                  {{$cs->loaichinhsach->tenloai}}
                 </td>
                 <td>
                     <form action="{{route('policyUpdate',$cs->idchinhsach)}}" method="POST"

@@ -17,6 +17,7 @@
                 <td>Đơn vị tính</td>
                 <td>Đơn giá</td>
                 <td>Số lượng tồn</td>
+                <td>Ngày nhập</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -27,6 +28,7 @@
                 <td>{{$nl->donvitinh}}</td>
                 <td>{{$nl->dongia}}</td>
                 <td>{{$nl->soluongton}}</td>
+                <td>{{\Carbon\Carbon::parse($nl->ngaynhap)->format('d/m/Y')}}</td>
                 <td>
                     <form action="{{route('ingredientUpdate',$nl->idnguyenlieu)}}" method="POST"
                         style="display: inline;">

@@ -19,14 +19,12 @@ class ShopController extends Controller
     public function search(Request $request){
         $query = $request->input('query');
         if(empty($request))
-            $data = sanpham::all();
+            $data = [];
         else
         {
         $data = sanpham::where('tensanpham','like','%'.$query.'%')
                         ->orWhere('idloaisanpham','like','%'.$query.'%')
                         ->get();
-        if ($data->isEmpty()) 
-        $data = sanpham::all();
         }
         return response()->json([
             'data'=>$data

@@ -418,7 +418,11 @@ function searchProducts(query) {
             let productList = document.getElementById('showProducts');
             productList.innerHTML = ''; 
 
-            data.data.forEach(product =>{
+            if(data.data.length == 0){
+                productList.innerHTML = '<p>Không có sản phẩm phù hợp</p>';
+            }
+            else{
+                data.data.forEach(product =>{
                 let truncatedText = product.motasanpham.slice(0, 70)+'...';
                 let amount = product.dongia; 
                 let VND = new Intl.NumberFormat('vi-VN').format(amount);
@@ -442,6 +446,8 @@ function searchProducts(query) {
                 `;
                 productList.innerHTML += productHTML;
             });
+            }
+            
         })
         .catch(error => console.error('Error fetching products:', error));
 }
