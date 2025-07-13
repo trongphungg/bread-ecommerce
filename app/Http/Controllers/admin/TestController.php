@@ -14,7 +14,7 @@ class TestController extends Controller
 {
     function test()
 {
-    $dh = donhang::where('idnguoidung',Auth::user()->idnguoidung)
+    $dh = donhang::where('idkhachhang',Auth::user()->idkhachhang)
                         ->where('trangthaidh',"")
                         ->first();
 

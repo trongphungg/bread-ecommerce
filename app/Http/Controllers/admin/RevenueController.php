@@ -9,7 +9,7 @@ use App\Models\chitietdonhang;
 use App\Models\sanpham;
 use App\Models\nguyenlieu;
 use App\Models\congthuc;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 use Illuminate\Support\Facades\DB;
 
 
@@ -82,7 +82,7 @@ class RevenueController extends Controller
         //Danh sách công thức
         $dsct = congthuc::all();
 
-        $dsnd = nguoidung::all();
+        $dsnd = khachhang::all();
 
 
         $colors = [];

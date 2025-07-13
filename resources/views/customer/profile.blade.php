@@ -21,7 +21,7 @@
                                 <i class="fas fa-user text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Họ và tên</p>
-                                    <h5 class="mb-0">{{ $nguoidung->tennguoidung }}</h5>
+                                    <h5 class="mb-0">{{ $khachhang->tenkhachhang }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -30,7 +30,7 @@
                                 <i class="fas fa-venus-mars text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Giới tính</p>
-                                    <h5 class="mb-0">{{ $nguoidung->gioitinh == 1 ? 'Nam' : 'Nữ' }}</h5>
+                                    <h5 class="mb-0">{{ $khachhang->gioitinh == 1 ? 'Nam' : 'Nữ' }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                 <i class="fas fa-birthday-cake text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Ngày sinh</p>
-                                    <h5 class="mb-0">{{\Carbon\Carbon::parse($nguoidung->ngaysinh)->format('d/m/Y')}}</h5>
+                                    <h5 class="mb-0">{{\Carbon\Carbon::parse($khachhang->ngaysinh)->format('d/m/Y')}}</h5>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 <i class="fas fa-phone text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Số điện thoại</p>
-                                    <h5 class="mb-0">{{ $nguoidung->sodienthoai }}</h5>
+                                    <h5 class="mb-0">{{ $khachhang->sodienthoai }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                 <i class="fas fa-map-marker-alt text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Địa chỉ</p>
-                                    <h5 class="mb-0">{{ $nguoidung->diachi }}</h5>
+                                    <h5 class="mb-0">{{ $khachhang->diachi }}</h5>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 <i class="fas fa-map-marker-alt text-primary me-3 fa-lg"></i>
                                 <div>
                                     <p class="text-muted mb-0">Vai trò</p>
-                                    <h5 class="mb-0">{{ $nguoidung->role == 1 ? 'Quản trị viên' : 'Khách hàng' }}</h5>
+                                    <h5 class="mb-0">{{ $khachhang->role == 1 ? 'Quản trị viên' : 'Khách hàng' }}</h5>
                                 </div>
                             </div>
                         </div>

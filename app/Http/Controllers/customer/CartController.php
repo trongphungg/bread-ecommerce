@@ -22,18 +22,18 @@ class CartController extends Controller
     public function index(){
         $cart = session()->get('cart',new \stdClass());
             if(Auth::user()){
-                $user_id = Auth::user()->idnguoidung;
-                $dh = donhang::where('idnguoidung',$user_id)
+                $user_id = Auth::user()->idkhachhang;
+                $dh = donhang::where('idkhachhang',$user_id)
                                 ->where('trangthaidh','')
                                 ->first();
                 if(!$dh){
                     $dh = new donhang();
-                    $dh->idnguoidung=$user_id;
+                    $dh->idkhachhang=$user_id;
                     $dh->ngaylapdh=now();
                     $dh->trangthaidh='';
                     $dh->tongtien=0;
                     $dh->diachi='';
-                    $dh->tennguoidung='';
+                    $dh->tenkhachhang='';
                     $dh->sodienthoai='';
                     $dh->save();
                 }
@@ -114,7 +114,7 @@ class CartController extends Controller
         unset($cart->{$id});
         session()->put('cart', $cart);
         if (Auth::check()) {
-            $dh = donhang::where('idnguoidung',Auth::user()->idnguoidung)
+            $dh = donhang::where('idkhachhang',Auth::user()->idkhachhang)
                         ->where('trangthaidh',"")
                         ->first();
             DB::table('chitietdonhang')

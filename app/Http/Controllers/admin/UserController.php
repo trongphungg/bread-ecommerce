@@ -4,13 +4,13 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     public function index(){
-        $dsuser = nguoidung::paginate(5);
+        $dsuser = khachhang::paginate(5);
         return view('admin.user.index',compact('dsuser'));
     }
 
@@ -20,22 +20,22 @@ class UserController extends Controller
 
     public function handleCreate(Request $request){
         $diachi = $request->diachi.'-'.$request->quan;
-        $nguoidung = new nguoidung();
-        $nguoidung->tennguoidung = $request->input('tennguoidung');
-        $nguoidung->ngaysinh = $request->input('ngaysinh');
-        $nguoidung->diachi = $diachi;
-        $nguoidung->gioitinh = $request->input('gioitinh');
-        $nguoidung->sodienthoai = $request->input('sodienthoai');
-        $nguoidung->email = $request->input('email');
-        $nguoidung->password = Hash::make($request->input('password'));
-        $nguoidung->role = $request->input('role');
-        $nguoidung->save();
+        $khachhang = new khachhang();
+        $khachhang->tenkhachhang = $request->input('tennguoidung');
+        $khachhang->ngaysinh = $request->input('ngaysinh');
+        $khachhang->diachi = $diachi;
+        $khachhang->gioitinh = $request->input('gioitinh');
+        $khachhang->sodienthoai = $request->input('sodienthoai');
+        $khachhang->email = $request->input('email');
+        $khachhang->password = Hash::make($request->input('password'));
+        $khachhang->role = $request->input('role');
+        $khachhang->save();
 
         return redirect('/users');
     }
 
     public function update($id){
-        $user = nguoidung::where('idnguoidung',$id)->first();
+        $user = khachhang::where('idkhachhang',$id)->first();
         return view('admin.user.update',compact('user'));
     }
 
@@ -43,9 +43,9 @@ class UserController extends Controller
         if($request->diachimoi)
             $diachi = $request->diachimoi;
         else $diachi = $request->diachi;
-        $nguoidung = nguoidung::where('idnguoidung',$id)
+        $khachhang = khachhang::where('idkhachhang',$id)
                             ->update([
-                                'tennguoidung' => $request->tennguoidung,
+                                'tenkhachhang' => $request->tennguoidung,
                                 'ngaysinh' => $request->ngaysinh,
                                 'diachi' =>$diachi,
                                 'gioitinh'=>$request->gioitinh,
@@ -57,7 +57,7 @@ class UserController extends Controller
     }
 
     public function delete($id){
-        $user = nguoidung::where('idnguoidung',$id);
+        $user = khachhang::where('idkhachhang',$id);
         $user->delete();
         return redirect('/users');
     }

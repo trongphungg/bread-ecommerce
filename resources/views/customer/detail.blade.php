@@ -111,7 +111,7 @@
                                             alt="">
                                         <div class="flex-grow-1">
                                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <h5 class="mb-0">{{ $d->nguoidung->tennguoidung }}</h5>
+                                                <h5 class="mb-0">{{ $d->khachhang->tenkhachhang }}</h5>
                                                 <div>
                                                     @for ($i = 0; $i < $d->sodiem; $i++)
                                                         <i class="fas fa-star text-warning me-1"></i>
@@ -136,7 +136,7 @@
                     <form action="{{ route('createReview') }}" method="POST">
                         @csrf
                         <input type="hidden" name="idsanpham" value="{{ $sanpham->idsanpham }}" />
-                        <input type="hidden" name="idnguoidung" value="{{ Auth::user()->idnguoidung }}" />
+                        <input type="hidden" name="idnguoidung" value="{{ Auth::user()->idkhachhang }}" />
 
                         <h4 class="mb-4 fw-bold">Để lại đánh giá về sản phẩm của bạn</h4>
 

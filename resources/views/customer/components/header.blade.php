@@ -58,7 +58,7 @@
                             <div class="dropdown-menu dropdown-menu-end shadow-lg border-0" aria-labelledby="userDropdown" style="min-width: 250px; margin-top: 0.5rem; border-radius: 12px; overflow: hidden;">
                                 @if(Auth::user())
                                 <div class="px-3 py-3 text-muted small text-center border-bottom bg-light">
-                                    Xin chào! {{ Auth::user()->tennguoidung }}
+                                    Xin chào! {{ Auth::user()->tenkhachhang }}
                                 </div>
                                 <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('profileIndex')}}">
                                     <i class="fas fa-user-circle me-3 text-primary"></i>Thông tin</a>

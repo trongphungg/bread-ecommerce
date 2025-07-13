@@ -28,12 +28,12 @@
             <div class="row">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('handleUpdateUser',$user->idnguoidung) }}" method="POST">
+                        <form action="{{ route('handleUpdateUser',$user->idkhachhang) }}" method="POST">
                             @csrf
                             <div class="form-group col-md-6">
                                 <label>Tên người dùng</label>
                                 <input type="text" class="form-control" name="tennguoidung"
-                                    value="{{ $user->tennguoidung }}">
+                                    value="{{ $user->tenkhachhang }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Ngày sinh</label>

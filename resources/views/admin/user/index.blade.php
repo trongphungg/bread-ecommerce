@@ -39,9 +39,9 @@
             @foreach($dsuser as $user)
             <tr>
                 <td>
-                    {{$user->idnguoidung}}
+                    {{$user->idkhachhang}}
                 </td>
-                <td>{{$user->tennguoidung}}</td>
+                <td>{{$user->tenkhachhang}}</td>
                 <td>{{\Carbon\Carbon::parse($user->ngaysinh)->format('d/m/Y')}}</td>
                 <td>{{$user->diachi}}</td>
                 <td>{{ $user->gioitinh == 1 ? 'Nam' : 'Nữ' }}</td>
@@ -49,7 +49,7 @@
                 <td>{{$user->email}}</td>
                 <td>{{$user->role ==1 ?'Quản trị viên':'Khách hàng'}}</td>
                 <td>
-                    <form action="{{route('userUpdate',$user->idnguoidung)}}" method="POST"
+                    <form action="{{route('userUpdate',$user->idkhachhang)}}" method="POST"
                         style="display: inline;">
                             @csrf
                             <button type="submit" style="background:none; border:none; cursor:pointer;">
@@ -58,7 +58,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="{{route('userDelete',$user->idnguoidung)}}" method="POST"
+                    <form action="{{route('userDelete',$user->idkhachhang)}}" method="POST"
                     style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa sản phẩm  không?');">
                         @csrf
                         @method('delete')

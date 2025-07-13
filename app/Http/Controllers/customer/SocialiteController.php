@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 
 class SocialiteController extends Controller
 {
@@ -29,10 +29,10 @@ class SocialiteController extends Controller
                     ->stateless()
                     ->user();
 
-            $nguoidung = nguoidung::where('email',$googleUser->email)->first();
-            if(!$nguoidung){
-                $nguoidung = nguoidung::create([
-                'tennguoidung' => $googleUser->name,
+            $khachhang = khachhang::where('email',$googleUser->email)->first();
+            if(!$khachhang){
+                $khachhang = khachhang::create([
+                'tenkhachhang' => $googleUser->name,
                 'gioitinh' => 0,
                 'ngaysinh' => date('Y-m-d'),
                 'sodienthoai' => ' ',
@@ -46,7 +46,7 @@ class SocialiteController extends Controller
             DB::commit();
             }
             
-            Auth::login($nguoidung);
+            Auth::login($khachhang);
             return redirect('/');
         }
          catch (\Exception $e) {

@@ -20,7 +20,7 @@ class DetailController extends Controller
     }
 
     public function handleCreate(Request $request){
-    $donhangs = donhang::where('idnguoidung', $request->idnguoidung)
+    $donhangs = donhang::where('idkhachhang', $request->idnguoidung)
                         ->where('trangthaidh', 'HT')
                         ->pluck('iddonhang');
 

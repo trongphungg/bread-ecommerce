@@ -72,9 +72,11 @@ class RecipeController extends Controller
     }
 
 
-    public function delete($id){
+    public function delete($id,PublicService $pub){
         $congthuc = congthuc::where('idcongthuc',$id)->first();
         $congthuc->delete();
+
+        $pub->tinhSoLuongBanhMi();
         return redirect()->back();
     }
 }

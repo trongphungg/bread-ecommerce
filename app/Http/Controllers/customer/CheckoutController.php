@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\sanpham;
 use App\Services\PublicService;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 use App\Models\donhang;
 use App\Models\chitietdonhang;
 use Illuminate\Support\Facades\DB;
@@ -47,19 +47,19 @@ foreach ($cart as $item) {
         else 
             $diachi = $request->diachi;
         if(Auth::user()){
-            $id=Auth::user()->idnguoidung;
-            $id_dh = donhang::where('idnguoidung',$id)
+            $id=Auth::user()->idkhachhang;
+            $id_dh = donhang::where('idkhachhang',$id)
                             ->where('trangthaidh','')
                             ->first();
             $ctdh = chitietdonhang::where('iddonhang',$id_dh->iddonhang)->get();
-            $dh = donhang::where('idnguoidung',$id)
+            $dh = donhang::where('idkhachhang',$id)
                             ->where('trangthaidh','')
                             ->update([
                                 'ngaylapdh' => now(),
                                 'trangthaidh' => "CXN",
                                 'tongtien' => $request->input('Tongtien'),
                                 'diachi' => $diachi,
-                                'tennguoidung'=> $request->tennguoidung,
+                                'tenkhachhang'=> $request->tennguoidung,
                                 'sodienthoai'=> $request->sodienthoai
                             ]);
         }
@@ -69,7 +69,7 @@ foreach ($cart as $item) {
                 $dh->trangthaidh = 'CXN';
                 $dh->tongtien = $request->input('Tongtien');
                 $dh->diachi = $diachi;
-                $dh->tennguoidung = $request->tennguoidung;
+                $dh->tenkhachhang = $request->tennguoidung;
                 $dh->sodienthoai = $request->sodienthoai;
                 $dh->save();
                 foreach ($cart as $item) {

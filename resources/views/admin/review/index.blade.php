@@ -22,7 +22,7 @@
             <tr>
                 <td>{{$v->iddanhgia}}</td>
                 <td>
-                  {{$v->nguoidung->tennguoidung}}
+                  {{$v->khachhang->tenkhachhang}}
                 </td>
                 <td>
                   {{$v->sanpham->tensanpham}}

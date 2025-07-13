@@ -15,7 +15,7 @@
                         <div class="form-item w-100">
                             <label class="form-label my-3">Tên Khách hàng<sup>*</sup></label>
                             <input type="text" name="tennguoidung" class="form-control"
-                                placeholder="Nhập tên khách hàng ..." value="{{ Auth::user()->tennguoidung ?? '' }}"
+                                placeholder="Nhập tên khách hàng ..." value="{{ Auth::user()->tenkhachhang ?? '' }}"
                                 required />
                         </div>
                         @if (Auth::check())

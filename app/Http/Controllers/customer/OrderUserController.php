@@ -11,7 +11,7 @@ use App\Models\chitietdonhang;
 class OrderUserController extends Controller
 {
     public function index(){
-        $dsdh = donhang::where('idnguoidung', Auth::user()->idnguoidung)
+        $dsdh = donhang::where('idkhachhang', Auth::user()->idkhachhang)
                             ->where('trangthaidh','!=','')
                             ->whereNotIn('trangthaidh', ['HT', 'HD'])
                             ->orderBy('ngaylapdh', 'desc')
@@ -26,7 +26,7 @@ class OrderUserController extends Controller
     }
 
     public function history(){
-        $dsdh = donhang::where('idnguoidung', Auth::user()->idnguoidung)
+        $dsdh = donhang::where('idkhachhang', Auth::user()->idkhachhang)
                             ->whereIn('trangthaidh', ['HT', 'HD'])
                             ->orderBy('ngaylapdh', 'desc')
                             ->paginate(10);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\customer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     public function index(){
-        $nguoidung = nguoidung::where('idnguoidung',Auth::user()->idnguoidung)->first();
-        return view('customer.profile',compact('nguoidung'));
+        $khachhang = khachhang::where('idkhachhang',Auth::user()->idkhachhang)->first();
+        return view('customer.profile',compact('khachhang'));
     }
 
     public function update(){
-        $user = nguoidung::where('idnguoidung',Auth::user()->idnguoidung)->first();
+        $user = khachhang::where('idkhachhang',Auth::user()->idkhachhang)->first();
         return view('customer.updateProfile',compact('user'));
     }
 
@@ -25,9 +25,9 @@ class ProfileController extends Controller
         if($request->diachimoi)
             $diachi = $request->diachimoi;
         else $diachi = $request->diachi;
-        $nguoidung = nguoidung::where('idnguoidung',Auth::user()->idnguoidung)
+        $khachhang = khachhang::where('idkhachhang',Auth::user()->idkhachhang)
                             ->update([
-                                'tennguoidung' => $request->tennguoidung,
+                                'tenkhachhang' => $request->tennguoidung,
                                 'ngaysinh' => $request->ngaysinh,
                                 'diachi' =>$diachi,
                                 'gioitinh'=>$request->gioitinh,

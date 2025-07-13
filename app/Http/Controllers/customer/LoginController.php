@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
@@ -25,7 +25,7 @@ class LoginController extends Controller
             'password.required' => 'Bạn cần nhập mật khẩu'
 ]);
 
-        $user = nguoidung::where('email', $credentials['email'])->first();
+        $user = khachhang::where('email', $credentials['email'])->first();
 
         if (!$user) {
             return back()->withErrors([
@@ -72,17 +72,17 @@ class LoginController extends Controller
         $diachi = $request->diachimoi;
 
         if($credentials){
-            $nguoidung = new nguoidung();
-        $nguoidung->tennguoidung = $request->input('tennguoidung');
-        $nguoidung->ngaysinh = $request->input('ngaysinh');
-        $nguoidung->diachi = $diachi;
-        $nguoidung->gioitinh = $request->input('gioitinh');
-        $nguoidung->sodienthoai = $request->input('sodienthoai');
-        $nguoidung->email = $request->input('email');
-        $nguoidung->password = Hash::make($request->input('matkhau'));
-        $nguoidung->role = 0;
+            $khachhang = new khachhang();
+        $khachhang->tenkhachhang = $request->input('tennguoidung');
+        $khachhang->ngaysinh = $request->input('ngaysinh');
+        $khachhang->diachi = $diachi;
+        $khachhang->gioitinh = $request->input('gioitinh');
+        $khachhang->sodienthoai = $request->input('sodienthoai');
+        $khachhang->email = $request->input('email');
+        $khachhang->password = Hash::make($request->input('matkhau'));
+        $khachhang->role = 0;
 
-        $nguoidung->save();
+        $khachhang->save();
         return redirect('/login');
         }
         else return redirect()->back();

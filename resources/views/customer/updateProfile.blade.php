@@ -11,7 +11,7 @@
                         @csrf
                         <div class="form-group my-1">
                             <label>Tên người dùng</label>
-                            <input type="text" class="form-control" name="tennguoidung" value="{{ $user->tennguoidung }}">
+                            <input type="text" class="form-control" name="tennguoidung" value="{{ $user->tenkhachhang }}">
                         </div>
                         <div class="form-group my-1">
                             <label>Ngày sinh</label>

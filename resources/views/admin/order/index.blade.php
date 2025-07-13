@@ -38,7 +38,7 @@
           <tr>
               <td>{{$dh->iddonhang}}</td>
               <td>
-                {{$dh->tennguoidung}}
+                {{$dh->tenkhachhang}}
               </td>
               <td>
                 {{$dh->sodienthoai}}
