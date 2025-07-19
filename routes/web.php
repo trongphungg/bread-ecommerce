@@ -285,3 +285,10 @@ Route::get('search-products',[ShopController::class,'search'])->name('searchProd
 Route::get('/api/nguyenlieu',[WarehouseController::class,'apiNguyenlieu']);
 Route::get('/api/top5',[RevenueController::class,'filter'])
     ->name('filter');
+
+
+Route::post('vnpay_payment',[CheckoutController::class,'vnpay_payment'])
+->name('vnpay_payment');
+
+// Return vnpay
+Route::get('/vnpay-return', [CheckoutController::class, 'vnpayReturn'])->name('vnpay.return');

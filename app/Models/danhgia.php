@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 use App\Models\sanpham;
 
 class danhgia extends Model
@@ -15,9 +15,9 @@ class danhgia extends Model
     protected $keyType = 'int';
     protected $fillable = ['trangthaidg'];
 
-    public function nguoidung()
+    public function khachhang()
     {
-        return $this->belongsTo(nguoidung::class, 'idnguoidung', 'idnguoidung');
+        return $this->belongsTo(khachhang::class, 'idkhachhang', 'idkhachhang');
     }
 
     public function sanpham()

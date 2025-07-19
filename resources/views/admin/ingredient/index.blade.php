@@ -12,22 +12,22 @@
             </div>
           <table class="mt-3 table table-hover">
             <tr>
-                <td>Mã nguyên liệu</td>
+                <td>Số thứ tự</td>
                 <td>Tên nguyên liệu</td>
-                <td>Đơn vị tính</td>
                 <td>Đơn giá</td>
                 <td>Số lượng tồn</td>
+                <td>Đơn vị tính</td>
                 <td>Ngày nhập</td>
                 <td></td>
                 <td></td>
             </tr>
             @foreach($dsnl as $nl)
             <tr>
-                <td>{{$nl->idnguyenlieu}}</td>
+                <td>{{$loop->iteration}}</td>
                 <td>{{$nl->tennguyenlieu}}</td>
-                <td>{{$nl->donvitinh}}</td>
-                <td>{{$nl->dongia}}</td>
+                <td>{{number_format($nl->dongia,0,',','.').'VNĐ'}}</td>
                 <td>{{$nl->soluongton}}</td>
+                <td>{{$nl->donvitinh}}</td>
                 <td>{{\Carbon\Carbon::parse($nl->ngaynhap)->format('d/m/Y')}}</td>
                 <td>
                     <form action="{{route('ingredientUpdate',$nl->idnguyenlieu)}}" method="POST"

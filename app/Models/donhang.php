@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\nguoidung;
+use App\Models\khachhang;
 
 class donhang extends Model
 {
@@ -13,8 +13,8 @@ class donhang extends Model
     public $incrementing = true;                 
     protected $keyType = 'int';
 
-    public function nguoidung()
+    public function khachhang()
     {
-        return $this->belongsTo(nguoidung::class, 'idnguoidung', 'idnguoidung');
+        return $this->belongsTo(khachhang::class, 'idkhachhang', 'idkhachhang');
     }
 }

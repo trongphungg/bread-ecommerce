@@ -2,17 +2,19 @@
 @section('content')
     <div class="container-fluid py-5">
         <div class="container py-5">
-                @if (session('error'))
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                @endif
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <h1 class="mb-4">Chi tiết thanh toán</h1>
-            <form action="{{ route('checkout.finish') }}" method="POST">
+            {{-- <form action="{{ route('checkout.finish') }}" method="POST"> --}}
+                <form action="" id="paymentForm" method="POST">
                 @csrf
                 <div class="row g-5">
                     <div class="col-md-12 col-lg-6 col-xl-5">
                         <div class="form-item w-100">
+                          <input type="text" name="iddonhang" id="iddonhang" value="{{ Auth::check() ? $iddonhang : '' }}" hidden/>
                             <label class="form-label my-3">Tên Khách hàng<sup>*</sup></label>
                             <input type="text" name="tennguoidung" class="form-control"
                                 placeholder="Nhập tên khách hàng ..." value="{{ Auth::user()->tenkhachhang ?? '' }}"
@@ -122,14 +124,29 @@
                             </table>
                         </div>
                         <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                            <button type="submit"
+                            {{-- <button type="submit"
                                 class="btn border border-secondary py-3 px-4 text-uppercase w-100 text-primary">Đặt
                                 hàng</button>
                         </div>
-
+                               </form>
+                        <form action="{{ route('vnpay_payment') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="Tongtien" value={{ $tongtien }}>
+                            <div class="row g-4 text-center align-items-center justify-content-center pt-4">
+                                <button type="submit" name="redirect"
+                                    class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Thanh toán
+                                    VNPay</button>
+                            </div>
+                        </form> --}}
+                        <button type="submit" onclick="document.getElementById('paymentForm').action='{{ route('checkout.finish') }}'; ">
+        Đặt hàng
+    </button>
+    <button type="submit" onclick="document.getElementById('paymentForm').action='{{ route('vnpay_payment') }}'; ">
+        Thanh toán VNPAY
+    </button>
                     </div>
                 </div>
-            </form>
+     
         </div>
     </div>
 @endsection

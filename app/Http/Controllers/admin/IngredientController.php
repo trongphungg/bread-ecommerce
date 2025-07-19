@@ -9,7 +9,8 @@ use App\Models\nguyenlieu;
 class IngredientController extends Controller
 {
     public function index(){
-        $dsnl = nguyenlieu::paginate(5);
+        $dsnl = nguyenlieu::orderBy('soluongton','asc')
+        ->paginate(5);
         return view('admin.ingredient.index',compact('dsnl'));
     }
 

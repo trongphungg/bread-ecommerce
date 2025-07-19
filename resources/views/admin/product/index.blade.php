@@ -35,7 +35,7 @@
                     echo "Còn hàng";
                   else echo "Hết hàng";
                 @endphp</td>
-                <td>{{number_format($sp->dongia,0,',',',').'VNĐ'}}</td>
+                <td>{{number_format($sp->dongia,0,',','.').'VNĐ'}}</td>
                 <td>{{$sp->soluong}}</td>
                 <td>
                     <form action="{{route('productUpdate',$sp->idsanpham)}}" method="POST"
