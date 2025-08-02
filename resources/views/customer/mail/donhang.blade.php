@@ -87,7 +87,7 @@
                     <tr>
                         <td>{{$dh->sanpham->tensanpham}}</td>
                         <td>{{number_format($dh->sanpham->dongia, 0, ',', '.').' VNĐ'}}</td>
-                        <td>{{$dh->Soluongsp}}</td>
+                        <td>{{$dh->soluongsp}}</td>
                         <td>{{number_format($dh->sanpham->dongia * $dh->soluongsp, 0, ',', '.').' VNĐ'}}</td>
                     </tr>
                     @php $tongtien += $dh->sanpham->dongia * $dh->soluongsp; @endphp

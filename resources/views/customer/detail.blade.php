@@ -6,62 +6,65 @@
     </div>
     <div class="container py-5">
         <div class="row g-4 mb-5">
-            <div class="col-lg-8 col-xl-9" id="productForm">
-                <form id="form{{ $sanpham->idsanpham }}">
-                    <div class="row g-4">
-                        <input type="hidden" value="{{ $sanpham->idsanpham }}" id="productId">
-                        <div class="col-lg-6">
-                            <div class="border rounded">
-                                <a href="#">
-                                    <img src="{{ asset('customer/assets/img/' . $sanpham->hinh) }}" id="productImage"
-                                        class="img-fluid rounded" alt="Image">
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <h4 class="fw-bold mb-3" id="productName">{{ $sanpham->tensanpham }}</h4>
-                            <h5 class="fw-bold mb-3" id="productPrice">{{ number_format($sanpham->dongia, 0, ',', '.') }}
-                                VNĐ</h5>
-                            <div class="d-flex mb-4">
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star text-warning"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
-                            <p class="mb-3">Số lượng: {{ $sanpham->soluong }}</p>
-                            <p class="mb-4">{{ $sanpham->motasanpham }}</p>
-                            <div class="input-group quantity mb-5" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input id="productQuantity" type="text"
-                                    class="form-control form-control-sm text-center border-0" value="1">
-                                <div class="input-group-btn">
-                                    <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
+            <div class="col-lg-8 col-xl-9">
+                <div id="productForm">
+                    <form id="form{{ $sanpham->idsanpham }}">
+                        <div class="row g-4">
+                            <input type="hidden" value="{{ $sanpham->idsanpham }}" id="productId">
+                            <div class="col-lg-6">
+                                <div class="border rounded">
+                                    <a href="#">
+                                        <img src="{{ asset('customer/assets/img/' . $sanpham->hinh) }}" id="productImage"
+                                            class="img-fluid rounded" alt="Image">
+                                    </a>
                                 </div>
                             </div>
-                            @if ($sanpham->trangthai == 0 || $sanpham->soluong <= 0)
-                                {{-- Sản phẩm hết --}}
-                                <span
-                                    class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger bg-light d-inline-flex align-items-center disabled"
-                                    style="cursor: not-allowed;">
-                                    <i class="fa fa-exclamation-triangle me-2 text-danger"></i> Hết hàng
-                                </span>
-                            @else
-                                {{-- Nút thêm vào giỏ --}}
-                                <button type="submit"
-                                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
-                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
-                                </button>
-                            @endif
+                            <div class="col-lg-6">
+                                <h4 class="fw-bold mb-3" id="productName">{{ $sanpham->tensanpham }}</h4>
+                                <h5 class="fw-bold mb-3" id="productPrice">
+                                    {{ number_format($sanpham->dongia, 0, ',', '.') }}
+                                    VNĐ</h5>
+                                <div class="d-flex mb-4">
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <p class="mb-3">Số lượng: {{ $sanpham->soluong }}</p>
+                                <p class="mb-4">{{ $sanpham->motasanpham }}</p>
+                                <div class="input-group quantity mb-5" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                    <input id="productQuantity" type="text"
+                                        class="form-control form-control-sm text-center border-0" value="1">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                @if ($sanpham->trangthai == 0 || $sanpham->soluong <= 0)
+                                    {{-- Sản phẩm hết --}}
+                                    <span
+                                        class="btn border border-danger rounded-pill px-4 py-2 mb-4 text-danger bg-light d-inline-flex align-items-center disabled"
+                                        style="cursor: not-allowed;">
+                                        <i class="fa fa-exclamation-triangle me-2 text-danger"></i> Hết hàng
+                                    </span>
+                                @else
+                                    {{-- Nút thêm vào giỏ --}}
+                                    <button type="submit"
+                                        class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                    </button>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
 
                 {{-- Tabs đánh giá --}}
                 <div class="col-lg-12 mt-5">
@@ -131,9 +134,8 @@
                     {{-- Kết thúc đánh --}}
 
                 </div>
-
                 @if (Auth::check())
-                    <form action="{{ route('createReview') }}" method="POST">
+                    <form id="reviewForm" action="{{ route('createReview') }}" method="POST">
                         @csrf
                         <input type="hidden" name="idsanpham" value="{{ $sanpham->idsanpham }}" />
                         <input type="hidden" name="idnguoidung" value="{{ Auth::user()->idkhachhang }}" />

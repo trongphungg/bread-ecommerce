@@ -39,29 +39,15 @@
                                 <label>Ngày sinh</label>
                                 <input type="date" class="form-control" name="ngaysinh" value="{{ old('ngaysinh') }}">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label class="label text-start d-block">Địa chỉ</label>
-                                <input type="text" class="login-input form-control"
-                                    name="diachi" placeholder="Nhập số nhà, tên đường, phường ..." required/>
-                                <select name="quan" id="quan" class="form-control" required>
-                                    <option value="" disabled selected>Vui lòng chọn quận</option>
-                                    <option value="Quận 1">Quận 1</option>
-                                    <option value="Quận 3">Quận 3</option>
-                                    <option value="Quận 4">Quận 4</option>
-                                    <option value="Quận 5">Quận 5</option>
-                                    <option value="Quận 6">Quận 6</option>
-                                    <option value="Quận 7">Quận 7</option>
-                                    <option value="Quận 8">Quận 8</option>
-                                    <option value="Quận 10">Quận 10</option>
-                                    <option value="Quận 11">Quận 11</option>
-                                    <option value="Quận 12">Quận 12</option>
-                                    <option value="Quận Tân Bình">Quận Tân Bình</option>
-                                    <option value="Quận Tân Phú">Quận Tân Phú</option>
-                                    <option value="Quận Bình Tân">Quận Bình Tân</option>
-                                    <option value="Quận Bình Thạnh">Quận Bình Thạnh</option>
-                                    <option value="Quận Gò Vấp">Quận Gò Vấp</option>
-                                    <option value="Quận Phú Nhuận">Quận Phú Nhuận</option>
-                                </select>
+                            <div class="form-item col-md-6">
+                                <label class="form-label my-3">Địa chỉ<sup>*</sup></label>
+                                <input type="text" id="duong" name="duong" class="form-control"
+                                    placeholder="Nhập số nhà, tên đường, phường ..." required />
+                                <div class="select-group d-flex gap-2 mt-1">
+                                    <select class="form-select" id="quan" name="quan" required></select>
+                                    <select class="form-select" id="phuong" name="phuong" required></select>
+                                    <input type="hidden" name="diachi" id="full_address" />
+                                </div>
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Giới tính</label>

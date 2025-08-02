@@ -16,6 +16,7 @@
                 <td>Tên nguyên liệu</td>
                 <td>Số lượng</td>
                 <td>Đơn vị tính</td>
+                <td>Số lượng tồn</td>
                 <td></td>
                 <td></td>
             </tr>
@@ -25,6 +26,7 @@
                 <td>{{$ct->nguyenlieu->tennguyenlieu}}</td>
                 <td>{{$ct->soluong}}</td>
                 <td>{{$ct->nguyenlieu->donvitinh}}</td>
+                <td>{{$ct->nguyenlieu->soluongton}}</td>
                 <td>
                     <form action="{{route('recipeUpdate',$ct->idcongthuc)}}" method="POST"
                         style="display: inline;">

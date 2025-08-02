@@ -132,7 +132,7 @@ class CheckoutController extends Controller
     if(!Auth::user()){
         $donhang = new Donhang();
     $donhang->ngaylapdh = now();
-    $donhang->trangthaidh = 'DA_HUY';
+    $donhang->trangthaidh = 'DH';
     $donhang->tongtien = $tongtien;
     $donhang->diachi = $diachi;
     $donhang->tenkhachhang = $tennguoidung;

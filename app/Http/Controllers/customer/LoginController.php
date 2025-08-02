@@ -59,8 +59,8 @@ class LoginController extends Controller
 
     public function handleCreate(Request $request){
         $credentials = $request->validate([
-            'email' => 'unique:nguoidung,email',
-            'sodienthoai' => 'unique:nguoidung,sodienthoai',
+            'email' => 'unique:khachhang,email',
+            'sodienthoai' => 'unique:khachhang,sodienthoai',
             'matkhau' => 'min:3|confirmed'
         ],[
             'email.unique' => 'Bạn đã có tài khoản rồi. Hãy tiến hành đăng nhập',

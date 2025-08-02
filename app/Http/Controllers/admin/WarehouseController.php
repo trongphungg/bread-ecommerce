@@ -84,6 +84,7 @@ class WarehouseController extends Controller
         }
 
         $pub->tinhSoLuongBanhMi();
+        DB::commit();
         return redirect('/warehouse');
         }catch(\Exception $e){
             DB::rollBack();

@@ -25,7 +25,7 @@
       <div class="card">
         <table class="mt-3 table table-hover">
           <tr>
-              <td>Mã đơn hàng</td>
+              <td>Số thứ tự</td>
               <td>Tên khách hàng</td>
               <td>Số điện thoại</td>
               <td>Ngày lập đơn hàng</td>
@@ -36,7 +36,7 @@
           </tr>
           @foreach($dsdh as $dh)
           <tr>
-              <td>{{$dh->iddonhang}}</td>
+              <td>{{$loop->iteration}}</td>
               <td>
                 {{$dh->tenkhachhang}}
               </td>

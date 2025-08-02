@@ -386,6 +386,7 @@
 
 .cart-icon:hover + .cart-content,
 .user-icon:hover + .user-content,
+.cart-icon:hover + .user-content,
 .user-content:hover,
 .cart-content:hover {
     display: block !important;

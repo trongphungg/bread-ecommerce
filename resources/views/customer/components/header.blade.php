@@ -50,7 +50,34 @@
                             </a>
                         </div>
                     </div>
-                    <div>
+
+                    {{-- Test --}}
+                    <a href="" class="position-relative me-4 my-auto cart-icon">
+                         <i class="fas fa-user fa-2x text-primary" style="transition: transform 0.2s; transform-origin: center;"></i>
+                    </a>
+                    <div class="position-absolute user-content cart-hover-content shadow p-3 bg-white">
+                        @if(Auth::user())
+                                <div class="px-3 py-3 text-muted small text-center border-bottom bg-light">
+                                    Xin chào! {{ Auth::user()->tenkhachhang }}
+                                </div>
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('profileIndex')}}">
+                                    <i class="fas fa-user-circle me-3 text-primary"></i>Thông tin</a>
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('orderUserIndex')}}">
+                                    <i class="fas fa-shopping-bag me-3 text-primary"></i>Đơn hàng</a>
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{route('orderUserHistory')}}">
+                                    <i class="fas fa-history me-3 text-primary"></i>Lịch sử mua hàng</a>
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center text-danger hover-bg-danger-light" href="{{ route('logout') }}">
+                                    <i class="fas fa-sign-out-alt me-3"></i>Đăng xuất</a>
+                                @else
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{ route('login') }}">
+                                    <i class="fas fa-sign-in-alt me-3 text-primary"></i>Đăng nhập</a>
+                                <a class="dropdown-item py-3 px-4 d-flex align-items-center hover-bg-light" href="{{ route('register') }}">
+                                    <i class="fas fa-sign-in-alt me-3 text-primary"></i>Đăng ký</a>
+                                @endif
+                    </div>
+                    {{-- Endtest --}}
+
+                    {{-- <div>
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle user-dropdown-toggle d-flex align-items-center" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user fa-2x text-primary" style="transition: transform 0.2s; transform-origin: center;"></i>
@@ -76,7 +103,7 @@
                                 @endif
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
     </div>
